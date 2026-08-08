@@ -28,11 +28,16 @@ function sanitizeHeaderValue(value: string) {
  * Configure RESEND_API_KEY and CONTACT_EMAIL_TO (and optionally
  * CONTACT_EMAIL_FROM) as environment variables to enable delivery.
  * Until then, submissions are logged server-side only.
+ *
+ * The default sender below uses elevenchase.com, a domain verified in
+ * Resend (SPF/DKIM confirmed) — NOT Resend's onboarding@resend.dev test
+ * address, which can only deliver to the Resend account's own signup
+ * email and will reject any other recipient with a 403.
  */
 export async function sendContactNotification(payload: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
-  const from = process.env.CONTACT_EMAIL_FROM ?? "ElevenChase <onboarding@resend.dev>";
+  const from = process.env.CONTACT_EMAIL_FROM?.trim() || "ElevenChase <hello@elevenchase.com>";
 
   if (!apiKey || !to) {
     // Never log PII (name/email/message). Only log that delivery was skipped.
