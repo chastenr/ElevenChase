@@ -35,16 +35,15 @@ export function Hero() {
           trigger="mount"
           delay={HERO_STAGGER_DELAYS.headline}
           lines={["We build the software", "ambitious companies", "run on."]}
-          className="text-[clamp(2.75rem,7vw,7.25rem)] leading-[0.98] font-medium tracking-tight text-balance"
+          className="text-[clamp(2.25rem,4.5vw,4.75rem)] leading-[1.05] font-medium tracking-tight text-balance"
         />
 
         <motion.p
           {...fadeUp(HERO_STAGGER_DELAYS.paragraph)}
           className="max-w-xl text-lg text-muted md:text-xl"
         >
-          ElevenChase is a software and AI engineering studio. We design,
-          build and ship production-ready products — from your first working
-          prototype to the platform your business runs on.
+          We design, build and ship software and AI products — from
+          prototype to platform.
         </motion.p>
 
         <motion.div

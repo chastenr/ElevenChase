@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/data/site";
@@ -47,8 +48,17 @@ export function Navbar() {
       <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 md:px-10 lg:px-16">
         <a
           href="#top"
-          className="font-mono text-sm tracking-[0.08em] whitespace-nowrap"
+          className="flex items-center gap-2.5 font-mono text-sm tracking-[0.08em] whitespace-nowrap"
         >
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={24}
+            height={24}
+            priority
+            className="h-6 w-6"
+            aria-hidden="true"
+          />
           ELEVENCHASE
         </a>
 

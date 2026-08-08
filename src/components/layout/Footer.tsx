@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FOOTER_LINKS, SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
@@ -9,9 +10,19 @@ export function Footer() {
       <Container className="py-12 md:py-16">
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-mono text-sm font-medium tracking-[0.08em]">
-              {SITE.name.toUpperCase()}
-            </p>
+            <div className="flex items-center gap-2.5">
+              <Image
+                src="/logo-mark.png"
+                alt=""
+                width={22}
+                height={22}
+                className="h-[22px] w-[22px]"
+                aria-hidden="true"
+              />
+              <p className="font-mono text-sm font-medium tracking-[0.08em]">
+                {SITE.name.toUpperCase()}
+              </p>
+            </div>
             <p className="mt-3 text-sm text-muted">{SITE.tagline}</p>
           </div>
 
