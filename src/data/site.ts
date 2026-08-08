@@ -7,8 +7,8 @@ export const SITE = {
   tagline: "Software + AI Engineering",
   description:
     "ElevenChase designs and builds software, AI systems, automation and high-performance websites for ambitious companies worldwide.",
-  location: "Philippines",
-  availability: "Available Worldwide",
+  location: "Remote-first",
+  availability: "Worldwide",
   ceoName: "Chasten Ramirez",
   ceoTitle: "CEO",
 } as const;

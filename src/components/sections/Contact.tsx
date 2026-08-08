@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { submitContactForm } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
-import { PROJECT_TYPES, BUDGET_RANGES } from "@/data/contact";
+import { PROJECT_TYPES } from "@/data/contact";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
@@ -106,53 +106,28 @@ export function Contact() {
                 </label>
               </div>
 
-              <div className="grid gap-8 sm:grid-cols-2">
-                <label className="flex flex-col gap-2">
-                  <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
-                    What do you need?{" "}
-                    <span className="normal-case text-muted/60">
-                      (optional)
-                    </span>
+              <label className="flex flex-col gap-2">
+                <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                  What do you need?{" "}
+                  <span className="normal-case text-muted/60">
+                    (optional)
                   </span>
-                  <select
-                    name="projectType"
-                    defaultValue=""
-                    className={fieldClasses}
-                  >
-                    <option value="" disabled>
-                      Select one
+                </span>
+                <select
+                  name="projectType"
+                  defaultValue=""
+                  className={fieldClasses}
+                >
+                  <option value="" disabled>
+                    Select one
+                  </option>
+                  {PROJECT_TYPES.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
                     </option>
-                    {PROJECT_TYPES.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <label className="flex flex-col gap-2">
-                  <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
-                    Budget{" "}
-                    <span className="normal-case text-muted/60">
-                      (optional)
-                    </span>
-                  </span>
-                  <select
-                    name="budget"
-                    defaultValue=""
-                    className={fieldClasses}
-                  >
-                    <option value="" disabled>
-                      Select one
-                    </option>
-                    {BUDGET_RANGES.map((range) => (
-                      <option key={range} value={range}>
-                        {range}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
+                  ))}
+                </select>
+              </label>
 
               <label className="flex flex-col gap-2">
                 <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">

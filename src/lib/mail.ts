@@ -5,7 +5,6 @@ export type ContactPayload = {
   company?: string;
   website?: string;
   projectType?: string;
-  budget?: string;
   improvementAreas?: string;
   message?: string;
 };
@@ -53,7 +52,6 @@ export async function sendContactNotification(payload: ContactPayload) {
         payload.company ? `Company: ${payload.company}` : null,
         payload.website ? `Website: ${payload.website}` : null,
         payload.projectType ? `Project type: ${payload.projectType}` : null,
-        payload.budget ? `Budget: ${payload.budget}` : null,
         payload.improvementAreas
           ? `Wants to improve: ${payload.improvementAreas}`
           : null,

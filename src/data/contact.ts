@@ -8,15 +8,6 @@ export const PROJECT_TYPES = [
   "Not sure yet",
 ] as const;
 
-export const BUDGET_RANGES = [
-  "< $5k",
-  "$5k – $10k",
-  "$10k – $25k",
-  "$25k – $50k",
-  "$50k+",
-  "Not sure yet",
-] as const;
-
 export const IMPROVEMENT_AREAS = [
   "Website",
   "SEO",

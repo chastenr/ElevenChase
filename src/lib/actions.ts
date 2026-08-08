@@ -16,7 +16,6 @@ export async function submitContactForm(
   const company = String(formData.get("company") ?? "").trim();
   const website = String(formData.get("website") ?? "").trim();
   const projectType = String(formData.get("projectType") ?? "").trim();
-  const budget = String(formData.get("budget") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
 
   if (!name || !email || !message) {
@@ -37,7 +36,6 @@ export async function submitContactForm(
     company: company || undefined,
     website: website || undefined,
     projectType: projectType || undefined,
-    budget: budget || undefined,
     message,
   });
 

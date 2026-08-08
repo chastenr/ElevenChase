@@ -63,10 +63,6 @@ const organizationJsonLd = {
   name: SITE.name,
   url: SITE.url,
   description: SITE.description,
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "PH",
-  },
   areaServed: "Worldwide",
   founder: {
     "@type": "Person",

@@ -7,7 +7,7 @@ export const FAQS: Faq[] = [
   {
     question: "What does a typical project cost?",
     answer:
-      "Most engagements fall somewhere between $5k and $50k+, depending on scope, since a landing page and a multi-tenant platform aren't priced the same way. We talk about budget early so there are no surprises, and we'll tell you honestly if an idea doesn't fit inside a given budget.",
+      "It depends entirely on scope, since a landing page and a multi-tenant platform aren't priced the same way. Tell us what you're building and we'll give you a clear, honest estimate before any work begins, so there are no surprises.",
   },
   {
     question: "How long does a project take?",
@@ -42,7 +42,7 @@ export const FAQS: Faq[] = [
   {
     question: "Where is ElevenChase based, and do you work internationally?",
     answer:
-      "We're based in the Philippines and work with clients worldwide, remotely, across time zones.",
+      "We're a remote-first studio working with clients worldwide. Communication happens async by default, with calls scheduled to fit your time zone.",
   },
   {
     question: "What if I'm not sure what I actually need yet?",
