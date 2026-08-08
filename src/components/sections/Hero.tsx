@@ -1,0 +1,85 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { AnimatedText } from "@/components/ui/AnimatedText";
+import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
+import { MagneticLink } from "@/components/ui/MagneticLink";
+import { Container } from "@/components/ui/Container";
+import { EASE_PREMIUM, HERO_STAGGER_DELAYS } from "@/lib/motion";
+import { SITE } from "@/data/site";
+
+export function Hero() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const fadeUp = (delay: number) => ({
+    initial: prefersReducedMotion ? false : { opacity: 0, y: 18 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: EASE_PREMIUM, delay },
+  });
+
+  return (
+    <section
+      id="top"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-28 pb-6 md:pt-36 md:pb-8"
+    >
+      <Container className="flex flex-1 flex-col justify-center gap-8 md:gap-10">
+        <motion.p
+          {...fadeUp(HERO_STAGGER_DELAYS.label)}
+          className="font-mono text-xs tracking-[0.18em] text-muted uppercase"
+        >
+          ElevenChase // Software + AI Engineering
+        </motion.p>
+
+        <AnimatedText
+          as="h1"
+          trigger="mount"
+          delay={HERO_STAGGER_DELAYS.headline}
+          lines={["We build the software", "ambitious companies", "run on."]}
+          className="text-[clamp(2.75rem,7vw,7.25rem)] leading-[0.98] font-medium tracking-tight text-balance"
+        />
+
+        <motion.p
+          {...fadeUp(HERO_STAGGER_DELAYS.paragraph)}
+          className="max-w-xl text-lg text-muted md:text-xl"
+        >
+          ElevenChase is a software and AI engineering studio. We design,
+          build and ship production-ready products — from your first working
+          prototype to the platform your business runs on.
+        </motion.p>
+
+        <motion.div
+          {...fadeUp(HERO_STAGGER_DELAYS.cta)}
+          className="flex flex-wrap items-center gap-x-8 gap-y-4"
+        >
+          <MagneticLink
+            href="#contact"
+            className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent"
+          >
+            Start a project
+            <AnimatedArrow className="ml-2" />
+          </MagneticLink>
+
+          <a
+            href="#work"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
+          >
+            Explore our work
+            <AnimatedArrow />
+          </a>
+        </motion.div>
+      </Container>
+
+      <motion.div
+        {...fadeUp(HERO_STAGGER_DELAYS.meta)}
+        className="border-t border-line"
+      >
+        <Container className="flex items-center justify-between py-5 font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+          <span>Products · Platforms · AI · Automation</span>
+          <span className="hidden sm:inline">
+            {SITE.location} / {SITE.availability}
+          </span>
+        </Container>
+      </motion.div>
+    </section>
+  );
+}
