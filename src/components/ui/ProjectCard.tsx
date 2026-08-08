@@ -3,7 +3,7 @@ import { AnimatedArrow } from "./AnimatedArrow";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group relative border-b border-line py-6 transition-colors duration-300 first:pt-0 last:border-none hover:bg-ink/5 md:py-7">
+    <article className="group relative border-b border-line py-7 transition-colors duration-300 first:pt-0 last:border-none hover:bg-ink/5 md:py-9">
       <div className="flex items-baseline gap-3 font-mono text-xs tracking-[0.12em] text-muted uppercase">
         <span>{project.category}</span>
         <span className="text-muted/60">·</span>

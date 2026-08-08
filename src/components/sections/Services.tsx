@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 
 export function Services() {
   return (
-    <section id="services" className="py-12 md:py-16">
+    <section id="services" className="py-16 md:py-24">
       <Container>
         <div className="max-w-3xl">
           <SectionLabel>{"// 02 Services"}</SectionLabel>
@@ -23,10 +23,10 @@ export function Services() {
           </Reveal>
         </div>
 
-        <div className="mt-8 border-t border-line md:mt-10">
+        <div className="mt-10 border-t border-line md:mt-14">
           {SERVICES.map((service, i) => (
             <Reveal key={service.index} direction={i % 2 === 0 ? "up" : "left"} delay={0.04}>
-              <div className="group relative border-b border-line py-6 transition-colors duration-300 hover:bg-ink/5 md:py-8">
+              <div className="group relative border-b border-line py-8 transition-colors duration-300 hover:bg-ink/5 md:py-10">
                 <div className="flex flex-col gap-4 md:grid md:grid-cols-12 md:items-start md:gap-8">
                   <span className="font-mono text-sm text-muted transition-opacity duration-300 group-hover:opacity-40 md:col-span-1">
                     {service.index}

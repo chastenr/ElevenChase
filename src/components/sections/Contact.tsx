@@ -22,7 +22,7 @@ export function Contact() {
   );
 
   return (
-    <section id="contact" className="py-12 md:py-16">
+    <section id="contact" className="py-16 md:py-24">
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">

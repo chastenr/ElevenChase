@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/ui/ProjectCard";
 
 export function Work() {
   return (
-    <section id="work" className="py-12 md:py-16">
+    <section id="work" className="py-16 md:py-24">
       <Container>
         <div className="max-w-3xl">
           <SectionLabel>{"// 04 Work"}</SectionLabel>
@@ -24,7 +24,7 @@ export function Work() {
           </Reveal>
         </div>
 
-        <div className="mt-8 border-t border-line md:mt-10">
+        <div className="mt-10 border-t border-line md:mt-14">
           {PROJECTS.map((project, i) => (
             <Reveal key={project.index} direction={i % 2 === 0 ? "up" : "left"} delay={0.04}>
               <ProjectCard project={project} />

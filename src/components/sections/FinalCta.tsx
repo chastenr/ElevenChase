@@ -23,7 +23,7 @@ export function FinalCta() {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="group relative overflow-hidden bg-ink py-16 text-ivory md:py-24"
+      className="group relative overflow-hidden bg-ink py-20 text-ivory md:py-28"
       style={{ "--mx": "50%", "--my": "40%" } as CSSProperties}
     >
       <div
