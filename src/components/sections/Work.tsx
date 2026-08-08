@@ -19,7 +19,7 @@ export function Work() {
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl text-lg text-muted">
               Representative engagements across SaaS, AI and enterprise
-              platforms — the kind of software we build for ambitious teams.
+              platforms: the kind of software we build for ambitious teams.
             </p>
           </Reveal>
         </div>

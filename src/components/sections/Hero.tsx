@@ -45,7 +45,7 @@ export function Hero() {
           className="max-w-xl text-lg text-muted md:text-xl"
         >
           We design, build and scale software, AI systems and
-          high-performance digital experiences — from first idea to
+          high-performance digital experiences, from first idea to
           production.
         </motion.p>
 

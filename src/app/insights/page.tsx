@@ -37,7 +37,7 @@ export default function InsightsPage() {
           <Reveal delay={0.12}>
             <p className="mt-6 max-w-xl text-lg text-muted md:text-xl">
               Practical writing on software engineering, AI, web development
-              and technical SEO — published as we write it, not on a
+              and technical SEO, published as we write it rather than on a
               schedule for its own sake.
             </p>
           </Reveal>
@@ -60,8 +60,8 @@ export default function InsightsPage() {
           <Reveal delay={0.25}>
             <div className="mt-16 border-t border-line pt-16 md:mt-20 md:pt-20">
               <p className="max-w-md text-lg text-muted">
-                We&apos;re writing our first pieces now. Check back soon —
-                or{" "}
+                We&apos;re writing our first pieces now. Check back soon, or
+                {" "}
                 <Link
                   href="/#contact"
                   className="text-ink underline underline-offset-4 hover:text-accent"

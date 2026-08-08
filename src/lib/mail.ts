@@ -15,8 +15,8 @@ const RESEND_API_URL = "https://api.resend.com/emails";
 /**
  * Sends the contact/audit form payload via Resend's HTTP API.
  * Configure RESEND_API_KEY and CONTACT_EMAIL_TO (and optionally
- * CONTACT_EMAIL_FROM) as environment variables to enable delivery —
- * until then, submissions are logged server-side only.
+ * CONTACT_EMAIL_FROM) as environment variables to enable delivery.
+ * Until then, submissions are logged server-side only.
  */
 export async function sendContactNotification(payload: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -25,7 +25,7 @@ export async function sendContactNotification(payload: ContactPayload) {
 
   if (!apiKey || !to) {
     console.warn(
-      "[contact] RESEND_API_KEY / CONTACT_EMAIL_TO not set — skipping email delivery.",
+      "[contact] RESEND_API_KEY / CONTACT_EMAIL_TO not set, skipping email delivery.",
       payload,
     );
     return { delivered: false as const };
@@ -33,8 +33,8 @@ export async function sendContactNotification(payload: ContactPayload) {
 
   const subject =
     payload.formType === "audit"
-      ? `New audit request — ${payload.name}`
-      : `New project inquiry — ${payload.name}`;
+      ? `New audit request: ${payload.name}`
+      : `New project inquiry: ${payload.name}`;
 
   const res = await fetch(RESEND_API_URL, {
     method: "POST",

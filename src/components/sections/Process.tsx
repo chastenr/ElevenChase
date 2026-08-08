@@ -19,7 +19,7 @@ export function Process() {
               />
               <Reveal delay={0.1}>
                 <p className="mt-6 max-w-sm text-lg text-muted">
-                  A focused way of working — from first conversation to
+                  A focused way of working, from first conversation to
                   shipped software, with visible progress at every stage.
                 </p>
               </Reveal>

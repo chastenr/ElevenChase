@@ -50,7 +50,7 @@ export function FinalCta() {
         <Reveal delay={0.1}>
           <p className="max-w-md text-lg text-ivory/60">
             Tell us what you&apos;re building. We&apos;ll reply with a clear
-            next step — what it would take to build, and how we&apos;d
+            next step: what it would take to build, and how we&apos;d
             approach it.
           </p>
         </Reveal>

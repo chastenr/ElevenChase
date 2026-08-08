@@ -45,13 +45,13 @@ export async function submitContactForm(
     return {
       status: "unconfigured",
       message:
-        "Thanks — your message was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.",
+        "Thanks, your message was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.",
     };
   }
 
   return {
     status: "success",
-    message: "Thanks for reaching out — we'll get back to you shortly.",
+    message: "Thanks for reaching out. We'll get back to you shortly.",
   };
 }
 
@@ -93,12 +93,12 @@ export async function submitAuditRequest(
     return {
       status: "unconfigured",
       message:
-        "Thanks — your request was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.",
+        "Thanks, your request was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.",
     };
   }
 
   return {
     status: "success",
-    message: "Thanks — we'll take a look and follow up with what we find.",
+    message: "Thanks. We'll take a look and follow up with what we find.",
   };
 }

@@ -20,7 +20,7 @@ export function Capabilities() {
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl text-lg text-muted">
               Whether you&apos;re validating an early idea or scaling
-              something that already works, we cover the full stack —
+              something that already works, we cover the full stack:
               products, AI systems, web experiences and the search
               infrastructure behind them.
             </p>

@@ -19,8 +19,7 @@ export function LiveActivity() {
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-sm text-lg text-muted">
                 A representative sample of the kind of engineering work we do
-                day to day — across software, AI, automation, web and
-                search.
+                day to day, across software, AI, automation, web and search.
               </p>
             </Reveal>
           </div>

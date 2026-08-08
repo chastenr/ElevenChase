@@ -14,7 +14,7 @@ export type Project = {
   testimonial?: { quote: string; author: string; role: string };
 };
 
-// Placeholder engagements — swap in real case studies as they become available.
+// Placeholder engagements: swap in real case studies as they become available.
 // Optional fields (impact, metrics, testimonial, industry) are left empty
 // until verified data exists; do not populate with invented figures.
 export const PROJECTS: Project[] = [

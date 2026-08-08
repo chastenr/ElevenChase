@@ -8,7 +8,7 @@ import { RelatedServices } from "@/components/service/RelatedServices";
 
 const PAGE_TITLE = "Web Development Services";
 const PAGE_DESCRIPTION =
-  "High-performance websites engineered around strategy, UX, technical SEO and conversion — built as business infrastructure, not a digital brochure.";
+  "High-performance websites engineered around strategy, UX, technical SEO and conversion, built as business infrastructure rather than a digital brochure.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -64,12 +64,12 @@ export default function WebDevelopmentPage() {
         ]}
         eyebrow="// Web Development"
         lines={["Websites that do", "more than exist."]}
-        description="A website should function as business infrastructure — generating leads, ranking in search and representing your brand — not sit as a digital brochure."
+        description="A website should function as business infrastructure that generates leads, ranks in search and represents your brand, not a digital brochure."
       />
 
       <FeatureGrid
         eyebrow="// What's included"
-        title="Design, build and grow — together."
+        title="Design, build and grow together."
         description="These aren't separate vendors handed off to each other. One team owns strategy, design, development and the technical systems behind performance and search."
         items={WEB_ITEMS}
         columns={3}
@@ -77,7 +77,7 @@ export default function WebDevelopmentPage() {
 
       <ServiceCta
         lines={["Ready for a website", "that works harder?"]}
-        description="Tell us about your current site — or the one you haven't built yet."
+        description="Tell us about your current site, or the one you haven't built yet."
         ctaLabel="Start a project"
         ctaHref="/#contact"
       />

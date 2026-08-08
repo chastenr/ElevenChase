@@ -31,9 +31,9 @@ export function WebsiteOffer() {
                 <span className="font-mono text-xs text-muted">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className="mt-5 text-lg font-medium tracking-tight">
+                <h3 className="mt-5 text-lg font-medium tracking-tight">
                   {feature.title}
-                </p>
+                </h3>
                 <p className="mt-2 text-sm text-pretty text-muted">
                   {feature.description}
                 </p>

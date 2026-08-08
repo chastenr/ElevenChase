@@ -17,7 +17,7 @@ export function TechStrip() {
       <Container>
         <Reveal>
           <p className="max-w-2xl text-2xl leading-snug font-medium tracking-tight text-balance md:text-3xl">
-            &ldquo;Technology should serve the product — not the other way
+            &ldquo;Technology should serve the product, not the other way
             around.&rdquo;
           </p>
         </Reveal>

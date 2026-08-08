@@ -3,7 +3,7 @@ export type ActivityItem = {
   category: string;
 };
 
-// Representative categories of engineering work — not tied to specific
+// Representative categories of engineering work, not tied to specific
 // clients or dated events.
 export const ACTIVITY_ITEMS: ActivityItem[] = [
   { label: "Implemented structured data", category: "SEO" },

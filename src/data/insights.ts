@@ -22,6 +22,6 @@ export type Article = {
   readingTime: string;
 };
 
-// No articles published yet — add real, reviewed content here as it's
+// No articles published yet. Add real, reviewed content here as it's
 // written. Do not auto-generate placeholder posts.
 export const ARTICLES: Article[] = [];

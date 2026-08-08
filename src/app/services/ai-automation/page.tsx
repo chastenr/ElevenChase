@@ -11,7 +11,7 @@ import { RelatedServices } from "@/components/service/RelatedServices";
 
 const PAGE_TITLE = "AI + Automation Services";
 const PAGE_DESCRIPTION =
-  "AI agents and workflow automation built into real business operations — support, sales, document processing and internal systems.";
+  "AI agents and workflow automation built into real business operations: support, sales, document processing and internal systems.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -76,7 +76,7 @@ export default function AiAutomationPage() {
         ]}
         eyebrow="// AI + Automation"
         lines={["AI that works", "inside your", "business."]}
-        description="AI systems integrated into actual business operations — not demos. We build agents and automation that plug into the tools you already use."
+        description="AI systems integrated into actual business operations, not demos. We build agents and automation that plug into the tools you already use."
       />
 
       <FeatureGrid

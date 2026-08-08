@@ -9,6 +9,7 @@ import { Process } from "@/components/sections/Process";
 import { Work } from "@/components/sections/Work";
 import { Principles } from "@/components/sections/Principles";
 import { About } from "@/components/sections/About";
+import { Faq } from "@/components/sections/Faq";
 import { AuditCta } from "@/components/sections/AuditCta";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Contact } from "@/components/sections/Contact";
@@ -27,6 +28,7 @@ export default function Home() {
       <Work />
       <Principles />
       <About />
+      <Faq />
       <AuditCta />
       <FinalCta />
       <Contact />

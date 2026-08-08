@@ -9,7 +9,7 @@ import { RelatedServices } from "@/components/service/RelatedServices";
 
 const PAGE_TITLE = "Software Development Services";
 const PAGE_DESCRIPTION =
-  "Production-ready SaaS, platforms, internal tools and MVPs — designed, architected and engineered by ElevenChase for real business workflows.";
+  "Production-ready SaaS, platforms, internal tools and MVPs, designed, architected and engineered by ElevenChase for real business workflows.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -74,7 +74,7 @@ export default function SoftwareDevelopmentPage() {
         ]}
         eyebrow="// Software Development"
         lines={["Software built for", "the business you're", "running."]}
-        description="Production-ready digital products built around real business workflows — from a first working prototype to a platform your business runs on."
+        description="Production-ready digital products built around real business workflows, from a first working prototype to the platform your business runs on."
       />
 
       <FeatureGrid

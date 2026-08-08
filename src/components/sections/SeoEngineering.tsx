@@ -20,7 +20,7 @@ export function SeoEngineering() {
               <p className="mt-6 max-w-md text-lg text-muted">
                 Search visibility starts with the website itself. ElevenChase
                 combines engineering, performance and content architecture to
-                create websites that search engines — and users — can
+                create websites that both search engines and users can
                 understand.
               </p>
             </Reveal>

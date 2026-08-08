@@ -16,7 +16,7 @@ type AnimatedTextProps = {
 };
 
 // The container (overflow-hidden mask) must stay put and host the
-// viewport observation — an IntersectionObserver clips its target's
+// viewport observation, since an IntersectionObserver clips its target's
 // rect against overflow-hidden ancestors, so if the animated line
 // itself (translated out of view) were the observed node, it would
 // report zero intersection forever and whileInView would never fire.

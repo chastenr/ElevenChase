@@ -27,7 +27,7 @@ export const CAPABILITIES: Capability[] = [
     title: "AI + Automation",
     href: "/services/ai-automation",
     description:
-      "AI systems integrated into actual business operations — not demos.",
+      "AI systems integrated into actual business operations, not demos.",
     examples: [
       "AI agents",
       "LLM applications",

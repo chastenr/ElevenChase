@@ -24,9 +24,9 @@ export function Principles() {
                 <span className="font-mono text-xs text-muted">
                   {principle.index}
                 </span>
-                <p className="mt-6 text-xl font-medium tracking-tight text-balance md:text-2xl">
+                <h3 className="mt-6 text-xl font-medium tracking-tight text-balance md:text-2xl">
                   {principle.title}
-                </p>
+                </h3>
                 <p className="mt-3 text-sm text-pretty text-muted">
                   {principle.detail}
                 </p>

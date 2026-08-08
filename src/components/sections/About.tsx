@@ -30,9 +30,9 @@ export function About() {
             <Reveal delay={0.12}>
               <p className="mt-6 text-lg text-pretty text-muted">
                 You work directly with the people designing and writing your
-                software — from early strategy through production — not a
-                rotating account team. Clear scope, clear communication, and
-                engineers who stay hands-on the entire way.
+                software, from early strategy through production, instead of
+                a rotating account team. Clear scope, clear communication,
+                and engineers who stay hands-on the entire way.
               </p>
             </Reveal>
 

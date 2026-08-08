@@ -14,7 +14,7 @@ import { RelatedServices } from "@/components/service/RelatedServices";
 
 const PAGE_TITLE = "Technical SEO Services";
 const PAGE_DESCRIPTION =
-  "Technical SEO built into the engineering of your website — crawlability, indexation, structured data, Core Web Vitals and site architecture, implemented directly by the team that builds your site.";
+  "Technical SEO engineered into your website: crawlability, structured data and Core Web Vitals, implemented directly by the team that builds your site.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -82,7 +82,7 @@ export default function SeoPage() {
         ]}
         eyebrow="// SEO Engineering"
         lines={["Technical SEO built", "into the foundation."]}
-        description="Many SEO problems are actually engineering problems — slow pages, broken canonicals, unclear architecture. We fix them at the source, because we're the ones who built it."
+        description="Many SEO problems are actually engineering problems: slow pages, broken canonicals, unclear architecture. We fix them at the source, because we're the ones who built it."
         ctaLabel="Request an SEO audit"
         ctaHref="/#audit"
       />
@@ -112,7 +112,7 @@ export default function SeoPage() {
             <div className="md:col-span-6 md:col-start-7">
               <Reveal>
                 <p className="text-lg text-muted">
-                  Most SEO engagements end with a report — a list of
+                  Most SEO engagements end with a report: a list of
                   recommendations for someone else&apos;s development team to
                   implement, reprioritize or ignore.
                 </p>
@@ -120,8 +120,8 @@ export default function SeoPage() {
               <Reveal delay={0.1}>
                 <p className="mt-6 text-lg text-muted">
                   Because we&apos;re the engineers who build your website, we
-                  implement fixes directly into the codebase — metadata,
-                  schema, redirects, architecture — without the handoff gap
+                  implement fixes directly into the codebase (metadata,
+                  schema, redirects, architecture) without the handoff gap
                   where recommendations usually stall.
                 </p>
               </Reveal>
@@ -154,9 +154,9 @@ export default function SeoPage() {
                 <p className="mt-6 text-lg text-pretty text-muted">
                   We build those foundations as standard practice. We
                   don&apos;t promise placement in any specific AI search
-                  experience — no one can guarantee that — but we make sure
-                  your site gives these systems clean, accurate information
-                  to work with.
+                  experience, since no one can guarantee that, but we make
+                  sure your site gives these systems clean, accurate
+                  information to work with.
                 </p>
               </Reveal>
             </div>
