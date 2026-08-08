@@ -7,27 +7,22 @@ export type Principle = {
 export const PRINCIPLES: Principle[] = [
   {
     index: "01",
-    title: "Build for humans.",
-    detail: "Every decision starts with the person who has to use it.",
+    title: "Direct Access",
+    detail: "Work directly with the engineers building your product.",
   },
   {
     index: "02",
-    title: "Keep complexity intentional.",
-    detail: "We default to simple, and only add complexity that earns its place.",
+    title: "Built for Production",
+    detail: "Architecture intended to survive beyond the prototype.",
   },
   {
     index: "03",
-    title: "Ship working software.",
-    detail: "Progress means something is running in production, not just planned.",
+    title: "Business First",
+    detail: "Technology choices follow the actual business problem.",
   },
   {
     index: "04",
-    title: "Own the outcome.",
-    detail: "We're accountable for results, not just for the tasks we complete.",
-  },
-  {
-    index: "05",
-    title: "Design for change.",
-    detail: "Requirements evolve, so we architect systems that can evolve with them.",
+    title: "One Team",
+    detail: "Strategy, design, engineering and optimization under one roof.",
   },
 ];

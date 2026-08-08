@@ -9,15 +9,15 @@ export function Principles() {
     <section id="principles" className="py-16 md:py-24">
       <Container>
         <div className="max-w-3xl">
-          <SectionLabel>{"// Principles"}</SectionLabel>
+          <SectionLabel>{"// Why ElevenChase"}</SectionLabel>
           <AnimatedText
             as="h2"
-            lines={["Software should", "create leverage."]}
+            lines={["Engineering without", "the agency layers."]}
             className="mt-5 text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] font-medium tracking-tight text-balance"
           />
         </div>
 
-        <div className="mt-10 grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 md:mt-14 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 md:mt-14 lg:grid-cols-4">
           {PRINCIPLES.map((principle, i) => (
             <Reveal key={principle.index} delay={i * 0.05}>
               <div className="h-full border-r border-b border-line p-7">

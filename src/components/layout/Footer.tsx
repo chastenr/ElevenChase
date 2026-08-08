@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { FOOTER_LINKS, SITE } from "@/data/site";
+import Link from "next/link";
+import { FOOTER_COLUMNS, SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
 export function Footer() {
@@ -8,8 +9,8 @@ export function Footer() {
   return (
     <footer className="border-t border-line">
       <Container className="py-14 md:py-20">
-        <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
-          <div>
+        <div className="grid gap-12 md:grid-cols-12">
+          <div className="md:col-span-4">
             <div className="flex items-center gap-2.5">
               <Image
                 src="/logo-mark.png"
@@ -26,20 +27,29 @@ export function Footer() {
             <p className="mt-3 text-sm text-muted">{SITE.tagline}</p>
           </div>
 
-          <nav
-            className="grid grid-cols-2 gap-x-12 gap-y-3 sm:flex sm:gap-10"
-            aria-label="Footer"
-          >
-            {FOOTER_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
-              >
-                {link.label}
-              </a>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-8">
+            {FOOTER_COLUMNS.map((column) => (
+              <div key={column.title}>
+                <p className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                  {column.title}
+                </p>
+                <nav
+                  className="mt-4 flex flex-col gap-3"
+                  aria-label={column.title}
+                >
+                  {column.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
             ))}
-          </nav>
+          </div>
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
@@ -47,7 +57,7 @@ export function Footer() {
             © {year} {SITE.legalName}. All rights reserved.
           </p>
           <p>
-            {SITE.location} / {SITE.availability}
+            {SITE.location} · {SITE.availability}
           </p>
         </div>
       </Container>

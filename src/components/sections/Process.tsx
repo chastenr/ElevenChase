@@ -1,8 +1,8 @@
-import { PROCESS_STEPS } from "@/data/process";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/ui/Container";
+import { ProcessSteps } from "@/components/ui/ProcessSteps";
 
 export function Process() {
   return (
@@ -27,21 +27,7 @@ export function Process() {
           </div>
 
           <div className="mt-10 md:col-span-7 md:mt-0">
-            {PROCESS_STEPS.map((step) => (
-              <Reveal key={step.index} delay={0.05}>
-                <div className="border-t border-line py-8 md:py-10">
-                  <span className="font-mono text-sm text-accent">
-                    {step.index}
-                  </span>
-                  <h3 className="mt-4 text-3xl font-medium tracking-tight md:text-4xl">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 max-w-md text-lg text-muted">
-                    {step.description}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+            <ProcessSteps />
           </div>
         </div>
       </Container>

@@ -1,16 +1,19 @@
 export type ContactPayload = {
+  formType: "project" | "audit";
   name: string;
   email: string;
   company?: string;
+  website?: string;
   projectType?: string;
-  budget: string;
-  message: string;
+  budget?: string;
+  improvementAreas?: string;
+  message?: string;
 };
 
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 /**
- * Sends the contact form payload via Resend's HTTP API.
+ * Sends the contact/audit form payload via Resend's HTTP API.
  * Configure RESEND_API_KEY and CONTACT_EMAIL_TO (and optionally
  * CONTACT_EMAIL_FROM) as environment variables to enable delivery —
  * until then, submissions are logged server-side only.
@@ -28,6 +31,11 @@ export async function sendContactNotification(payload: ContactPayload) {
     return { delivered: false as const };
   }
 
+  const subject =
+    payload.formType === "audit"
+      ? `New audit request — ${payload.name}`
+      : `New project inquiry — ${payload.name}`;
+
   const res = await fetch(RESEND_API_URL, {
     method: "POST",
     headers: {
@@ -38,15 +46,19 @@ export async function sendContactNotification(payload: ContactPayload) {
       from,
       to,
       reply_to: payload.email,
-      subject: `New project inquiry — ${payload.name}`,
+      subject,
       text: [
         `Name: ${payload.name}`,
         `Email: ${payload.email}`,
         payload.company ? `Company: ${payload.company}` : null,
+        payload.website ? `Website: ${payload.website}` : null,
         payload.projectType ? `Project type: ${payload.projectType}` : null,
         payload.budget ? `Budget: ${payload.budget}` : null,
+        payload.improvementAreas
+          ? `Wants to improve: ${payload.improvementAreas}`
+          : null,
         "",
-        payload.message,
+        payload.message ?? "",
       ]
         .filter(Boolean)
         .join("\n"),

@@ -1,40 +1,60 @@
 export type Project = {
   index: string;
   category: string;
+  projectType: string;
   year: string;
   title: string;
-  description: string;
-  tech: string[];
-  result?: string;
+  problem: string;
+  solution: string;
+  stack: string[];
+  services: string[];
+  industry?: string;
+  impact?: string;
+  metrics?: { label: string; value: string }[];
+  testimonial?: { quote: string; author: string; role: string };
 };
 
 // Placeholder engagements — swap in real case studies as they become available.
+// Optional fields (impact, metrics, testimonial, industry) are left empty
+// until verified data exists; do not populate with invented figures.
 export const PROJECTS: Project[] = [
   {
     index: "01",
-    category: "SaaS",
+    category: "Software",
+    projectType: "SaaS Platform",
     year: "2025",
-    title: "SaaS Platform",
-    description:
-      "A multi-tenant SaaS product rebuilt around a modern architecture, from onboarding through billing.",
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Stripe"],
+    title: "Multi-tenant SaaS Platform",
+    problem:
+      "A single-tenant product needed to support multiple organizations with isolated data, billing and permissions without a rebuild.",
+    solution:
+      "Rebuilt around a multi-tenant architecture with modern auth, subscription billing and a redesigned onboarding flow.",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Stripe"],
+    services: ["Software Development"],
   },
   {
     index: "02",
-    category: "AI / Automation",
+    category: "AI Operations",
+    projectType: "Internal Platform",
     year: "2025",
     title: "AI Operations Platform",
-    description:
-      "An internal operations platform where AI agents triage, summarize and route work across teams.",
-    tech: ["Next.js", "OpenAI", "Anthropic", "Node.js"],
+    problem:
+      "Support and operations teams were manually triaging and routing incoming work across disconnected tools.",
+    solution:
+      "Built an internal platform where AI agents triage, summarize and route work across teams, combining lead management, communication and workflow automation.",
+    stack: ["Next.js", "OpenAI", "Anthropic", "Node.js"],
+    services: ["AI + Automation", "Software Development"],
   },
   {
     index: "03",
     category: "Enterprise",
+    projectType: "Web Platform",
     year: "2026",
     title: "Enterprise Web Platform",
-    description:
-      "A modernization of a legacy internal system into a fast, maintainable web platform.",
-    tech: ["Next.js", "TypeScript", "AWS", "PostgreSQL"],
+    problem:
+      "A legacy internal system had become slow, hard to maintain and costly to extend.",
+    solution:
+      "Modernized the system into a fast, maintainable web platform with a component architecture built for ongoing iteration.",
+    stack: ["Next.js", "TypeScript", "AWS", "PostgreSQL"],
+    services: ["Software Development", "Web Development"],
   },
 ];

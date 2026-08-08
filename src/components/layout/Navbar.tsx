@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Menu, X } from "lucide-react";
-import { NAV_LINKS } from "@/data/site";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { NAV_LINKS, SERVICES_NAV } from "@/data/site";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
@@ -46,8 +47,8 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 md:px-10 lg:px-16">
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           className="flex items-center gap-2.5 font-mono text-sm tracking-[0.08em] whitespace-nowrap"
         >
           <Image
@@ -60,28 +61,64 @@ export function Navbar() {
             aria-hidden="true"
           />
           ELEVENCHASE
-        </a>
+        </Link>
 
-        <div className="hidden items-center gap-10 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           <nav className="flex items-center gap-8" aria-label="Primary">
+            <div className="group relative">
+              <button
+                type="button"
+                className="flex items-center gap-1 text-sm text-muted transition-colors duration-200 hover:text-ink group-focus-within:text-ink"
+              >
+                Services
+                <ChevronDown
+                  size={14}
+                  aria-hidden="true"
+                  className="transition-transform duration-300 group-hover:rotate-180 group-focus-within:rotate-180"
+                />
+              </button>
+
+              <div className="pointer-events-none absolute top-full left-1/2 z-50 w-[560px] -translate-x-1/2 translate-y-1 pt-4 opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                <div className="grid grid-cols-2 gap-1 border border-line bg-ivory p-2">
+                  {SERVICES_NAV.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="flex flex-col gap-1 p-4 transition-colors duration-200 hover:bg-ink/5"
+                    >
+                      <span className="font-mono text-xs text-muted">
+                        {service.index}
+                      </span>
+                      <span className="text-sm font-medium text-ink">
+                        {service.label}
+                      </span>
+                      <span className="text-xs text-muted">
+                        {service.description}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm text-muted transition-colors duration-200 hover:text-ink"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="group inline-flex items-center gap-1.5 text-sm text-ink transition-colors duration-200 hover:text-accent"
           >
             Start a project
             <AnimatedArrow />
-          </a>
+          </Link>
 
           <ThemeToggle />
         </div>
@@ -112,9 +149,33 @@ export function Navbar() {
             className="overflow-hidden border-t border-line bg-ivory md:hidden"
           >
             <nav
-              className="flex flex-col gap-1 px-6 py-6"
+              className="flex max-h-[calc(100svh-5rem)] flex-col gap-1 overflow-y-auto px-6 py-6"
               aria-label="Mobile"
             >
+              <p className="pt-2 font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                Services
+              </p>
+              {SERVICES_NAV.map((service, i) => (
+                <motion.a
+                  key={service.href}
+                  href={service.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    ease: EASE_PREMIUM,
+                    delay: 0.04 * i,
+                  }}
+                  className="border-b border-line py-3 text-lg font-medium tracking-tight"
+                >
+                  {service.label}
+                </motion.a>
+              ))}
+
+              <p className="pt-6 font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                Menu
+              </p>
               {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.href}
@@ -125,21 +186,22 @@ export function Navbar() {
                   transition={{
                     duration: 0.4,
                     ease: EASE_PREMIUM,
-                    delay: 0.05 * i,
+                    delay: 0.04 * i,
                   }}
-                  className="border-b border-line py-4 text-2xl font-medium tracking-tight"
+                  className="border-b border-line py-3 text-lg font-medium tracking-tight"
                 >
                   {link.label}
                 </motion.a>
               ))}
-              <a
-                href="#contact"
+
+              <Link
+                href="/#contact"
                 onClick={() => setOpen(false)}
-                className="group mt-6 inline-flex items-center gap-2 text-sm text-ink"
+                className="group mt-6 mb-2 inline-flex items-center gap-2 text-sm text-accent"
               >
                 Start a project
                 <AnimatedArrow />
-              </a>
+              </Link>
             </nav>
           </motion.div>
         )}

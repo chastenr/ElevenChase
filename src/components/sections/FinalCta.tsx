@@ -57,7 +57,7 @@ export function FinalCta() {
 
         <Reveal delay={0.18}>
           <MagneticLink
-            href="#contact"
+            href="/#contact"
             className="rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-ivory hover:text-ink"
           >
             Start a project

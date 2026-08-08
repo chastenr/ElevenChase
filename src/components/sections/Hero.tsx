@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { MagneticLink } from "@/components/ui/MagneticLink";
+import { ServiceTicker } from "@/components/ui/ServiceTicker";
 import { Container } from "@/components/ui/Container";
 import { EASE_PREMIUM, HERO_STAGGER_DELAYS } from "@/lib/motion";
 import { SITE } from "@/data/site";
@@ -42,29 +44,46 @@ export function Hero() {
           {...fadeUp(HERO_STAGGER_DELAYS.paragraph)}
           className="max-w-xl text-lg text-muted md:text-xl"
         >
-          We design, build and ship software and AI products — from
-          prototype to platform.
+          We design, build and scale software, AI systems and
+          high-performance digital experiences — from first idea to
+          production.
         </motion.p>
+
+        <motion.div
+          {...fadeUp(HERO_STAGGER_DELAYS.paragraph + 0.05)}
+          className="font-mono text-xs tracking-[0.14em] text-muted uppercase"
+        >
+          Building <ServiceTicker className="text-ink" /> for ambitious
+          companies
+        </motion.div>
 
         <motion.div
           {...fadeUp(HERO_STAGGER_DELAYS.cta)}
           className="flex flex-wrap items-center gap-x-8 gap-y-4"
         >
           <MagneticLink
-            href="#contact"
+            href="/#contact"
             className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent"
           >
             Start a project
             <AnimatedArrow className="ml-2" />
           </MagneticLink>
 
-          <a
-            href="#work"
+          <Link
+            href="/#work"
             className="group inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
           >
             Explore our work
             <AnimatedArrow />
-          </a>
+          </Link>
+
+          <Link
+            href="/#audit"
+            className="group inline-flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-ink"
+          >
+            Get a website audit
+            <AnimatedArrow />
+          </Link>
         </motion.div>
       </Container>
 
@@ -73,7 +92,7 @@ export function Hero() {
         className="border-t border-line"
       >
         <Container className="flex items-center justify-between py-5 font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
-          <span>Products · Platforms · AI · Automation</span>
+          <span>Software · AI · Web · SEO</span>
           <span className="hidden sm:inline">
             {SITE.location} / {SITE.availability}
           </span>

@@ -118,3 +118,21 @@ body {
 section[id] {
   scroll-margin-top: 5.5rem;
 }
+
+@keyframes activity-scroll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

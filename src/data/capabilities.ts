@@ -1,6 +1,7 @@
 export type Capability = {
   index: string;
   title: string;
+  href: string;
   description: string;
   examples: string[];
 };
@@ -8,34 +9,61 @@ export type Capability = {
 export const CAPABILITIES: Capability[] = [
   {
     index: "01",
-    title: "Digital Products",
+    title: "Software Development",
+    href: "/services/software-development",
     description:
-      "MVPs and production-ready digital products built from idea through launch.",
-    examples: ["SaaS", "Customer portals", "Marketplaces", "Internal tools"],
+      "Production-ready digital products built around real business workflows.",
+    examples: [
+      "SaaS",
+      "Customer portals",
+      "Marketplaces",
+      "Internal tools",
+      "Dashboards",
+      "API platforms",
+    ],
   },
   {
     index: "02",
-    title: "Platforms",
+    title: "AI + Automation",
+    href: "/services/ai-automation",
     description:
-      "Scalable software architecture designed for businesses that need reliability and room to grow.",
+      "AI systems integrated into actual business operations — not demos.",
     examples: [
-      "Enterprise applications",
-      "API platforms",
-      "Dashboards",
-      "Business systems",
+      "AI agents",
+      "LLM applications",
+      "RAG",
+      "Voice AI",
+      "Chat systems",
+      "Workflow automation",
     ],
   },
   {
     index: "03",
-    title: "AI + Automation",
+    title: "Web Experience",
+    href: "/services/web-development",
     description:
-      "Practical artificial intelligence integrated into real business workflows.",
+      "High-performance websites engineered around brand, usability and conversion.",
     examples: [
-      "AI assistants",
-      "AI agents",
-      "Automation",
-      "LLM integrations",
-      "Intelligent workflows",
+      "Strategy",
+      "UX/UI",
+      "Next.js development",
+      "CMS",
+      "Conversion optimization",
+      "Performance",
+    ],
+  },
+  {
+    index: "04",
+    title: "SEO Engineering",
+    href: "/services/seo",
+    description: "Technical search infrastructure built directly into your website.",
+    examples: [
+      "Technical SEO",
+      "Structured data",
+      "Keyword architecture",
+      "Core Web Vitals",
+      "Programmatic SEO",
+      "AI search foundations",
     ],
   },
 ];

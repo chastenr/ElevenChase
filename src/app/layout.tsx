@@ -18,18 +18,19 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Software & AI Engineering`,
-    template: `%s — ${SITE.name}`,
+    default: SITE.title,
+    template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
   keywords: [
     "software engineering studio",
     "AI engineering",
+    "AI automation",
+    "web development",
+    "technical SEO",
+    "Next.js development",
     "SaaS development",
     "product development",
-    "custom software development",
-    "AI applications",
-    "Next.js development",
   ],
   authors: [{ name: SITE.name }],
   alternates: {
@@ -39,13 +40,13 @@ export const metadata: Metadata = {
     type: "website",
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} — Software & AI Engineering`,
+    title: SITE.title,
     description: SITE.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — Software & AI Engineering`,
+    title: SITE.title,
     description: SITE.description,
   },
   robots: {
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
 
 const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var t=s==='light'||s==='dark'?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
-const structuredData = {
+const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: SITE.name,
@@ -74,6 +75,13 @@ const structuredData = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.name,
+  url: SITE.url,
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -82,12 +90,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ivory text-ink">
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script
-          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <Navbar />
         <main className="flex-1">{children}</main>
