@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 
 export function Process() {
   return (
-    <section id="process" className="py-24 md:py-36">
+    <section id="process" className="py-12 md:py-16">
       <Container>
         <div className="md:grid md:grid-cols-12 md:gap-12 lg:gap-20">
           <div className="md:col-span-5">
@@ -26,10 +26,10 @@ export function Process() {
             </div>
           </div>
 
-          <div className="mt-16 md:col-span-7 md:mt-0">
+          <div className="mt-8 md:col-span-7 md:mt-0">
             {PROCESS_STEPS.map((step) => (
               <Reveal key={step.index} delay={0.05}>
-                <div className="border-t border-line py-10 md:py-16">
+                <div className="border-t border-line py-6 md:py-8">
                   <span className="font-mono text-sm text-accent">
                     {step.index}
                   </span>

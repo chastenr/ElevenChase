@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -6,7 +7,7 @@ import { SITE } from "@/data/site";
 
 export function About() {
   return (
-    <section id="about" className="py-24 md:py-36">
+    <section id="about" className="py-12 md:py-16">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
@@ -37,9 +38,12 @@ export function About() {
 
             <Reveal delay={0.2}>
               <div className="mt-10 flex items-center gap-4">
-                <span
-                  aria-hidden="true"
-                  className="h-px w-10 bg-line-strong"
+                <Image
+                  src="/chasten-ramirez.jpg"
+                  alt={SITE.ceoName}
+                  width={56}
+                  height={56}
+                  className="h-14 w-14 rounded-full border border-line object-cover grayscale transition-all duration-500 hover:grayscale-0"
                 />
                 <div>
                   <p className="text-sm font-medium text-ink">

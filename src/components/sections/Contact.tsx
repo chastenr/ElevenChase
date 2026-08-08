@@ -3,7 +3,7 @@
 import { useActionState } from "react";
 import { submitContactForm } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
-import { PROJECT_TYPES, BUDGET_RANGES } from "@/data/contact";
+import { PROJECT_TYPES } from "@/data/contact";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
@@ -22,7 +22,7 @@ export function Contact() {
   );
 
   return (
-    <section id="contact" className="py-24 md:py-36">
+    <section id="contact" className="py-12 md:py-16">
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
@@ -109,25 +109,15 @@ export function Contact() {
 
                 <label className="flex flex-col gap-2">
                   <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
-                    Budget range{" "}
-                    <span className="normal-case text-muted/60">
-                      (optional)
-                    </span>
+                    Budget
                   </span>
-                  <select
+                  <input
+                    type="text"
                     name="budget"
-                    defaultValue=""
+                    required
+                    placeholder="e.g. ₱50,000 or $1,000"
                     className={fieldClasses}
-                  >
-                    <option value="" disabled>
-                      Select one
-                    </option>
-                    {BUDGET_RANGES.map((range) => (
-                      <option key={range} value={range}>
-                        {range}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </label>
               </div>
 

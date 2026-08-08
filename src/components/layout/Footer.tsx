@@ -6,7 +6,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-line">
-      <Container className="py-16 md:py-20">
+      <Container className="py-12 md:py-16">
         <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="font-mono text-sm font-medium tracking-[0.08em]">

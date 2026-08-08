@@ -18,10 +18,11 @@ export async function submitContactForm(
   const budget = String(formData.get("budget") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
 
-  if (!name || !email || !message) {
+  if (!name || !email || !budget || !message) {
     return {
       status: "error",
-      message: "Please fill in your name, email and a short description.",
+      message:
+        "Please fill in your name, email, budget and a short description.",
     };
   }
 
@@ -34,7 +35,7 @@ export async function submitContactForm(
     email,
     company: company || undefined,
     projectType: projectType || undefined,
-    budget: budget || undefined,
+    budget,
     message,
   });
 

@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 
 export function Capabilities() {
   return (
-    <section id="capabilities" className="py-24 md:py-36">
+    <section id="capabilities" className="py-12 md:py-16">
       <Container>
         <div className="max-w-3xl">
           <SectionLabel>{"// 01 Capabilities"}</SectionLabel>
@@ -25,14 +25,14 @@ export function Capabilities() {
           </Reveal>
         </div>
 
-        <div className="mt-16 border-t border-line md:mt-20">
+        <div className="mt-8 border-t border-line md:mt-10">
           {CAPABILITIES.map((capability, i) => (
             <Reveal
               key={capability.index}
               direction={i % 2 === 0 ? "up" : "none"}
               delay={0.05}
             >
-              <div className="grid gap-4 border-b border-line py-10 md:grid-cols-12 md:items-start md:gap-8 md:py-14">
+              <div className="grid gap-4 border-b border-line py-6 md:grid-cols-12 md:items-start md:gap-8 md:py-8">
                 <span className="font-mono text-sm text-muted md:col-span-1">
                   {capability.index}
                 </span>

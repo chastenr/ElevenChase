@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 
 export function Principles() {
   return (
-    <section id="principles" className="py-24 md:py-36">
+    <section id="principles" className="py-12 md:py-16">
       <Container>
         <div className="max-w-3xl">
           <SectionLabel>{"// Principles"}</SectionLabel>
@@ -17,10 +17,10 @@ export function Principles() {
           />
         </div>
 
-        <div className="mt-16 grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 md:mt-20 lg:grid-cols-5">
+        <div className="mt-8 grid grid-cols-1 border-t border-l border-line sm:grid-cols-2 md:mt-10 lg:grid-cols-5">
           {PRINCIPLES.map((principle, i) => (
             <Reveal key={principle.index} delay={i * 0.05}>
-              <div className="h-full border-r border-b border-line p-8">
+              <div className="h-full border-r border-b border-line p-6">
                 <span className="font-mono text-xs text-muted">
                   {principle.index}
                 </span>

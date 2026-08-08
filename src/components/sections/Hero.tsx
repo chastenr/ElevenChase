@@ -20,7 +20,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-28 pb-6 md:pt-36 md:pb-8"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-24 pb-6 md:pt-28 md:pb-8"
     >
       <Container className="flex flex-1 flex-col justify-center gap-8 md:gap-10">
         <motion.p
