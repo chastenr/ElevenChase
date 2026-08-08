@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { submitAuditRequest } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
 import { IMPROVEMENT_AREAS } from "@/data/contact";
+import { HONEYPOT_FIELD_NAME, TIMESTAMP_FIELD_NAME } from "@/lib/form-security";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
@@ -20,6 +21,11 @@ export function AuditCta() {
     submitAuditRequest,
     initialState,
   );
+  const mountTimeRef = useRef<number | null>(null);
+  const timestampInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    mountTimeRef.current = Date.now();
+  }, []);
 
   return (
     <section id="audit" className="border-y border-line py-16 md:py-24">
@@ -44,9 +50,36 @@ export function AuditCta() {
           <div className="md:col-span-6 md:col-start-7">
             <form
               action={formAction}
+              onSubmit={() => {
+                if (timestampInputRef.current) {
+                  timestampInputRef.current.value = String(
+                    mountTimeRef.current ?? Date.now(),
+                  );
+                }
+              }}
               className="flex flex-col gap-6"
               noValidate
             >
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden"
+              >
+                <label htmlFor="hp_field_audit">Leave this field empty</label>
+                <input
+                  id="hp_field_audit"
+                  type="text"
+                  name={HONEYPOT_FIELD_NAME}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+              <input
+                ref={timestampInputRef}
+                type="hidden"
+                name={TIMESTAMP_FIELD_NAME}
+                defaultValue=""
+              />
+
               <div className="grid gap-6 sm:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">

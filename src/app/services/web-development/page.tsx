@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
+import {
+  serviceJsonLd,
+  breadcrumbJsonLd,
+  jsonLdScriptProps,
+} from "@/lib/structured-data";
 import { ServiceHero } from "@/components/service/ServiceHero";
 import { FeatureGrid } from "@/components/service/FeatureGrid";
 import { ServiceCta } from "@/components/service/ServiceCta";
@@ -47,14 +51,8 @@ export default function WebDevelopmentPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
+      <script type="application/ld+json" {...jsonLdScriptProps(jsonLd)} />
+      <script type="application/ld+json" {...jsonLdScriptProps(breadcrumb)} />
 
       <ServiceHero
         breadcrumb={[

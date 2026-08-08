@@ -2,32 +2,51 @@
 
 import { sendContactNotification } from "@/lib/mail";
 import type { ContactFormState } from "@/lib/contact-types";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { contactSchema, auditSchema, isBotSubmission } from "@/lib/form-security";
 
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
+const GENERIC_ERROR: ContactFormState = {
+  status: "error",
+  message: "Something went wrong. Please try again.",
+};
+
+const RATE_LIMITED_ERROR: ContactFormState = {
+  status: "error",
+  message: "Too many submissions. Please try again in a little while.",
+};
 
 export async function submitContactForm(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const company = String(formData.get("company") ?? "").trim();
-  const website = String(formData.get("website") ?? "").trim();
-  const projectType = String(formData.get("projectType") ?? "").trim();
-  const message = String(formData.get("message") ?? "").trim();
+  if (isBotSubmission(formData)) {
+    return GENERIC_ERROR;
+  }
 
-  if (!name || !email || !message) {
+  const { allowed } = await checkRateLimit();
+  if (!allowed) {
+    return RATE_LIMITED_ERROR;
+  }
+
+  const parsed = contactSchema.safeParse({
+    name: formData.get("name") ?? "",
+    email: formData.get("email") ?? "",
+    company: formData.get("company") ?? "",
+    website: formData.get("website") ?? "",
+    projectType: formData.get("projectType") ?? "",
+    message: formData.get("message") ?? "",
+  });
+
+  if (!parsed.success) {
     return {
       status: "error",
-      message: "Please fill in your name, email and a short description.",
+      message:
+        parsed.error.issues[0]?.message ??
+        "Please check your details and try again.",
     };
   }
 
-  if (!isValidEmail(email)) {
-    return { status: "error", message: "Please enter a valid email address." };
-  }
+  const { name, email, company, website, projectType, message } = parsed.data;
 
   const { delivered } = await sendContactNotification({
     formType: "project",
@@ -57,26 +76,37 @@ export async function submitAuditRequest(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const company = String(formData.get("company") ?? "").trim();
-  const website = String(formData.get("website") ?? "").trim();
-  const improvementAreas = formData
-    .getAll("improvementAreas")
-    .map((v) => String(v))
-    .filter(Boolean)
-    .join(", ");
+  if (isBotSubmission(formData)) {
+    return GENERIC_ERROR;
+  }
 
-  if (!name || !email || !website) {
+  const { allowed } = await checkRateLimit();
+  if (!allowed) {
+    return RATE_LIMITED_ERROR;
+  }
+
+  const improvementAreasRaw = formData
+    .getAll("improvementAreas")
+    .map((value) => String(value));
+
+  const parsed = auditSchema.safeParse({
+    name: formData.get("name") ?? "",
+    email: formData.get("email") ?? "",
+    company: formData.get("company") ?? "",
+    website: formData.get("website") ?? "",
+    improvementAreas: improvementAreasRaw,
+  });
+
+  if (!parsed.success) {
     return {
       status: "error",
-      message: "Please fill in your name, email and website URL.",
+      message:
+        parsed.error.issues[0]?.message ??
+        "Please fill in your name, email and website URL.",
     };
   }
 
-  if (!isValidEmail(email)) {
-    return { status: "error", message: "Please enter a valid email address." };
-  }
+  const { name, email, company, website, improvementAreas } = parsed.data;
 
   const { delivered } = await sendContactNotification({
     formType: "audit",
@@ -84,7 +114,9 @@ export async function submitAuditRequest(
     email,
     company: company || undefined,
     website,
-    improvementAreas: improvementAreas || undefined,
+    improvementAreas: improvementAreas.length
+      ? improvementAreas.join(", ")
+      : undefined,
   });
 
   if (!delivered) {

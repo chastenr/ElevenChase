@@ -1,5 +1,7 @@
 import { SITE } from "@/data/site";
 
+export { jsonLdScriptProps } from "@/lib/json-ld";
+
 export function serviceJsonLd({
   name,
   description,

@@ -1,4 +1,5 @@
 import { FAQS } from "@/data/faq";
+import { jsonLdScriptProps } from "@/lib/structured-data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,10 +22,7 @@ const faqJsonLd = {
 export function Faq() {
   return (
     <section id="faq" className="py-16 md:py-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+      <script type="application/ld+json" {...jsonLdScriptProps(faqJsonLd)} />
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">

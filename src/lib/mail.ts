@@ -1,3 +1,5 @@
+import "server-only";
+
 export type ContactPayload = {
   formType: "project" | "audit";
   name: string;
@@ -12,6 +14,16 @@ export type ContactPayload = {
 const RESEND_API_URL = "https://api.resend.com/emails";
 
 /**
+ * Strips characters that could be used for email header injection
+ * (CRLF) if a field is ever placed into a header value such as the
+ * subject line. Defense-in-depth: Resend's JSON API already treats
+ * these as opaque string values, not raw header text.
+ */
+function sanitizeHeaderValue(value: string) {
+  return value.replace(/[\r\n]+/g, " ").trim();
+}
+
+/**
  * Sends the contact/audit form payload via Resend's HTTP API.
  * Configure RESEND_API_KEY and CONTACT_EMAIL_TO (and optionally
  * CONTACT_EMAIL_FROM) as environment variables to enable delivery.
@@ -23,17 +35,18 @@ export async function sendContactNotification(payload: ContactPayload) {
   const from = process.env.CONTACT_EMAIL_FROM ?? "ElevenChase <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
+    // Never log PII (name/email/message). Only log that delivery was skipped.
     console.warn(
-      "[contact] RESEND_API_KEY / CONTACT_EMAIL_TO not set, skipping email delivery.",
-      payload,
+      `[contact] RESEND_API_KEY / CONTACT_EMAIL_TO not set, skipping email delivery for formType=${payload.formType}.`,
     );
     return { delivered: false as const };
   }
 
+  const safeName = sanitizeHeaderValue(payload.name);
   const subject =
     payload.formType === "audit"
-      ? `New audit request: ${payload.name}`
-      : `New project inquiry: ${payload.name}`;
+      ? `New audit request: ${safeName}`
+      : `New project inquiry: ${safeName}`;
 
   const res = await fetch(RESEND_API_URL, {
     method: "POST",
@@ -64,7 +77,9 @@ export async function sendContactNotification(payload: ContactPayload) {
   });
 
   if (!res.ok) {
-    console.error("[contact] Resend API error", res.status, await res.text());
+    // Log status only; the response body can echo back request fields
+    // (including user-supplied text) and is not safe to log verbatim.
+    console.error(`[contact] Resend API error, status=${res.status}`);
     return { delivered: false as const };
   }
 

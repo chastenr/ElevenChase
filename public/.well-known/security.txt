@@ -1,0 +1,8 @@
+# TODO: replace with a real, monitored security contact before this file
+# is relied upon. Per RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116).
+# No dedicated security contact currently exists in this repository/config,
+# so a real address was not invented here.
+Contact: mailto:TODO-set-a-real-security-contact@elevenchase.com
+Expires: 2027-08-08T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.elevenchase.com/.well-known/security.txt
