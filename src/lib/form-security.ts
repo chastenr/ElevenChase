@@ -33,7 +33,19 @@ export function isBotSubmission(formData: FormData): boolean {
 const SINGLE_LINE_PATTERN = /^[^\x00-\x1F\x7F]*$/;
 // Multi-line fields may contain \t, \n, \r but no other control characters.
 const MULTI_LINE_PATTERN = /^[^\x00-\x08\x0B\x0C\x0E-\x1F\x7F]*$/;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Exported so form components can run the same lightweight check
+// client-side (to disable the submit button) without duplicating it. The
+// server-side Zod schemas below remain the actual security boundary.
+export const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const FIELD_LIMITS = {
+  name: 100,
+  email: 254,
+  company: 150,
+  website: 2048,
+  message: 5000,
+} as const;
 
 export function isSafeHttpUrl(value: string) {
   try {

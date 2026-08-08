@@ -27,6 +27,38 @@ export function serviceJsonLd({
   };
 }
 
+export function articleJsonLd({
+  title,
+  description,
+  url,
+  datePublished,
+  author,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  author?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    url,
+    datePublished,
+    author: {
+      "@type": "Person",
+      name: author ?? SITE.ceoName,
+    },
+    publisher: {
+      "@type": "ProfessionalService",
+      name: SITE.name,
+      url: SITE.url,
+    },
+  };
+}
+
 export function breadcrumbJsonLd(items: { label: string; href: string }[]) {
   return {
     "@context": "https://schema.org",

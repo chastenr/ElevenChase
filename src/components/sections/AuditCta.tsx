@@ -1,15 +1,22 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { submitAuditRequest } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
 import { IMPROVEMENT_AREAS } from "@/data/contact";
-import { HONEYPOT_FIELD_NAME, TIMESTAMP_FIELD_NAME } from "@/lib/form-security";
+import {
+  HONEYPOT_FIELD_NAME,
+  TIMESTAMP_FIELD_NAME,
+  EMAIL_PATTERN,
+  FIELD_LIMITS,
+  isSafeHttpUrl,
+} from "@/lib/form-security";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/ui/Container";
+import { Toast } from "@/components/ui/Toast";
 
 const fieldClasses =
   "w-full border-b border-line bg-transparent py-3 text-base text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none transition-colors duration-200";
@@ -26,6 +33,49 @@ export function AuditCta() {
   useEffect(() => {
     mountTimeRef.current = Date.now();
   }, []);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
+  const [website, setWebsite] = useState("");
+  const [improvementAreas, setImprovementAreas] = useState<string[]>([]);
+
+  // Track the previous action result so a fresh result (even one with the
+  // same status/message as before) re-opens the toast and, on success,
+  // clears the form. Adjusting state during render like this — rather than
+  // in an effect — is React's recommended way to react to a changed value
+  // without an extra render/flash. See "You Might Not Need an Effect."
+  const [prevState, setPrevState] = useState(state);
+  const [toastDismissed, setToastDismissed] = useState(false);
+  if (state !== prevState) {
+    setPrevState(state);
+    setToastDismissed(false);
+    if (state.status === "success") {
+      setName("");
+      setEmail("");
+      setCompany("");
+      setWebsite("");
+      setImprovementAreas([]);
+    }
+  }
+  const toastOpen = state.status !== "idle" && !toastDismissed;
+
+  useEffect(() => {
+    if (!toastOpen) return;
+    const timer = setTimeout(() => setToastDismissed(true), 5000);
+    return () => clearTimeout(timer);
+  }, [toastOpen, state]);
+
+  const isValid =
+    name.trim().length > 0 &&
+    EMAIL_PATTERN.test(email.trim()) &&
+    isSafeHttpUrl(website.trim());
+
+  function toggleImprovementArea(area: string) {
+    setImprovementAreas((prev) =>
+      prev.includes(area) ? prev.filter((a) => a !== area) : [...prev, area],
+    );
+  }
 
   return (
     <section id="audit" className="border-y border-line py-16 md:py-24">
@@ -90,6 +140,9 @@ export function AuditCta() {
                     name="name"
                     required
                     autoComplete="name"
+                    maxLength={FIELD_LIMITS.name}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className={fieldClasses}
                   />
                 </label>
@@ -103,6 +156,9 @@ export function AuditCta() {
                     name="email"
                     required
                     autoComplete="email"
+                    maxLength={FIELD_LIMITS.email}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className={fieldClasses}
                   />
                 </label>
@@ -120,6 +176,9 @@ export function AuditCta() {
                     type="text"
                     name="company"
                     autoComplete="organization"
+                    maxLength={FIELD_LIMITS.company}
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
                     className={fieldClasses}
                   />
                 </label>
@@ -133,6 +192,9 @@ export function AuditCta() {
                     name="website"
                     required
                     placeholder="https://"
+                    maxLength={FIELD_LIMITS.website}
+                    value={website}
+                    onChange={(e) => setWebsite(e.target.value)}
                     className={fieldClasses}
                   />
                 </label>
@@ -152,6 +214,8 @@ export function AuditCta() {
                         type="checkbox"
                         name="improvementAreas"
                         value={area}
+                        checked={improvementAreas.includes(area)}
+                        onChange={() => toggleImprovementArea(area)}
                         className="h-4 w-4 accent-accent"
                       />
                       {area}
@@ -160,25 +224,24 @@ export function AuditCta() {
                 </div>
               </fieldset>
 
-              <div className="flex flex-col items-start gap-4 pt-2">
+              <div className="flex flex-col items-start gap-3 pt-2">
                 <button
                   type="submit"
-                  disabled={isPending}
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent disabled:opacity-50"
+                  disabled={isPending || !isValid}
+                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink"
                 >
                   {isPending ? "Sending…" : "Request an audit"}
                   <AnimatedArrow />
                 </button>
 
-                {state.status !== "idle" && (
-                  <p
-                    role="status"
-                    className={
-                      state.status === "error"
-                        ? "text-sm text-red-600 dark:text-red-400"
-                        : "text-sm text-muted"
-                    }
-                  >
+                {!isValid && (
+                  <p className="text-xs text-muted">
+                    Fill in your name, email and website URL to continue.
+                  </p>
+                )}
+
+                {isValid && state.status === "error" && (
+                  <p role="status" className="text-sm text-red-600 dark:text-red-400">
                     {state.message}
                   </p>
                 )}
@@ -187,6 +250,13 @@ export function AuditCta() {
           </div>
         </div>
       </Container>
+
+      <Toast
+        show={toastOpen}
+        message={state.message}
+        tone={state.status === "error" ? "error" : "success"}
+        onDismiss={() => setToastDismissed(true)}
+      />
     </section>
   );
 }

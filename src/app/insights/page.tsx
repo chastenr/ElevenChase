@@ -4,8 +4,13 @@ import { SITE } from "@/data/site";
 import { ARTICLE_CATEGORIES, ARTICLES } from "@/data/insights";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
+import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/ui/Container";
+
+const sortedArticles = [...ARTICLES].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+);
 
 const PAGE_TITLE = "Insights";
 const PAGE_DESCRIPTION =
@@ -56,7 +61,7 @@ export default function InsightsPage() {
           </ul>
         </Reveal>
 
-        {ARTICLES.length === 0 ? (
+        {sortedArticles.length === 0 ? (
           <Reveal delay={0.25}>
             <div className="mt-16 border-t border-line pt-16 md:mt-20 md:pt-20">
               <p className="max-w-md text-lg text-muted">
@@ -75,21 +80,23 @@ export default function InsightsPage() {
           </Reveal>
         ) : (
           <div className="mt-16 border-t border-line md:mt-20">
-            {ARTICLES.map((article) => (
-              <article
+            {sortedArticles.map((article) => (
+              <Link
                 key={article.slug}
-                className="border-b border-line py-8 md:py-10"
+                href={`/insights/${article.slug}`}
+                className="group block border-b border-line py-8 transition-colors duration-200 hover:bg-ink/[0.02] md:py-10"
               >
                 <div className="flex items-center gap-3 font-mono text-xs tracking-[0.1em] text-muted uppercase">
                   <span>{article.category}</span>
                   <span aria-hidden="true">·</span>
                   <span>{article.readingTime}</span>
                 </div>
-                <h2 className="mt-3 text-2xl font-medium tracking-tight">
+                <h2 className="mt-3 flex items-center gap-2 text-2xl font-medium tracking-tight">
                   {article.title}
+                  <AnimatedArrow className="opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
                 </h2>
                 <p className="mt-2 max-w-xl text-muted">{article.excerpt}</p>
-              </article>
+              </Link>
             ))}
           </div>
         )}
