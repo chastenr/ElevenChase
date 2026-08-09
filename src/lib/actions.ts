@@ -15,6 +15,12 @@ const RATE_LIMITED_ERROR: ContactFormState = {
   message: "Too many submissions. Please try again in a little while.",
 };
 
+const SEND_FAILED_ERROR: ContactFormState = {
+  status: "error",
+  message:
+    "Something went wrong while sending your request. Please try again or contact chase@elevenchase.com.",
+};
+
 export async function submitContactForm(
   _prevState: ContactFormState,
   formData: FormData,
@@ -48,7 +54,7 @@ export async function submitContactForm(
 
   const { name, email, company, website, projectType, message } = parsed.data;
 
-  const { delivered } = await sendContactNotification({
+  const result = await sendContactNotification({
     formType: "project",
     name,
     email,
@@ -58,7 +64,7 @@ export async function submitContactForm(
     message,
   });
 
-  if (!delivered) {
+  if (result.status === "not_configured") {
     return {
       status: "unconfigured",
       message:
@@ -66,9 +72,14 @@ export async function submitContactForm(
     };
   }
 
+  if (result.status === "failed") {
+    return SEND_FAILED_ERROR;
+  }
+
   return {
     status: "success",
-    message: "Thanks for reaching out. We'll get back to you shortly.",
+    message:
+      "Request received. Thanks for reaching out to ElevenChase. We've sent a confirmation to your email and will review your project shortly.",
   };
 }
 
@@ -108,7 +119,7 @@ export async function submitAuditRequest(
 
   const { name, email, company, website, improvementAreas } = parsed.data;
 
-  const { delivered } = await sendContactNotification({
+  const result = await sendContactNotification({
     formType: "audit",
     name,
     email,
@@ -119,12 +130,16 @@ export async function submitAuditRequest(
       : undefined,
   });
 
-  if (!delivered) {
+  if (result.status === "not_configured") {
     return {
       status: "unconfigured",
       message:
         "Thanks, your request was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.",
     };
+  }
+
+  if (result.status === "failed") {
+    return SEND_FAILED_ERROR;
   }
 
   return {
