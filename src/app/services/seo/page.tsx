@@ -199,6 +199,11 @@ export default function SeoPage() {
             href: "/services/software-development",
             description: "Production-ready products and platforms.",
           },
+          {
+            label: "Dedicated Engineering",
+            href: "/services/dedicated-engineering",
+            description: "An embedded team that works alongside yours.",
+          },
         ]}
       />
     </>

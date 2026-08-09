@@ -49,4 +49,19 @@ export const FAQS: Faq[] = [
     answer:
       "That's normal. Request a free website audit or start a conversation, and we'll help you figure out what's actually worth building or fixing first, before you commit to anything.",
   },
+  {
+    question: "Can ElevenChase build AI agents for my business?",
+    answer:
+      "Yes. We build AI agents and automation for real operations: support inboxes that draft and triage responses, lead qualification, document processing, and internal tools that summarize and route work, integrated into the systems you already use rather than shipped as standalone demos.",
+  },
+  {
+    question: "Can you automate our existing business workflows?",
+    answer:
+      "Often, yes. We look at what's manual today, whether that's routing support tickets, qualifying leads, or processing documents, and build automation that plugs into your existing tools rather than requiring you to switch systems.",
+  },
+  {
+    question: "What technologies does ElevenChase use?",
+    answer:
+      "Primarily Next.js, React and TypeScript for software and web development, PostgreSQL and Supabase for data, AWS and Vercel for infrastructure, and OpenAI and Anthropic for AI features. The exact stack depends on what a project actually needs.",
+  },
 ];

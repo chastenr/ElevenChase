@@ -127,6 +127,11 @@ export default function AiAutomationPage() {
             href: "/services/seo",
             description: "Technical search infrastructure built in.",
           },
+          {
+            label: "Dedicated Engineering",
+            href: "/services/dedicated-engineering",
+            description: "An embedded team that works alongside yours.",
+          },
         ]}
       />
     </>

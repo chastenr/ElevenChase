@@ -2,6 +2,58 @@ import { SITE } from "@/data/site";
 
 export { jsonLdScriptProps } from "@/lib/json-ld";
 
+// Stable @id anchors so Organization/WebSite/Person are defined once (in the
+// root layout, present on every page) and referenced by every other schema
+// block via {"@id": ...} rather than duplicated as disconnected objects.
+export const ORGANIZATION_ID = `${SITE.url}/#organization`;
+export const WEBSITE_ID = `${SITE.url}/#website`;
+export const FOUNDER_ID = `${SITE.url}/#founder`;
+
+export function organizationJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": ORGANIZATION_ID,
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: SITE.url,
+    logo: `${SITE.url}/logo-mark.png`,
+    image: `${SITE.url}/logo-mark.png`,
+    description: SITE.description,
+    areaServed: "Worldwide",
+    knowsAbout: [
+      "Software Development",
+      "AI Engineering",
+      "Workflow Automation",
+      "Web Development",
+      "Technical SEO",
+    ],
+    founder: { "@id": FOUNDER_ID },
+  };
+}
+
+export function founderJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": FOUNDER_ID,
+    name: SITE.ceoName,
+    jobTitle: SITE.ceoTitle,
+    worksFor: { "@id": ORGANIZATION_ID },
+  };
+}
+
+export function websiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: SITE.name,
+    url: SITE.url,
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
 export function serviceJsonLd({
   name,
   description,
@@ -14,15 +66,12 @@ export function serviceJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": `${url}#service`,
     serviceType: name,
     name,
     description,
     url,
-    provider: {
-      "@type": "ProfessionalService",
-      name: SITE.name,
-      url: SITE.url,
-    },
+    provider: { "@id": ORGANIZATION_ID },
     areaServed: "Worldwide",
   };
 }
@@ -43,19 +92,15 @@ export function articleJsonLd({
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": `${url}#article`,
     headline: title,
     description,
     url,
     datePublished,
-    author: {
-      "@type": "Person",
-      name: author ?? SITE.ceoName,
-    },
-    publisher: {
-      "@type": "ProfessionalService",
-      name: SITE.name,
-      url: SITE.url,
-    },
+    author: author
+      ? { "@type": "Person", name: author }
+      : { "@id": FOUNDER_ID },
+    publisher: { "@id": ORGANIZATION_ID },
   };
 }
 

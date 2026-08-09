@@ -108,6 +108,11 @@ export default function SoftwareDevelopmentPage() {
             href: "/services/web-development",
             description: "High-performance websites engineered to convert.",
           },
+          {
+            label: "Dedicated Engineering",
+            href: "/services/dedicated-engineering",
+            description: "An embedded team that works alongside yours.",
+          },
         ]}
       />
     </>

@@ -110,12 +110,12 @@ export default function TermsPage() {
               </h2>
               <p className="mt-3">
                 Questions about these terms? Reach out through our{" "}
-                <a
+                <Link
                   href="/#contact"
                   className="text-ink underline underline-offset-4 hover:text-accent"
                 >
                   contact form
-                </a>
+                </Link>
                 .
               </p>
             </div>

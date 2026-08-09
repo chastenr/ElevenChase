@@ -41,7 +41,7 @@ export const SERVICES_NAV = [
   {
     index: "05",
     label: "Dedicated Engineering",
-    href: "/#capabilities",
+    href: "/services/dedicated-engineering",
     description: "An embedded engineering team that works alongside yours.",
   },
 ] as const;
@@ -57,7 +57,7 @@ export const NAV_LINKS = [
 export const FOOTER_COLUMNS = [
   {
     title: "Services",
-    links: SERVICES_NAV.slice(0, 4).map((s) => ({
+    links: SERVICES_NAV.map((s) => ({
       label: s.label,
       href: s.href,
     })),

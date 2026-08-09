@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ArticleBlock } from "@/data/insights";
 
 type ArticleBodyProps = {
@@ -40,6 +41,26 @@ export function ArticleBody({ blocks }: ArticleBodyProps) {
               >
                 <code>{block.code}</code>
               </pre>
+            );
+          case "links":
+            return (
+              <div key={i} className="mt-8 border-t border-line pt-6">
+                <p className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                  {block.label}
+                </p>
+                <ul className="mt-3 flex flex-col gap-2">
+                  {block.items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="text-lg text-ink underline underline-offset-4 transition-colors duration-200 hover:text-accent"
+                      >
+                        {item.text}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             );
           default:
             return null;

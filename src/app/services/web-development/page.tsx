@@ -92,6 +92,11 @@ export default function WebDevelopmentPage() {
             href: "/services/ai-automation",
             description: "AI systems integrated into real operations.",
           },
+          {
+            label: "Dedicated Engineering",
+            href: "/services/dedicated-engineering",
+            description: "An embedded team that works alongside yours.",
+          },
         ]}
       />
     </>
