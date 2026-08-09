@@ -56,11 +56,16 @@ export function AnimatedText({
         };
 
   return (
-    <Tag className={className}>
+    // The tight leading used on these headings allocates less box height
+    // than descenders (g/y/p/q/j) actually need, so at very large sizes the
+    // reveal mask's overflow-hidden clips them. pb-[0.2em] on each mask
+    // gives descenders room; -mb-[0.2em] here cancels the trailing line's
+    // padding so spacing after the heading is unaffected.
+    <Tag className={cn(className, "-mb-[0.2em]")}>
       {lines.map((line, i) => (
         <motion.span
           key={line + i}
-          className="block overflow-hidden"
+          className="block overflow-hidden pb-[0.2em]"
           variants={CONTAINER_VARIANTS}
           {...containerProps}
         >

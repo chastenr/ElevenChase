@@ -30,7 +30,7 @@ export const FAQS: Faq[] = [
       "No, and it's worth being skeptical of anyone who does. We build the technical foundations that give search engines and AI systems a clean, accurate site to understand: crawlability, structured data, performance and architecture. Rankings depend on factors no single vendor controls.",
   },
   {
-    question: "What does \"Dedicated Engineering\" actually include?",
+    question: "What does “Dedicated Engineering” actually include?",
     answer:
       "An embedded engineer or small team that works inside your existing workflow: your tools, your standups, your roadmap, rather than operating as a separate outside vendor you have to manage.",
   },

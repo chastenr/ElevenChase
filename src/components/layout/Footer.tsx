@@ -4,7 +4,7 @@ import { FOOTER_COLUMNS, SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
 export function Footer() {
-  const year = 2026;
+  const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-line">

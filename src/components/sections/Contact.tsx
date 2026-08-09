@@ -124,7 +124,7 @@ export function Contact() {
                 defaultValue=""
               />
 
-              <div className="grid gap-8 sm:grid-cols-2">
+              <div className="grid gap-8 lg:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
                     Name
@@ -158,7 +158,7 @@ export function Contact() {
                 </label>
               </div>
 
-              <div className="grid gap-8 sm:grid-cols-2">
+              <div className="grid gap-8 lg:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
                     Company{" "}

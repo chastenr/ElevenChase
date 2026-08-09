@@ -14,7 +14,7 @@ export function About() {
             <SectionLabel>{"// 05 About"}</SectionLabel>
             <AnimatedText
               as="h2"
-              lines={["Small team.", "Serious engineering."]}
+              lines={["Small team.", "Serious", "engineering."]}
               className="mt-5 text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] font-medium tracking-tight text-balance"
             />
           </div>

@@ -8,6 +8,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { NAV_LINKS, SERVICES_NAV } from "@/data/site";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 import { EASE_PREMIUM, HERO_STAGGER_DELAYS } from "@/lib/motion";
 
@@ -46,7 +47,7 @@ export function Navbar() {
         scrolled ? "border-line py-4" : "border-transparent py-6",
       )}
     >
-      <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 md:px-10 lg:px-16">
+      <Container className="flex items-center justify-between">
         <Link
           href="/#top"
           className="flex items-center gap-2.5 font-mono text-sm tracking-[0.08em] whitespace-nowrap"
@@ -136,7 +137,7 @@ export function Navbar() {
             {open ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
           </button>
         </div>
-      </div>
+      </Container>
 
       <AnimatePresence>
         {open && (
