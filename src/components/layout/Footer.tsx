@@ -53,9 +53,23 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} {SITE.legalName}. All rights reserved.
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p>
+              © {year} {SITE.legalName}. All rights reserved.
+            </p>
+            <Link
+              href="/privacy"
+              className="transition-colors duration-200 hover:text-ink"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors duration-200 hover:text-ink"
+            >
+              Terms of Service
+            </Link>
+          </div>
           <p>
             {SITE.location} · {SITE.availability}
           </p>

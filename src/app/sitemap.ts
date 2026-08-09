@@ -28,6 +28,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
     },
     { path: "/insights", priority: 0.6, changeFrequency: "weekly" as const },
+    { path: "/privacy", priority: 0.2, changeFrequency: "yearly" as const },
+    { path: "/terms", priority: 0.2, changeFrequency: "yearly" as const },
   ];
 
   const staticEntries = routes.map((route) => ({
