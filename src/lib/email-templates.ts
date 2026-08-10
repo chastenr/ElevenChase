@@ -137,7 +137,7 @@ export function renderCustomerConfirmationEmail({ name }: { name: string }) {
         <p style="margin:24px 0 4px 0; font-size:14px; color:${BRAND.ink}; font-weight:500;">Chasten Ramirez</p>
         <p style="margin:0 0 12px 0; font-size:14px; color:${BRAND.muted};">Founder, ElevenChase</p>
         <p style="margin:0; font-size:13px; color:${BRAND.muted};">
-          <a href="mailto:chase@elevenchase.com" style="color:${BRAND.muted}; text-decoration:underline;">chase@elevenchase.com</a>
+          <a href="mailto:start@elevenchase.com" style="color:${BRAND.muted}; text-decoration:underline;">start@elevenchase.com</a>
           &nbsp;&middot;&nbsp;
           <a href="${SITE_URL}" style="color:${BRAND.muted}; text-decoration:underline;">elevenchase.com</a>
         </p>

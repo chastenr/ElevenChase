@@ -115,7 +115,7 @@ function buildCustomerText(name: string) {
     "Best,",
     "Chasten Ramirez",
     "Founder, ElevenChase",
-    "chase@elevenchase.com",
+    "start@elevenchase.com",
     "https://www.elevenchase.com",
   ].join("\n");
 }
@@ -145,7 +145,7 @@ export async function sendContactNotification(
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
   const from =
-    process.env.CONTACT_EMAIL_FROM?.trim() || "ElevenChase <chase@elevenchase.com>";
+    process.env.CONTACT_EMAIL_FROM?.trim() || "ElevenChase <start@elevenchase.com>";
 
   if (!apiKey || !to) {
     // Never log PII (name/email/message). Only log that delivery was skipped.

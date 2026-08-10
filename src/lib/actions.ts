@@ -18,7 +18,7 @@ const RATE_LIMITED_ERROR: ContactFormState = {
 const SEND_FAILED_ERROR: ContactFormState = {
   status: "error",
   message:
-    "Something went wrong while sending your request. Please try again or contact chase@elevenchase.com.",
+    "Something went wrong while sending your request. Please try again or contact start@elevenchase.com.",
 };
 
 export async function submitContactForm(

@@ -6,6 +6,7 @@ import { EASE_PREMIUM } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const WORDS = ["Software", "AI", "Automation", "Web", "SEO", "Platforms"];
+const LONGEST_WORD = WORDS.reduce((a, b) => (b.length > a.length ? b : a));
 
 export function ServiceTicker({ className }: { className?: string }) {
   const [index, setIndex] = useState(0);
@@ -27,8 +28,13 @@ export function ServiceTicker({ className }: { className?: string }) {
       ) : (
         <span
           aria-hidden="true"
-          className="relative inline-block h-[1.2em] w-32 overflow-hidden align-bottom"
+          className="relative inline-block h-[1.2em] overflow-hidden align-baseline"
         >
+          {/* Invisible in-flow text so this box gets a real baseline and
+              a real width from actual glyphs, instead of the browser
+              falling back to a synthetic bottom-edge baseline and a
+              guessed fixed width for the absolutely-positioned word below. */}
+          <span className="invisible whitespace-nowrap">{LONGEST_WORD}</span>
           <AnimatePresence mode="wait">
             <motion.span
               key={WORDS[index]}
