@@ -64,4 +64,24 @@ export const FAQS: Faq[] = [
     answer:
       "Primarily Next.js, React and TypeScript for software and web development, PostgreSQL and Supabase for data, AWS and Vercel for infrastructure, and OpenAI and Anthropic for AI features. The exact stack depends on what a project actually needs.",
   },
+  {
+    question: "What does ElevenChase build?",
+    answer:
+      "Custom software, SaaS platforms, AI systems and automation, and high-performance web applications. Software and AI engineering is the core of what we do; web development and technical SEO support that, rather than the other way around.",
+  },
+  {
+    question: "Can you take over an existing product?",
+    answer:
+      "Yes. We start with an honest audit of the current codebase and architecture, then take over ownership of ongoing development, whether that's fixing what's holding it back, modernizing it, or continuing feature work.",
+  },
+  {
+    question: "Can you integrate AI into an existing platform?",
+    answer:
+      "Yes. This is a common engagement: adding AI features (agents, automation, document processing) into a product that already exists, rather than building something new from scratch.",
+  },
+  {
+    question: "Who owns the software after the project?",
+    answer:
+      "This depends on the specific agreement for your engagement, which we'll make clear before work begins. In general, clients own what's built for them. Exact terms are set out in the project contract, not assumed from this page.",
+  },
 ];

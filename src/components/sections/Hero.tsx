@@ -9,6 +9,7 @@ import { ServiceTicker } from "@/components/ui/ServiceTicker";
 import { Container } from "@/components/ui/Container";
 import { EASE_PREMIUM, HERO_STAGGER_DELAYS } from "@/lib/motion";
 import { SITE } from "@/data/site";
+import { trackEvent } from "@/lib/analytics";
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -63,17 +64,19 @@ export function Hero() {
         >
           <MagneticLink
             href="/#contact"
+            onClick={() => trackEvent("hero_book_call")}
             className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent"
           >
-            Start a project
+            Book a discovery call
             <AnimatedArrow className="ml-2" />
           </MagneticLink>
 
           <Link
             href="/#work"
+            onClick={() => trackEvent("hero_view_work")}
             className="group inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
           >
-            Explore our work
+            See our work
             <AnimatedArrow />
           </Link>
 

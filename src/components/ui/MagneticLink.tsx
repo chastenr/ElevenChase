@@ -10,6 +10,7 @@ type MagneticLinkProps = {
   className?: string;
   strength?: number;
   external?: boolean;
+  onClick?: () => void;
 };
 
 export function MagneticLink({
@@ -18,6 +19,7 @@ export function MagneticLink({
   className,
   strength = 0.3,
   external = false,
+  onClick,
 }: MagneticLinkProps) {
   const ref = useRef<HTMLAnchorElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -45,6 +47,7 @@ export function MagneticLink({
       href={href}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       style={{ x: springX, y: springY }}
       className={cn("group inline-flex items-center", className)}
       target={external ? "_blank" : undefined}

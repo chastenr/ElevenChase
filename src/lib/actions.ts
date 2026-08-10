@@ -40,6 +40,8 @@ export async function submitContactForm(
     company: formData.get("company") ?? "",
     website: formData.get("website") ?? "",
     projectType: formData.get("projectType") ?? "",
+    budget: formData.get("budget") ?? "",
+    timeline: formData.get("timeline") ?? "",
     message: formData.get("message") ?? "",
   });
 
@@ -52,7 +54,8 @@ export async function submitContactForm(
     };
   }
 
-  const { name, email, company, website, projectType, message } = parsed.data;
+  const { name, email, company, website, projectType, budget, timeline, message } =
+    parsed.data;
 
   const result = await sendContactNotification({
     formType: "project",
@@ -61,6 +64,8 @@ export async function submitContactForm(
     company: company || undefined,
     website: website || undefined,
     projectType: projectType || undefined,
+    budget: budget || undefined,
+    timeline: timeline || undefined,
     message,
   });
 

@@ -153,6 +153,8 @@ export function renderAdminNotificationEmail({
   company,
   website,
   projectType,
+  budget,
+  timeline,
   message,
 }: {
   name: string;
@@ -160,6 +162,8 @@ export function renderAdminNotificationEmail({
   company?: string;
   website?: string;
   projectType?: string;
+  budget?: string;
+  timeline?: string;
   message: string;
 }) {
   const rows: [string, string][] = [
@@ -169,6 +173,8 @@ export function renderAdminNotificationEmail({
   if (company) rows.push(["Company", company]);
   if (website) rows.push(["Website", website]);
   if (projectType) rows.push(["Project type", projectType]);
+  if (budget) rows.push(["Budget", budget]);
+  if (timeline) rows.push(["Timeline", timeline]);
 
   const rowsHtml = rows
     .map(

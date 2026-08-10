@@ -117,7 +117,7 @@ export function Navbar() {
             href="/#contact"
             className="group inline-flex items-center gap-1.5 text-sm text-ink transition-colors duration-200 hover:text-accent"
           >
-            Start a project
+            Book a call
             <AnimatedArrow />
           </Link>
 
@@ -200,7 +200,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="group mt-6 mb-2 inline-flex items-center gap-2 text-sm text-accent"
               >
-                Start a project
+                Book a call
                 <AnimatedArrow />
               </Link>
             </nav>

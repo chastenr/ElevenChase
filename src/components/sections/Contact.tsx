@@ -3,13 +3,14 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
-import { PROJECT_TYPES } from "@/data/contact";
+import { PROJECT_TYPES, BUDGET_RANGES, TIMELINES } from "@/data/contact";
 import {
   HONEYPOT_FIELD_NAME,
   TIMESTAMP_FIELD_NAME,
   EMAIL_PATTERN,
   FIELD_LIMITS,
 } from "@/lib/form-security";
+import { trackEvent } from "@/lib/analytics";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
@@ -38,7 +39,16 @@ export function Contact() {
   const [company, setCompany] = useState("");
   const [website, setWebsite] = useState("");
   const [projectType, setProjectType] = useState("");
+  const [budget, setBudget] = useState("");
+  const [timeline, setTimeline] = useState("");
   const [message, setMessage] = useState("");
+  const hasTrackedStart = useRef(false);
+
+  function trackFormStarted() {
+    if (hasTrackedStart.current) return;
+    hasTrackedStart.current = true;
+    trackEvent("project_form_started");
+  }
 
   // Track the previous action result so a fresh result (even one with the
   // same status/message as before) re-opens the toast and, on success,
@@ -56,6 +66,8 @@ export function Contact() {
       setCompany("");
       setWebsite("");
       setProjectType("");
+      setBudget("");
+      setTimeline("");
       setMessage("");
     }
   }
@@ -66,6 +78,13 @@ export function Contact() {
     const timer = setTimeout(() => setToastDismissed(true), 5000);
     return () => clearTimeout(timer);
   }, [toastOpen, state]);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      trackEvent("project_form_submitted");
+      hasTrackedStart.current = false;
+    }
+  }, [state]);
 
   const isValid =
     name.trim().length > 0 &&
@@ -137,6 +156,7 @@ export function Contact() {
                     maxLength={FIELD_LIMITS.name}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    onFocus={trackFormStarted}
                     className={fieldClasses}
                   />
                 </label>
@@ -220,6 +240,56 @@ export function Contact() {
                 </select>
               </label>
 
+              <div className="grid gap-8 lg:grid-cols-2">
+                <label className="flex flex-col gap-2">
+                  <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                    Budget{" "}
+                    <span className="normal-case text-muted/60">
+                      (optional)
+                    </span>
+                  </span>
+                  <select
+                    name="budget"
+                    value={budget}
+                    onChange={(e) => setBudget(e.target.value)}
+                    className={fieldClasses}
+                  >
+                    <option value="" disabled>
+                      Select one
+                    </option>
+                    {BUDGET_RANGES.map((range) => (
+                      <option key={range} value={range}>
+                        {range}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="flex flex-col gap-2">
+                  <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                    Timeline{" "}
+                    <span className="normal-case text-muted/60">
+                      (optional)
+                    </span>
+                  </span>
+                  <select
+                    name="timeline"
+                    value={timeline}
+                    onChange={(e) => setTimeline(e.target.value)}
+                    className={fieldClasses}
+                  >
+                    <option value="" disabled>
+                      Select one
+                    </option>
+                    {TIMELINES.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
               <label className="flex flex-col gap-2">
                 <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
                   Project details
@@ -228,13 +298,19 @@ export function Contact() {
                   name="message"
                   required
                   rows={4}
-                  placeholder="What are you building?"
+                  placeholder="What are you building, and what problem is it solving?"
                   maxLength={FIELD_LIMITS.message}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   className={`${fieldClasses} resize-none`}
                 />
               </label>
+
+              <p className="max-w-md text-xs text-muted/70">
+                This form is for project inquiries and partnerships.
+                Unsolicited marketing solicitations may not receive a
+                response.
+              </p>
 
               <div className="flex flex-col items-start gap-3 pt-2">
                 <button

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { TrustStrip } from "@/components/sections/TrustStrip";
 import { Value } from "@/components/sections/Value";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { WebsiteOffer } from "@/components/sections/WebsiteOffer";
@@ -9,6 +10,7 @@ import { Process } from "@/components/sections/Process";
 import { Work } from "@/components/sections/Work";
 import { Principles } from "@/components/sections/Principles";
 import { About } from "@/components/sections/About";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Faq } from "@/components/sections/Faq";
 import { AuditCta } from "@/components/sections/AuditCta";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -18,6 +20,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustStrip />
       <Value />
       <Capabilities />
       <WebsiteOffer />
@@ -28,6 +31,7 @@ export default function Home() {
       <Work />
       <Principles />
       <About />
+      <Testimonials />
       <Faq />
       <AuditCta />
       <FinalCta />

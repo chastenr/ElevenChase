@@ -52,6 +52,12 @@ export function About() {
                   <p className="text-sm text-muted">
                     {SITE.ceoTitle}, {SITE.name}
                   </p>
+                  <a
+                    href="mailto:chase@elevenchase.com"
+                    className="text-sm text-muted underline underline-offset-4 transition-colors duration-200 hover:text-ink"
+                  >
+                    chase@elevenchase.com
+                  </a>
                 </div>
               </div>
             </Reveal>

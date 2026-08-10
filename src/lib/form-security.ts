@@ -1,7 +1,12 @@
 import { z } from "zod";
 // Relative import (not the "@/" alias) so this module can be loaded
 // directly by a plain Node test runner without a bundler/path resolver.
-import { PROJECT_TYPES, IMPROVEMENT_AREAS } from "../data/contact.ts";
+import {
+  PROJECT_TYPES,
+  IMPROVEMENT_AREAS,
+  BUDGET_RANGES,
+  TIMELINES,
+} from "../data/contact.ts";
 
 /**
  * Pure, framework-independent contact-form validation and bot-detection
@@ -108,6 +113,16 @@ const optionalProjectTypeSchema = z
   .optional()
   .or(z.literal(""));
 
+const optionalBudgetSchema = z
+  .enum(BUDGET_RANGES)
+  .optional()
+  .or(z.literal(""));
+
+const optionalTimelineSchema = z
+  .enum(TIMELINES)
+  .optional()
+  .or(z.literal(""));
+
 const improvementAreaSchema = z.enum(IMPROVEMENT_AREAS);
 
 export const contactSchema = z.object({
@@ -116,6 +131,8 @@ export const contactSchema = z.object({
   company: optionalCompanySchema,
   website: optionalWebsiteSchema,
   projectType: optionalProjectTypeSchema,
+  budget: optionalBudgetSchema,
+  timeline: optionalTimelineSchema,
   message: messageSchema,
 });
 

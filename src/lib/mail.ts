@@ -11,6 +11,8 @@ export type ContactPayload = {
   company?: string;
   website?: string;
   projectType?: string;
+  budget?: string;
+  timeline?: string;
   improvementAreas?: string;
   message?: string;
 };
@@ -76,6 +78,8 @@ function buildAdminText(payload: ContactPayload) {
     payload.company ? `Company: ${payload.company}` : null,
     payload.website ? `Website: ${payload.website}` : null,
     payload.projectType ? `Project type: ${payload.projectType}` : null,
+    payload.budget ? `Budget: ${payload.budget}` : null,
+    payload.timeline ? `Timeline: ${payload.timeline}` : null,
     payload.improvementAreas
       ? `Wants to improve: ${payload.improvementAreas}`
       : null,
@@ -169,6 +173,8 @@ export async function sendContactNotification(
       company: payload.company,
       website: payload.website,
       projectType: payload.projectType,
+      budget: payload.budget,
+      timeline: payload.timeline,
       message: payload.message ?? payload.improvementAreas ?? "",
     }),
   });

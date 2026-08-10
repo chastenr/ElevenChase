@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
+import Link from "next/link";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { MagneticLink } from "@/components/ui/MagneticLink";
@@ -56,13 +57,23 @@ export function FinalCta() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <MagneticLink
-            href="/#contact"
-            className="rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-ivory hover:text-ink"
-          >
-            Start a project
-            <AnimatedArrow className="ml-2" />
-          </MagneticLink>
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+            <MagneticLink
+              href="/#contact"
+              className="rounded-full bg-accent px-7 py-3.5 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-ivory hover:text-ink"
+            >
+              Book a discovery call
+              <AnimatedArrow className="ml-2" />
+            </MagneticLink>
+
+            <Link
+              href="/#contact"
+              className="group inline-flex items-center gap-2 text-sm font-medium text-ivory/70 transition-colors duration-200 hover:text-ivory"
+            >
+              Start a project
+              <AnimatedArrow />
+            </Link>
+          </div>
         </Reveal>
       </Container>
     </section>

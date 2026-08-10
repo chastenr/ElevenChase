@@ -17,6 +17,7 @@ import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Toast } from "@/components/ui/Toast";
+import { trackEvent } from "@/lib/analytics";
 
 const fieldClasses =
   "w-full border-b border-line bg-transparent py-3 text-base text-ink placeholder:text-muted/70 focus:border-ink focus:outline-none transition-colors duration-200";
@@ -65,6 +66,12 @@ export function AuditCta() {
     const timer = setTimeout(() => setToastDismissed(true), 5000);
     return () => clearTimeout(timer);
   }, [toastOpen, state]);
+
+  useEffect(() => {
+    if (state.status === "success") {
+      trackEvent("audit_form_submitted");
+    }
+  }, [state]);
 
   const isValid =
     name.trim().length > 0 &&

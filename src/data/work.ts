@@ -1,4 +1,5 @@
 export type Project = {
+  slug: string;
   index: string;
   category: string;
   projectType: string;
@@ -9,16 +10,30 @@ export type Project = {
   stack: string[];
   services: string[];
   industry?: string;
+  /** 3–5 concrete things ElevenChase built. Only populate with verified specifics. */
+  keyFeatures?: string[];
+  /** A specific technical/product challenge and how it was addressed. */
+  challenge?: string;
+  /** A short note on the technical architecture, when there's something specific worth explaining. */
+  architecture?: string;
+  /** Path under /public, e.g. "/work/project-slug.png". No fabricated screenshots. */
+  screenshot?: string;
+  /** Live project URL, only if the client has approved it being shown. */
+  url?: string;
   impact?: string;
   metrics?: { label: string; value: string }[];
   testimonial?: { quote: string; author: string; role: string };
 };
 
 // Placeholder engagements: swap in real case studies as they become available.
-// Optional fields (impact, metrics, testimonial, industry) are left empty
-// until verified data exists; do not populate with invented figures.
+// Optional fields (industry, keyFeatures, challenge, architecture, screenshot,
+// url, impact, metrics, testimonial) are left empty until verified data
+// exists — do not populate with invented specifics, even generic-sounding
+// ones. The /work/[slug] detail page renders correctly with only the
+// fields below present.
 export const PROJECTS: Project[] = [
   {
+    slug: "multi-tenant-saas-platform",
     index: "01",
     category: "Software",
     projectType: "SaaS Platform",
@@ -32,6 +47,7 @@ export const PROJECTS: Project[] = [
     services: ["Software Development"],
   },
   {
+    slug: "ai-operations-platform",
     index: "02",
     category: "AI Operations",
     projectType: "Internal Platform",
@@ -45,6 +61,7 @@ export const PROJECTS: Project[] = [
     services: ["AI + Automation", "Software Development"],
   },
   {
+    slug: "enterprise-web-platform",
     index: "03",
     category: "Enterprise",
     projectType: "Web Platform",
