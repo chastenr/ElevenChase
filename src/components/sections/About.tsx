@@ -53,10 +53,10 @@ export function About() {
                     {SITE.ceoTitle}, {SITE.name}
                   </p>
                   <a
-                    href="mailto:start@elevenchase.com"
+                    href="mailto:chase@elevenchase.com"
                     className="text-sm text-muted underline underline-offset-4 transition-colors duration-200 hover:text-ink"
                   >
-                    start@elevenchase.com
+                    chase@elevenchase.com
                   </a>
                 </div>
               </div>
