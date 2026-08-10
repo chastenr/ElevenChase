@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { Reveal } from "@/components/ui/Reveal";
@@ -53,13 +54,22 @@ export function About() {
                     {SITE.ceoTitle}, {SITE.name}
                   </p>
                   <a
-                    href="mailto:chase@elevenchase.com"
+                    href={`mailto:${SITE.email}`}
                     className="text-sm text-muted underline underline-offset-4 transition-colors duration-200 hover:text-ink"
                   >
-                    chase@elevenchase.com
+                    {SITE.email}
                   </a>
                 </div>
               </div>
+            </Reveal>
+
+            <Reveal delay={0.26}>
+              <Link
+                href="/company"
+                className="mt-8 inline-block text-sm text-ink underline underline-offset-4 transition-colors duration-200 hover:text-accent"
+              >
+                More about ElevenChase →
+              </Link>
             </Reveal>
           </div>
         </div>

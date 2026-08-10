@@ -1,11 +1,11 @@
 import { Container } from "@/components/ui/Container";
 
 const TRUST_SIGNALS = [
+  "Founder-led studio",
   "Production-ready engineering",
   "Direct engineer access",
   "Built for real business operations",
   "Worldwide collaboration",
-  "Long-term technical support",
 ];
 
 export function TrustStrip() {

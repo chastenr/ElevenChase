@@ -4,6 +4,7 @@ import { sendContactNotification } from "@/lib/mail";
 import type { ContactFormState } from "@/lib/contact-types";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { contactSchema, auditSchema, isBotSubmission } from "@/lib/form-security";
+import { SITE } from "@/data/site";
 
 const GENERIC_ERROR: ContactFormState = {
   status: "error",
@@ -17,8 +18,7 @@ const RATE_LIMITED_ERROR: ContactFormState = {
 
 const SEND_FAILED_ERROR: ContactFormState = {
   status: "error",
-  message:
-    "Something went wrong while sending your request. Please try again or contact start@elevenchase.com.",
+  message: `Something went wrong while sending your request. Please try again or contact ${SITE.contactEmail}.`,
 };
 
 export async function submitContactForm(

@@ -69,9 +69,15 @@ export function Footer() {
             >
               Terms of Service
             </Link>
+            <Link
+              href="/security"
+              className="transition-colors duration-200 hover:text-ink"
+            >
+              Security
+            </Link>
           </div>
           <p>
-            {SITE.location} · {SITE.availability}
+            Founded by {SITE.ceoName} · {SITE.location} · {SITE.availability}
           </p>
         </div>
       </Container>

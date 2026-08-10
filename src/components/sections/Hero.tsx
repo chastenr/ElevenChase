@@ -72,7 +72,7 @@ export function Hero() {
           </MagneticLink>
 
           <Link
-            href="/#work"
+            href="/work"
             onClick={() => trackEvent("hero_view_work")}
             className="group inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
           >

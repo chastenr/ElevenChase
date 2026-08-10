@@ -27,10 +27,12 @@ export function GET() {
   lines.push("## Company");
   lines.push("");
   lines.push(`- [Homepage](${SITE.url}/): Overview of ${SITE.name}'s services, process and work.`);
+  lines.push(`- [Company](${SITE.url}/company): Who ${SITE.name} is, founder background, and how the studio works.`);
   lines.push(`- [Insights](${SITE.url}/insights): Engineering-focused articles on software, AI, web development and technical SEO.`);
   lines.push(`- [Contact](${SITE.url}/#contact): Start a project or request a free website audit.`);
   lines.push(`- [Privacy Policy](${SITE.url}/privacy)`);
   lines.push(`- [Terms of Service](${SITE.url}/terms)`);
+  lines.push(`- [Security](${SITE.url}/security): Responsible disclosure policy and vulnerability contact.`);
   lines.push("");
 
   if (ARTICLES.length > 0) {

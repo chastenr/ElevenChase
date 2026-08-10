@@ -1,4 +1,5 @@
 import "server-only";
+import { SITE } from "@/data/site";
 import {
   renderCustomerConfirmationEmail,
   renderAdminNotificationEmail,
@@ -113,10 +114,10 @@ function buildCustomerText(name: string) {
     "Thank you for considering ElevenChase.",
     "",
     "Best,",
-    "Chasten Ramirez",
-    "Founder, ElevenChase",
-    "start@elevenchase.com",
-    "https://www.elevenchase.com",
+    SITE.ceoName,
+    `${SITE.ceoTitle}, ${SITE.name}`,
+    SITE.contactEmail,
+    SITE.url,
   ].join("\n");
 }
 
@@ -145,7 +146,8 @@ export async function sendContactNotification(
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
   const from =
-    process.env.CONTACT_EMAIL_FROM?.trim() || "ElevenChase <start@elevenchase.com>";
+    process.env.CONTACT_EMAIL_FROM?.trim() ||
+    `${SITE.name} <${SITE.contactEmail}>`;
 
   if (!apiKey || !to) {
     // Never log PII (name/email/message). Only log that delivery was skipped.

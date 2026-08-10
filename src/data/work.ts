@@ -10,6 +10,11 @@ export type Project = {
   stack: string[];
   services: string[];
   industry?: string;
+  /** Only populate once the client has approved being named publicly. */
+  clientName?: string;
+  clientUrl?: string;
+  /** Path under /public. Only use a logo the client has approved for display. */
+  clientLogo?: string;
   /** 3–5 concrete things ElevenChase built. Only populate with verified specifics. */
   keyFeatures?: string[];
   /** A specific technical/product challenge and how it was addressed. */
@@ -27,10 +32,10 @@ export type Project = {
 
 // Placeholder engagements: swap in real case studies as they become available.
 // Optional fields (industry, keyFeatures, challenge, architecture, screenshot,
-// url, impact, metrics, testimonial) are left empty until verified data
-// exists — do not populate with invented specifics, even generic-sounding
-// ones. The /work/[slug] detail page renders correctly with only the
-// fields below present.
+// url, impact, metrics, testimonial, clientName, clientUrl, clientLogo) are
+// left empty until verified data exists — do not populate with invented
+// specifics, even generic-sounding ones. The /work/[slug] detail page
+// renders correctly with only the fields below present.
 export const PROJECTS: Project[] = [
   {
     slug: "multi-tenant-saas-platform",

@@ -53,7 +53,7 @@ export default async function ProjectDetailPage({
 
   const breadcrumb = breadcrumbJsonLd([
     { label: "Home", href: "/" },
-    { label: "Work", href: "/#work" },
+    { label: "Work", href: "/work" },
     { label: project.title, href: `/work/${project.slug}` },
   ]);
 
@@ -71,7 +71,7 @@ export default async function ProjectDetailPage({
               Home
             </Link>
             <span aria-hidden="true">/</span>
-            <Link href="/#work" className="transition-colors duration-200 hover:text-ink">
+            <Link href="/work" className="transition-colors duration-200 hover:text-ink">
               Work
             </Link>
             <span aria-hidden="true">/</span>
@@ -177,6 +177,37 @@ export default async function ProjectDetailPage({
             </div>
 
             <div className="md:col-span-4 md:col-start-9">
+              {project.clientName && (
+                <div className="border-t-0 pb-6">
+                  <p className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
+                    Client
+                  </p>
+                  <div className="mt-3 flex items-center gap-3">
+                    {project.clientLogo && (
+                      <Image
+                        src={project.clientLogo}
+                        alt={project.clientName}
+                        width={32}
+                        height={32}
+                        className="h-8 w-8 object-contain"
+                      />
+                    )}
+                    {project.clientUrl ? (
+                      <a
+                        href={project.clientUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-ink-soft underline underline-offset-4 hover:text-accent"
+                      >
+                        {project.clientName}
+                      </a>
+                    ) : (
+                      <p className="text-ink-soft">{project.clientName}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+
               <div className="border-t border-line pt-6">
                 <p className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
                   Services

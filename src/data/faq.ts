@@ -84,4 +84,9 @@ export const FAQS: Faq[] = [
     answer:
       "This depends on the specific agreement for your engagement, which we'll make clear before work begins. In general, clients own what's built for them. Exact terms are set out in the project contract, not assumed from this page.",
   },
+  {
+    question: "How does a project start?",
+    answer:
+      "Tell us what you're building through the contact form or by booking a discovery call. We'll ask enough questions to understand the problem, then follow up with an honest scope and next steps, rather than a generic sales pitch.",
+  },
 ];

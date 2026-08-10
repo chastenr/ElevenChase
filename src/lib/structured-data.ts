@@ -21,6 +21,7 @@ export function organizationJsonLd() {
     image: `${SITE.url}/logo-mark.png`,
     description: SITE.description,
     areaServed: "Worldwide",
+    email: SITE.email,
     knowsAbout: [
       "Software Development",
       "AI Engineering",
@@ -29,6 +30,7 @@ export function organizationJsonLd() {
       "Technical SEO",
     ],
     founder: { "@id": FOUNDER_ID },
+    ...(SITE.sameAs.length > 0 ? { sameAs: SITE.sameAs } : {}),
   };
 }
 
@@ -39,7 +41,9 @@ export function founderJsonLd() {
     "@id": FOUNDER_ID,
     name: SITE.ceoName,
     jobTitle: SITE.ceoTitle,
+    email: SITE.email,
     worksFor: { "@id": ORGANIZATION_ID },
+    ...(SITE.founderSameAs.length > 0 ? { sameAs: SITE.founderSameAs } : {}),
   };
 }
 

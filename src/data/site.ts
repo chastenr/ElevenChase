@@ -10,7 +10,16 @@ export const SITE = {
   location: "Remote-first",
   availability: "Worldwide",
   ceoName: "Chasten Ramirez",
-  ceoTitle: "CEO",
+  ceoTitle: "Founder & CEO",
+  email: "chase@elevenchase.com",
+  contactEmail: "start@elevenchase.com",
+  // Company and founder social profiles for schema.org `sameAs`. Left empty
+  // until real, live profiles exist — populate as they're created rather
+  // than inventing placeholder URLs. Both the Organization and Person
+  // JSON-LD blocks in structured-data.ts read these and omit `sameAs`
+  // entirely while empty.
+  sameAs: [] as string[],
+  founderSameAs: [] as string[],
 } as const;
 
 export const SERVICES_NAV = [
@@ -47,9 +56,8 @@ export const SERVICES_NAV = [
 ] as const;
 
 export const NAV_LINKS = [
-  { label: "Work", href: "/#work" },
-  { label: "Process", href: "/#process" },
-  { label: "About", href: "/#about" },
+  { label: "Work", href: "/work" },
+  { label: "Company", href: "/company" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/#contact" },
 ] as const;
@@ -65,9 +73,9 @@ export const FOOTER_COLUMNS = [
   {
     title: "Company",
     links: [
-      { label: "Work", href: "/#work" },
+      { label: "About", href: "/company" },
+      { label: "Work", href: "/work" },
       { label: "Process", href: "/#process" },
-      { label: "About", href: "/#about" },
       { label: "Contact", href: "/#contact" },
     ],
   },

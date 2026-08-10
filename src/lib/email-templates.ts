@@ -1,4 +1,5 @@
 import "server-only";
+import { SITE } from "@/data/site";
 
 /**
  * Hand-written HTML email templates (table-based layout, inline styles
@@ -134,10 +135,10 @@ export function renderCustomerConfirmationEmail({ name }: { name: string }) {
     </tr>
     <tr>
       <td style="padding: 32px 40px 36px 40px; margin-top:24px; border-top:1px solid ${BRAND.line}; font-family:${BRAND.fontStack};">
-        <p style="margin:24px 0 4px 0; font-size:14px; color:${BRAND.ink}; font-weight:500;">Chasten Ramirez</p>
-        <p style="margin:0 0 12px 0; font-size:14px; color:${BRAND.muted};">Founder, ElevenChase</p>
+        <p style="margin:24px 0 4px 0; font-size:14px; color:${BRAND.ink}; font-weight:500;">${escapeHtml(SITE.ceoName)}</p>
+        <p style="margin:0 0 12px 0; font-size:14px; color:${BRAND.muted};">${escapeHtml(SITE.ceoTitle)}, ${escapeHtml(SITE.name)}</p>
         <p style="margin:0; font-size:13px; color:${BRAND.muted};">
-          <a href="mailto:start@elevenchase.com" style="color:${BRAND.muted}; text-decoration:underline;">start@elevenchase.com</a>
+          <a href="mailto:${SITE.contactEmail}" style="color:${BRAND.muted}; text-decoration:underline;">${SITE.contactEmail}</a>
           &nbsp;&middot;&nbsp;
           <a href="${SITE_URL}" style="color:${BRAND.muted}; text-decoration:underline;">elevenchase.com</a>
         </p>

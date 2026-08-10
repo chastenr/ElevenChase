@@ -70,11 +70,20 @@ export function GET() {
   lines.push("## Company pages");
   lines.push("");
   lines.push(`- Homepage: ${SITE.url}/`);
+  lines.push(`- Company / about: ${SITE.url}/company`);
+  lines.push(`- Selected engineering work: ${SITE.url}/work`);
   lines.push(`- Insights: ${SITE.url}/insights`);
   lines.push(`- Privacy Policy: ${SITE.url}/privacy`);
   lines.push(`- Terms of Service: ${SITE.url}/terms`);
+  lines.push(`- Security / responsible disclosure: ${SITE.url}/security`);
   lines.push(`- Contact / start a project: ${SITE.url}/#contact`);
   lines.push(`- Free website audit request: ${SITE.url}/#audit`);
+  lines.push("");
+
+  lines.push("## Founder");
+  lines.push("");
+  lines.push(`- ${SITE.ceoName}, ${SITE.ceoTitle} of ${SITE.name}.`);
+  lines.push(`- Contact: ${SITE.email}`);
   lines.push("");
 
   lines.push("## Honest limitations");
