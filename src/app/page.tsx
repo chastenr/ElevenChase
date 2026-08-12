@@ -5,7 +5,6 @@ import { Principles } from "@/components/sections/Principles";
 import { LiveActivity } from "@/components/sections/LiveActivity";
 import { TechStrip } from "@/components/sections/TechStrip";
 import { Process } from "@/components/sections/Process";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { About } from "@/components/sections/About";
 import { Faq } from "@/components/sections/Faq";
 import { AuditCta } from "@/components/sections/AuditCta";
@@ -26,7 +25,6 @@ export default function Home() {
       <LiveActivity />
       <TechStrip />
       <Process />
-      <Testimonials />
       <About />
       <Faq />
       <AuditCta />

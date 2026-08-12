@@ -8,6 +8,7 @@ import { EASE_PREMIUM } from "@/lib/motion";
 type AnimatedTextProps = {
   lines: string[];
   as?: ElementType;
+  id?: string;
   className?: string;
   lineClassName?: string;
   delay?: number;
@@ -26,6 +27,7 @@ const LINE_VARIANTS: Variants = { hidden: { y: "110%" }, visible: { y: "0%" } };
 export function AnimatedText({
   lines,
   as: Tag = "div",
+  id,
   className,
   lineClassName,
   delay = 0,
@@ -36,7 +38,7 @@ export function AnimatedText({
 
   if (prefersReducedMotion) {
     return (
-      <Tag className={className}>
+      <Tag id={id} className={className}>
         {lines.map((line, i) => (
           <span key={line + i} className={cn("block", lineClassName)}>
             {line}
@@ -61,7 +63,7 @@ export function AnimatedText({
     // reveal mask's overflow-hidden clips them. pb-[0.2em] on each mask
     // gives descenders room; -mb-[0.2em] here cancels the trailing line's
     // padding so spacing after the heading is unaffected.
-    <Tag className={cn(className, "-mb-[0.2em]")}>
+    <Tag id={id} className={cn(className, "-mb-[0.2em]")}>
       {lines.map((line, i) => (
         <motion.span
           key={line + i}

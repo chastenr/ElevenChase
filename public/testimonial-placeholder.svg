@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title description">
+  <title id="title">Placeholder client portrait</title>
+  <desc id="description">A neutral illustrated silhouette used until the client's photo is available.</desc>
+  <rect width="160" height="160" fill="#e5e2d9"/>
+  <circle cx="80" cy="62" r="30" fill="#aaa69d"/>
+  <path d="M24 160c3-39 24-61 56-61s53 22 56 61H24Z" fill="#8d8981"/>
+</svg>
