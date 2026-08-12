@@ -4,6 +4,10 @@ import {
   renderCustomerConfirmationEmail,
   renderAdminNotificationEmail,
 } from "@/lib/email-templates";
+import {
+  syncResendContact,
+  type MarketingContact,
+} from "@/lib/resend-contacts";
 
 export type ContactPayload = {
   formType: "project" | "audit";
@@ -68,6 +72,36 @@ async function sendViaResend(apiKey: string, email: ResendEmail) {
     return false;
   }
   return true;
+}
+
+/**
+ * Adds a newly opted-in project lead to Resend's global Contacts list.
+ * Existing contacts are deliberately left unchanged so a previous global
+ * unsubscribe can never be reversed by this form. The function is best-effort
+ * and never throws because inquiry delivery has priority over marketing sync.
+ */
+export async function subscribeMarketingContact({
+  name,
+  email,
+}: MarketingContact): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(
+      "[marketing-contact] RESEND_API_KEY not set, skipping contact creation",
+    );
+    return;
+  }
+
+  const result = await syncResendContact(apiKey, { name, email });
+  if (result.status === "failed") {
+    const httpStatus = result.httpStatus
+      ? `, status=${result.httpStatus}`
+      : "";
+    // Never log the address or response body; both can contain subscriber data.
+    console.error(
+      `[marketing-contact] Resend ${result.phase} failed${httpStatus}`,
+    );
+  }
 }
 
 function buildAdminText(payload: ContactPayload) {

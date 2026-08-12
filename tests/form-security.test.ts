@@ -17,7 +17,10 @@ const VALID_CONTACT = {
   company: "",
   website: "",
   projectType: "",
+  budget: "",
+  timeline: "",
   message: "We need a new marketing website.",
+  marketingOptIn: "false",
 };
 
 const VALID_AUDIT = {
@@ -46,6 +49,27 @@ describe("contactSchema", () => {
     const result = contactSchema.safeParse({
       ...VALID_CONTACT,
       email: "not-an-email",
+    });
+    assert.equal(result.success, false);
+  });
+
+  test("parses explicit marketing consent as a boolean", () => {
+    const optedIn = contactSchema.safeParse({
+      ...VALID_CONTACT,
+      marketingOptIn: "true",
+    });
+    const optedOut = contactSchema.safeParse(VALID_CONTACT);
+
+    assert.equal(optedIn.success, true);
+    assert.equal(optedIn.data?.marketingOptIn, true);
+    assert.equal(optedOut.success, true);
+    assert.equal(optedOut.data?.marketingOptIn, false);
+  });
+
+  test("rejects a tampered marketing consent value", () => {
+    const result = contactSchema.safeParse({
+      ...VALID_CONTACT,
+      marketingOptIn: "yes",
     });
     assert.equal(result.success, false);
   });
@@ -81,7 +105,10 @@ describe("contactSchema", () => {
       company: "",
       website: "",
       projectType: "",
+      budget: "",
+      timeline: "",
       message: "",
+      marketingOptIn: "false",
     });
     assert.equal(result.success, false);
   });

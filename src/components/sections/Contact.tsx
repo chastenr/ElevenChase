@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { submitContactForm } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
 import { PROJECT_TYPES, BUDGET_RANGES, TIMELINES } from "@/data/contact";
@@ -42,6 +43,7 @@ export function Contact() {
   const [budget, setBudget] = useState("");
   const [timeline, setTimeline] = useState("");
   const [message, setMessage] = useState("");
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const hasTrackedStart = useRef(false);
 
   function trackFormStarted() {
@@ -69,6 +71,7 @@ export function Contact() {
       setBudget("");
       setTimeline("");
       setMessage("");
+      setMarketingOptIn(false);
     }
   }
   const toastOpen = state.status !== "idle" && !toastDismissed;
@@ -313,6 +316,35 @@ export function Contact() {
               </p>
 
               <div className="flex flex-col items-start gap-3 pt-2">
+                <input
+                  type="hidden"
+                  name="marketingOptIn"
+                  value={String(marketingOptIn)}
+                />
+                <label className="flex min-h-11 max-w-lg cursor-pointer items-start gap-3 text-sm leading-relaxed text-muted">
+                  <input
+                    type="checkbox"
+                    checked={marketingOptIn}
+                    onChange={(event) => {
+                      const checked = event.target.checked;
+                      setMarketingOptIn(checked);
+                      if (checked) trackEvent("marketing_opt_in_selected");
+                    }}
+                    className="mt-1 size-4 shrink-0 cursor-pointer accent-accent"
+                  />
+                  <span>
+                    Send me occasional ElevenChase insights, updates, and useful
+                    business tips. Unsubscribe anytime. See our{" "}
+                    <Link
+                      href="/privacy"
+                      className="text-ink underline underline-offset-4 hover:text-accent"
+                    >
+                      Privacy Policy
+                    </Link>
+                    .
+                  </span>
+                </label>
+
                 <button
                   type="submit"
                   disabled={isPending || !isValid}

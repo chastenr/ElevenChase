@@ -125,6 +125,12 @@ const optionalTimelineSchema = z
 
 const improvementAreaSchema = z.enum(IMPROVEMENT_AREAS);
 
+// The form sends an explicit string because native FormData has no boolean
+// type. Only these two exact values are accepted at the server boundary.
+const marketingOptInSchema = z
+  .enum(["true", "false"])
+  .transform((value) => value === "true");
+
 export const contactSchema = z.object({
   name: nameSchema,
   email: emailSchema,
@@ -134,6 +140,7 @@ export const contactSchema = z.object({
   budget: optionalBudgetSchema,
   timeline: optionalTimelineSchema,
   message: messageSchema,
+  marketingOptIn: marketingOptInSchema,
 });
 
 export const auditSchema = z.object({

@@ -1,6 +1,9 @@
 "use server";
 
-import { sendContactNotification } from "@/lib/mail";
+import {
+  sendContactNotification,
+  subscribeMarketingContact,
+} from "@/lib/mail";
 import type { ContactFormState } from "@/lib/contact-types";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { contactSchema, auditSchema, isBotSubmission } from "@/lib/form-security";
@@ -43,6 +46,7 @@ export async function submitContactForm(
     budget: formData.get("budget") ?? "",
     timeline: formData.get("timeline") ?? "",
     message: formData.get("message") ?? "",
+    marketingOptIn: formData.get("marketingOptIn") ?? "false",
   });
 
   if (!parsed.success) {
@@ -54,8 +58,17 @@ export async function submitContactForm(
     };
   }
 
-  const { name, email, company, website, projectType, budget, timeline, message } =
-    parsed.data;
+  const {
+    name,
+    email,
+    company,
+    website,
+    projectType,
+    budget,
+    timeline,
+    message,
+    marketingOptIn,
+  } = parsed.data;
 
   const result = await sendContactNotification({
     formType: "project",
@@ -79,6 +92,12 @@ export async function submitContactForm(
 
   if (result.status === "failed") {
     return SEND_FAILED_ERROR;
+  }
+
+  if (result.status === "sent" && marketingOptIn) {
+    // Marketing capture is intentionally best-effort. The inquiry has already
+    // succeeded, so a Contacts API issue must never turn it into a form error.
+    await subscribeMarketingContact({ name, email });
   }
 
   return {

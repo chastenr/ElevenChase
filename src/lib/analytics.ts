@@ -15,6 +15,7 @@ export type AnalyticsEvent =
   | "start_project"
   | "project_form_started"
   | "project_form_submitted"
+  | "marketing_opt_in_selected"
   | "audit_form_submitted";
 
 export function trackEvent(event: AnalyticsEvent) {

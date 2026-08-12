@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 
 const PAGE_TITLE = "Privacy Policy";
 const PAGE_DESCRIPTION = `How ${SITE.name} collects, uses and protects information submitted through this website.`;
-const LAST_UPDATED = "August 9, 2026";
+const LAST_UPDATED = "August 12, 2026";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -43,9 +43,9 @@ export default function PrivacyPage() {
                 We only collect information you choose to submit through the
                 contact and website-audit forms on this site: your name,
                 email address, and optionally your company name, website
-                URL, project type, and message. There are no user accounts,
-                no e-commerce, and no other forms on this site that collect
-                personal information.
+                URL, project type, message, and whether you choose to receive
+                occasional marketing emails. There are no user accounts or
+                e-commerce on this site.
               </p>
             </div>
 
@@ -54,11 +54,13 @@ export default function PrivacyPage() {
                 How we use it
               </h2>
               <p className="mt-3">
-                Information submitted through our forms is used solely to
-                respond to your inquiry, for example to follow up about a
-                project or a requested website audit. We do not use it for
-                advertising, and we do not share it with third parties for
-                marketing purposes.
+                We use information submitted through our forms to respond to
+                your inquiry, for example to follow up about a project or a
+                requested website audit. If you explicitly select the optional
+                marketing checkbox, we also use your name and email address to
+                send occasional ElevenChase insights, updates, and business
+                tips. Submitting an inquiry without selecting that checkbox
+                does not subscribe you to marketing emails.
               </p>
             </div>
 
@@ -76,9 +78,10 @@ export default function PrivacyPage() {
                 >
                   Resend
                 </a>{" "}
-                to deliver form submissions to our inbox by email. Resend
-                processes this information only to transmit it to us and is
-                the only third party involved in handling form data.
+                to deliver form submissions to our inbox by email and, when
+                you opt in, to maintain our marketing contact list and deliver
+                future marketing emails. Resend is the only third party
+                involved in handling form data.
               </p>
             </div>
 
@@ -101,9 +104,10 @@ export default function PrivacyPage() {
               </h2>
               <p className="mt-3">
                 We retain form submissions only as long as needed to respond
-                to and follow up on your inquiry. You can request that we
-                delete information you&apos;ve submitted at any time using the
-                contact details below.
+                to and follow up on your inquiry. If you opt in to marketing,
+                we retain your contact record until you unsubscribe or ask us
+                to delete it. You can make a deletion request at any time
+                using the contact details below.
               </p>
             </div>
 
@@ -113,8 +117,9 @@ export default function PrivacyPage() {
               </h2>
               <p className="mt-3">
                 You can ask us what information we hold about you, request a
-                correction, or request deletion at any time. Contact us using
-                the email address below and we&apos;ll respond promptly.
+                correction, request deletion, or unsubscribe from marketing at
+                any time. Marketing emails will include an unsubscribe option.
+                Contact us using the details below and we&apos;ll respond promptly.
               </p>
             </div>
 
