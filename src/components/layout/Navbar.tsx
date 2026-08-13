@@ -53,7 +53,7 @@ export function Navbar() {
           className="flex items-center gap-2.5 font-mono text-sm tracking-[0.08em] whitespace-nowrap"
         >
           <Image
-            src="/logo-mark.png"
+            src="/logo-mark-white.png"
             alt=""
             width={24}
             height={24}

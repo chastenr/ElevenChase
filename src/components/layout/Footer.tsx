@@ -13,7 +13,7 @@ export function Footer() {
           <div className="md:col-span-4">
             <div className="flex items-center gap-2.5">
               <Image
-                src="/logo-mark.png"
+                src="/logo-mark-white.png"
                 alt=""
                 width={22}
                 height={22}
