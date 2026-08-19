@@ -15,7 +15,7 @@ export function ClientProof() {
             id="client-proof-heading"
             className="font-mono text-[11px] tracking-[0.18em] text-muted uppercase"
           >
-            // Satisfied clients
+            {"// Satisfied clients"}
           </h2>
           <p className="mt-2 text-sm text-muted">Trusted with work that matters.</p>
         </div>
@@ -24,7 +24,7 @@ export function ClientProof() {
           {CLIENTS.map((client) => (
             <li
               key={client.name}
-              className="flex min-h-24 items-center justify-center border-l border-line px-8 md:justify-end"
+              className="flex min-h-24 items-center justify-center border-t border-line px-8 md:justify-end md:border-t-0 md:border-l"
             >
               <Image
                 src={client.logo}
