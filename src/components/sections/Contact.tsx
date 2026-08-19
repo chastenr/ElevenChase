@@ -24,7 +24,7 @@ const fieldClasses =
 
 const initialContactState: ContactFormState = { status: "idle", message: "" };
 
-export function Contact() {
+export function Contact({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" }) {
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
     initialContactState,
@@ -95,15 +95,15 @@ export function Contact() {
     message.trim().length > 0;
 
   return (
-    <section id="contact" className="py-16 md:py-24">
+    <section id="contact" className="py-24 md:py-32">
       <Container>
         <div className="grid gap-12 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
             <SectionLabel>{"// Contact"}</SectionLabel>
             <AnimatedText
-              as="h2"
+              as={headingLevel}
               lines={["Tell us about", "your project."]}
-              className="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.02] font-medium tracking-tight text-balance"
+              className="mt-6 text-[clamp(2.75rem,5vw,4.75rem)] leading-[0.98] font-medium tracking-[-0.05em] text-balance"
             />
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-sm text-lg text-muted">
@@ -348,7 +348,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isPending || !isValid}
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink"
+                  className="group inline-flex min-h-12 items-center gap-2 border border-ink bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-transparent hover:text-ink disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-ink disabled:hover:text-ivory"
                 >
                   {isPending ? "Sending…" : "Start the conversation"}
                   <AnimatedArrow />

@@ -38,6 +38,7 @@ export function FaqItem({ question, answer }: FaqItemProps) {
       </button>
       <motion.div
         id={panelId}
+        aria-hidden={!open}
         initial={false}
         animate={{ height: open ? "auto" : 0 }}
         transition={{ duration: 0.35, ease: EASE_PREMIUM }}

@@ -10,7 +10,7 @@
   --color-muted: #75746c;
   --color-line: #dedad0;
   --color-line-strong: #c9c4b6;
-  --color-accent: #2c4bf2;
+  --color-accent: #111110;
   --color-accent-ink: #f7f6f1;
 
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
@@ -25,7 +25,7 @@
     --color-muted: #96938a;
     --color-line: #2a2823;
     --color-line-strong: #3d3a33;
-    --color-accent: #6d8bff;
+    --color-accent: #f3f1ea;
     --color-accent-ink: #f3f1ea;
   }
 }
@@ -38,7 +38,7 @@
   --color-muted: #96938a;
   --color-line: #2a2823;
   --color-line-strong: #3d3a33;
-  --color-accent: #6d8bff;
+  --color-accent: #f3f1ea;
   --color-accent-ink: #f3f1ea;
 }
 
@@ -82,6 +82,16 @@ body {
   font-family: var(--font-sans);
 }
 
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  content: "";
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-accent-ink);
@@ -119,6 +129,13 @@ section[id] {
   scroll-margin-top: 5.5rem;
 }
 
+.technical-grid {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
 @keyframes activity-scroll {
   from {
     transform: translateY(0);
@@ -134,5 +151,70 @@ section[id] {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes engineering-orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes engineering-orbit-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes engineering-signal-pulse {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+.engineering-orbit-slow {
+  animation: engineering-orbit-spin 48s linear infinite;
+}
+
+.engineering-orbit-reverse {
+  animation: engineering-orbit-reverse 34s linear infinite;
+}
+
+.engineering-signal {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: engineering-signal-pulse 3.2s ease-in-out infinite;
+}
+
+@supports (animation-timeline: view()) {
+  @keyframes engineering-card-reveal {
+    0%, 100% {
+      opacity: 0.08;
+      transform: translateY(24px) scale(0.985);
+    }
+    24%, 76% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .engineering-step-card {
+    animation: engineering-card-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engineering-orbit-slow,
+  .engineering-orbit-reverse,
+  .engineering-signal,
+  .engineering-step-card {
+    animation: none;
   }
 }

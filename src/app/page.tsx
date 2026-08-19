@@ -1,12 +1,13 @@
 import { Hero } from "@/components/sections/Hero";
-import { TrustStrip } from "@/components/sections/TrustStrip";
+import { OpeningSequence } from "@/components/sections/OpeningSequence";
+import { Premise } from "@/components/sections/Premise";
+import { TechnicalDiagram } from "@/components/sections/TechnicalDiagram";
+import { ClientProof } from "@/components/sections/ClientProof";
 import { Capabilities } from "@/components/sections/Capabilities";
-import { Principles } from "@/components/sections/Principles";
-import { LiveActivity } from "@/components/sections/LiveActivity";
-import { TechStrip } from "@/components/sections/TechStrip";
+import { Problems } from "@/components/sections/Problems";
 import { Process } from "@/components/sections/Process";
 import { About } from "@/components/sections/About";
-import { Faq } from "@/components/sections/Faq";
+import { Signals } from "@/components/sections/Signals";
 import { AuditCta } from "@/components/sections/AuditCta";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Contact } from "@/components/sections/Contact";
@@ -18,15 +19,17 @@ import { Contact } from "@/components/sections/Contact";
 export default function Home() {
   return (
     <>
-      <Hero />
-      <TrustStrip />
+      <OpeningSequence>
+        <Hero />
+        <Premise />
+        <TechnicalDiagram />
+      </OpeningSequence>
+      <ClientProof />
+      <Problems />
       <Capabilities />
-      <Principles />
-      <LiveActivity />
-      <TechStrip />
+      <Signals />
       <Process />
       <About />
-      <Faq />
       <AuditCta />
       <FinalCta />
       <Contact />

@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { AnimatedText } from "@/components/ui/AnimatedText";
+import { KineticHeadline } from "@/components/ui/KineticHeadline";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { MagneticLink } from "@/components/ui/MagneticLink";
-import { ServiceTicker } from "@/components/ui/ServiceTicker";
 import { Container } from "@/components/ui/Container";
 import { EASE_PREMIUM, HERO_STAGGER_DELAYS } from "@/lib/motion";
 import { SITE } from "@/data/site";
@@ -23,51 +22,40 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-24 pb-6 md:pt-28 md:pb-8"
+      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pt-28 pb-0 md:pt-36"
     >
-      <Container className="flex flex-1 flex-col justify-center gap-8 md:gap-10">
+      <Container className="relative z-10 flex flex-1 flex-col justify-center py-12 md:py-16">
         <motion.p
           {...fadeUp(HERO_STAGGER_DELAYS.label)}
-          className="font-mono text-xs tracking-[0.18em] text-muted uppercase"
+          className="font-mono text-[11px] tracking-[0.2em] text-muted uppercase md:text-xs"
         >
           ElevenChase // Software + AI Engineering
         </motion.p>
 
-        <AnimatedText
-          as="h1"
-          trigger="mount"
+        <KineticHeadline
           delay={HERO_STAGGER_DELAYS.headline}
           lines={["We build the software", "ambitious companies", "run on."]}
-          className="text-[clamp(2.25rem,4.5vw,4.75rem)] leading-[1.05] font-medium tracking-tight text-balance"
+          className="mt-8 max-w-[1280px] text-[clamp(3.25rem,8.25vw,7.5rem)] leading-[0.89] font-medium tracking-[-0.065em] text-balance"
         />
 
         <motion.p
           {...fadeUp(HERO_STAGGER_DELAYS.paragraph)}
-          className="max-w-xl text-lg text-muted md:text-xl"
+          className="mt-10 max-w-2xl text-lg leading-relaxed text-muted md:ml-auto md:text-xl"
         >
-          We design, build and scale software, AI systems and
-          high-performance digital experiences, from first idea to
-          production.
+          Design, engineering and AI systems for companies building serious
+          products, automating operations and scaling what already works.
         </motion.p>
 
         <motion.div
-          {...fadeUp(HERO_STAGGER_DELAYS.paragraph + 0.05)}
-          className="font-mono text-xs tracking-[0.14em] text-muted uppercase"
-        >
-          Building <ServiceTicker className="text-ink" /> for ambitious
-          companies
-        </motion.div>
-
-        <motion.div
           {...fadeUp(HERO_STAGGER_DELAYS.cta)}
-          className="flex flex-wrap items-center gap-x-8 gap-y-4"
+          className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 md:ml-auto md:w-2xl"
         >
           <MagneticLink
             href="/#contact"
-            onClick={() => trackEvent("hero_book_call")}
-            className="rounded-full bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-accent"
+            onClick={() => trackEvent("start_project")}
+            className="min-h-11 border border-ink bg-ink px-6 py-3 text-sm font-medium text-ivory transition-colors duration-300 hover:bg-transparent hover:text-ink"
           >
-            Book a discovery call
+            Start a project
             <AnimatedArrow className="ml-2" />
           </MagneticLink>
 
@@ -80,13 +68,6 @@ export function Hero() {
             <AnimatedArrow />
           </Link>
 
-          <Link
-            href="/#audit"
-            className="group inline-flex items-center gap-2 text-sm text-muted transition-colors duration-200 hover:text-ink"
-          >
-            Get a website audit
-            <AnimatedArrow />
-          </Link>
         </motion.div>
       </Container>
 
@@ -94,13 +75,16 @@ export function Hero() {
         {...fadeUp(HERO_STAGGER_DELAYS.meta)}
         className="border-t border-line"
       >
-        <Container className="flex items-center justify-between py-5 font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
-          <span>Software · AI · Web · SEO</span>
-          <span className="hidden sm:inline">
-            {SITE.location} / {SITE.availability}
-          </span>
+        <Container className="grid grid-cols-3 gap-0 py-0 font-mono text-[10px] tracking-[0.14em] text-muted uppercase sm:grid-cols-6 md:text-[11px]">
+          {["Software", "AI", "Automation", "Web", "SEO", "Platforms"].map((item) => (
+            <span key={item} className="border-r border-line px-2 py-4 text-center first:border-l sm:py-5">{item}</span>
+          ))}
         </Container>
       </motion.div>
+      <Container className="flex items-center justify-between py-4 font-mono text-[10px] tracking-[0.16em] text-muted uppercase">
+        <span>Scroll to explore ↓</span>
+        <span className="hidden sm:inline">{SITE.location} / {SITE.availability}</span>
+      </Container>
     </section>
   );
 }

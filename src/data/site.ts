@@ -57,9 +57,10 @@ export const SERVICES_NAV = [
 
 export const NAV_LINKS = [
   { label: "Work", href: "/work" },
+  { label: "Services", href: "/services" },
+  { label: "Process", href: "/process" },
   { label: "Company", href: "/company" },
   { label: "Insights", href: "/insights" },
-  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const FOOTER_COLUMNS = [

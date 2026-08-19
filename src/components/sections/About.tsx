@@ -8,15 +8,15 @@ import { SITE } from "@/data/site";
 
 export function About() {
   return (
-    <section id="about" className="py-16 md:py-24">
+    <section id="about" className="py-24 md:py-36">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
-            <SectionLabel>{"// 05 About"}</SectionLabel>
+            <SectionLabel>{"// ElevenChase"}</SectionLabel>
             <AnimatedText
               as="h2"
               lines={["Small team.", "Serious", "engineering."]}
-              className="mt-5 text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] font-medium tracking-tight text-balance"
+              className="mt-6 text-[clamp(2.75rem,5.5vw,5.25rem)] leading-[0.98] font-medium tracking-[-0.05em] text-balance"
             />
           </div>
 
@@ -24,7 +24,7 @@ export function About() {
             <Reveal>
               <p className="text-xl leading-relaxed text-pretty text-muted md:text-2xl">
                 ElevenChase is an independent software engineering studio
-                helping companies turn ideas, workflows and complex problems
+                helping companies turn ideas, workflows and complex operational problems
                 into software people actually want to use.
               </p>
             </Reveal>

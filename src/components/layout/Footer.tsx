@@ -1,84 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FOOTER_COLUMNS, SITE } from "@/data/site";
+import { SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
+const LINKS = [
+  ["Services", "/services"], ["Work", "/work"], ["Company", "/company"],
+  ["Insights", "/insights"], ["FAQ", "/faq"], ["Contact", "/contact"],
+] as const;
+
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-line">
-      <Container className="py-14 md:py-20">
+    <footer className="border-t border-line py-14 md:py-20">
+      <Container>
         <div className="grid gap-12 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <div className="flex items-center gap-2.5">
-              <Image
-                src="/logo-mark-white.png"
-                alt=""
-                width={22}
-                height={22}
-                className="h-[22px] w-[22px]"
-                aria-hidden="true"
-              />
-              <p className="font-mono text-sm font-medium tracking-[0.08em]">
-                {SITE.name.toUpperCase()}
-              </p>
-            </div>
-            <p className="mt-3 text-sm text-muted">{SITE.tagline}</p>
+          <div className="md:col-span-5">
+            <Link href="/" className="inline-flex items-center gap-3 font-mono text-sm tracking-[0.1em]">
+              <Image src="/logo-mark-white.png" alt="" width={26} height={26} className="invert dark:invert-0" aria-hidden="true" /> ELEVENCHASE
+            </Link>
+            <p className="mt-4 text-sm text-muted">Software + AI Engineering</p>
           </div>
-
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-8">
-            {FOOTER_COLUMNS.map((column) => (
-              <div key={column.title}>
-                <p className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
-                  {column.title}
-                </p>
-                <nav
-                  className="mt-4 flex flex-col gap-3"
-                  aria-label={column.title}
-                >
-                  {column.links.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-sm text-ink-soft transition-colors duration-200 hover:text-ink"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
-            ))}
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-3 md:col-span-3">
+            {LINKS.map(([label, href]) => <Link key={href} href={href} className="text-sm text-muted hover:text-ink">{label}</Link>)}
+          </nav>
+          <div className="md:col-span-4 md:text-right">
+            <a href={`mailto:${SITE.email}`} className="text-sm underline underline-offset-4">{SITE.email}</a>
+            <p className="mt-3 font-mono text-[10px] tracking-[0.12em] text-muted uppercase">Remote-first · Worldwide</p>
           </div>
         </div>
-
-        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <p>
-              © {year} {SITE.legalName}. All rights reserved.
-            </p>
-            <Link
-              href="/privacy"
-              className="transition-colors duration-200 hover:text-ink"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="transition-colors duration-200 hover:text-ink"
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="/security"
-              className="transition-colors duration-200 hover:text-ink"
-            >
-              Security
-            </Link>
-          </div>
-          <p>
-            Founded by {SITE.ceoName} · {SITE.location} · {SITE.availability}
-          </p>
+        <div className="mt-16 flex flex-col gap-5 border-t border-line pt-7 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 ElevenChase. All rights reserved.</p>
+          <nav aria-label="Legal" className="flex gap-5"><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/security">Security</Link></nav>
         </div>
       </Container>
     </footer>

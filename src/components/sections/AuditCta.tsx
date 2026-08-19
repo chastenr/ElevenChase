@@ -85,21 +85,21 @@ export function AuditCta() {
   }
 
   return (
-    <section id="audit" className="border-y border-line py-16 md:py-24">
+    <section id="audit" className="border-y border-line py-24 md:py-28">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-5">
-            <SectionLabel>{"// Free audit"}</SectionLabel>
+            <SectionLabel>{"// Not ready for a project?"}</SectionLabel>
             <AnimatedText
               as="h2"
-              lines={["Not sure what your", "website needs?"]}
+              lines={["Start with", "an audit."]}
               className="mt-5 text-[clamp(1.75rem,3.5vw,3rem)] leading-[1.05] font-medium tracking-tight text-balance"
             />
             <Reveal delay={0.1}>
               <p className="mt-6 max-w-sm text-lg text-muted">
-                We&apos;ll look at your website&apos;s performance, technical
-                foundation and search structure and tell you where the
-                biggest opportunities are.
+                We&apos;ll review your site&apos;s technical foundation, performance,
+                search structure and conversion path and tell you what is
+                actually worth fixing.
               </p>
             </Reveal>
           </div>

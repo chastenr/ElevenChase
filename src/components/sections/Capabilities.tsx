@@ -8,21 +8,19 @@ import { Container } from "@/components/ui/Container";
 
 export function Capabilities() {
   return (
-    <section id="capabilities" className="py-16 md:py-24">
+    <section id="capabilities" className="py-24 md:py-36">
       <Container>
         <div className="max-w-3xl">
-          <SectionLabel>{"// 01 Capabilities"}</SectionLabel>
+          <SectionLabel>{"// What we build"}</SectionLabel>
           <AnimatedText
             as="h2"
-            lines={["Software. AI.", "Web. SEO."]}
-            className="mt-5 text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.02] font-medium tracking-tight text-balance"
+            lines={["Software.", "AI. Infrastructure."]}
+            className="mt-6 text-[clamp(2.75rem,6vw,5.75rem)] leading-[0.98] font-medium tracking-[-0.05em] text-balance"
           />
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl text-lg text-muted">
-              Whether you&apos;re validating an early idea or scaling
-              something that already works, we cover the full stack:
-              products, AI systems, web experiences and the search
-              infrastructure behind them.
+              We build the systems companies use to launch products, remove
+              operational drag and create durable digital infrastructure.
             </p>
           </Reveal>
         </div>
@@ -43,7 +41,7 @@ export function Capabilities() {
                 </span>
                 <h3 className="flex items-center gap-3 text-3xl leading-[1.05] font-medium tracking-tight text-balance md:col-span-6 md:text-5xl">
                   {capability.title}
-                  <AnimatedArrow className="opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <AnimatedArrow className="transition-transform duration-300 group-hover:translate-x-1" />
                 </h3>
                 <div className="md:col-span-5">
                   <p className="max-w-md text-lg text-muted">
@@ -54,6 +52,7 @@ export function Capabilities() {
                       <li key={example}>{example}</li>
                     ))}
                   </ul>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm">Explore {capability.title.replace(" Development", "").replace(" Engineering", "")} <AnimatedArrow /></span>
                 </div>
               </Link>
             </Reveal>

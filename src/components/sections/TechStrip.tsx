@@ -3,6 +3,7 @@
 import { useReducedMotion } from "motion/react";
 import { TECH_STACK } from "@/data/tech";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
@@ -11,19 +12,16 @@ export function TechStrip() {
 
   return (
     <section
-      className="border-y border-line py-12 md:py-14"
+      className="border-y border-line py-24 md:py-32"
       aria-label="Technology"
     >
       <Container>
-        <Reveal>
-          <p className="max-w-2xl text-2xl leading-snug font-medium tracking-tight text-balance md:text-3xl">
-            &ldquo;Technology should serve the product, not the other way
-            around.&rdquo;
-          </p>
-        </Reveal>
+        <SectionLabel>{"// Stack"}</SectionLabel>
+        <Reveal><h2 className="mt-6 max-w-4xl text-[clamp(2.5rem,5vw,4.75rem)] leading-[1] font-medium tracking-[-0.045em]">Tools are chosen<br />for the problem.</h2></Reveal>
+        <Reveal delay={0.1}><p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">We work primarily with modern web, cloud and AI infrastructure, but architecture follows the product rather than the other way around.</p></Reveal>
 
         {prefersReducedMotion && (
-          <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm tracking-[0.06em] text-muted uppercase">
+          <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm tracking-[0.06em] text-muted uppercase">
             {TECH_STACK.map((tech) => (
               <li key={tech}>{tech}</li>
             ))}
@@ -32,7 +30,7 @@ export function TechStrip() {
       </Container>
 
       {!prefersReducedMotion && (
-        <div className="relative mt-8 overflow-hidden">
+        <div className="relative mt-14 overflow-hidden">
           <div
             className={cn(
               "flex w-max gap-12 px-6 font-mono text-sm tracking-[0.06em] text-muted uppercase md:px-10 lg:px-16",

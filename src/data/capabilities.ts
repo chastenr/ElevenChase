@@ -12,7 +12,7 @@ export const CAPABILITIES: Capability[] = [
     title: "Software Development",
     href: "/services/software-development",
     description:
-      "Production-ready digital products built around real business workflows.",
+      "Production-ready digital products designed around real business workflows.",
     examples: [
       "SaaS",
       "Customer portals",
@@ -27,26 +27,26 @@ export const CAPABILITIES: Capability[] = [
     title: "AI + Automation",
     href: "/services/ai-automation",
     description:
-      "AI systems integrated into actual business operations, not demos.",
+      "AI that works inside real operations rather than sitting in a demo.",
     examples: [
       "AI agents",
       "LLM applications",
-      "RAG",
+      "RAG systems",
       "Voice AI",
-      "Chat systems",
+      "Document processing",
       "Workflow automation",
     ],
   },
   {
     index: "03",
-    title: "Web Experience",
+    title: "Web Engineering",
     href: "/services/web-development",
     description:
       "High-performance websites engineered around brand, usability and conversion.",
     examples: [
       "Strategy",
       "UX/UI",
-      "Next.js development",
+      "Next.js",
       "CMS",
       "Conversion optimization",
       "Performance",
@@ -60,7 +60,7 @@ export const CAPABILITIES: Capability[] = [
     examples: [
       "Technical SEO",
       "Structured data",
-      "Keyword architecture",
+      "Indexing",
       "Core Web Vitals",
       "Programmatic SEO",
       "AI search foundations",
