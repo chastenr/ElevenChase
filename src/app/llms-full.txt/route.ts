@@ -71,7 +71,6 @@ export function GET() {
   lines.push("");
   lines.push(`- Homepage: ${SITE.url}/`);
   lines.push(`- Company / about: ${SITE.url}/company`);
-  lines.push(`- Selected engineering work: ${SITE.url}/work`);
   lines.push(`- Insights: ${SITE.url}/insights`);
   lines.push(`- Privacy Policy: ${SITE.url}/privacy`);
   lines.push(`- Terms of Service: ${SITE.url}/terms`);
@@ -90,9 +89,6 @@ export function GET() {
   lines.push("");
   lines.push(
     "- Pricing is not published as fixed rates because scope, complexity and timeline vary too much between projects; estimates are provided after a scoping conversation.",
-  );
-  lines.push(
-    "- Case studies on the homepage Work section describe representative engagement types (project type, problem, solution, technology). Specific client names, industries and measurable outcomes are added only once available and verified.",
   );
   lines.push(
     "- No fixed office location beyond remote-first/worldwide; no public awards, certifications or third-party ratings are claimed.",

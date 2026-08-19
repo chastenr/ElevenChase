@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { KineticHeadline } from "@/components/ui/KineticHeadline";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
@@ -59,15 +58,6 @@ export function Hero() {
             Start a project
             <AnimatedArrow className="ml-2" />
           </MagneticLink>
-
-          <Link
-            href="/work"
-            onClick={() => trackEvent("hero_view_work")}
-            className="group inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors duration-200 hover:text-ink"
-          >
-            See our work
-            <AnimatedArrow />
-          </Link>
 
         </motion.div>
       </Container>

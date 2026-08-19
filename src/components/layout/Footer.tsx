@@ -4,7 +4,7 @@ import { SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 
 const LINKS = [
-  ["Services", "/services"], ["Work", "/work"], ["Company", "/company"],
+  ["Services", "/services"], ["Company", "/company"],
   ["Insights", "/insights"], ["FAQ", "/faq"], ["Contact", "/contact"],
 ] as const;
 

@@ -12,10 +12,8 @@ import { AuditCta } from "@/components/sections/AuditCta";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Contact } from "@/components/sections/Contact";
 
-// Anonymous portfolio cards are intentionally not the homepage's primary
-// proof (see src/app/work/page.tsx for the full, honestly-framed list) —
-// what/why/how sections, real technology and the founder's identity carry
-// credibility instead. Work stays reachable via nav/footer.
+// The homepage leads with capabilities, process, client trust and direct
+// founder accountability without publishing confidential project details.
 export default function Home() {
   return (
     <>

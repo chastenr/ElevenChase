@@ -26,7 +26,7 @@ export function GET() {
 
   lines.push("## Company");
   lines.push("");
-  lines.push(`- [Homepage](${SITE.url}/): Overview of ${SITE.name}'s services, process and work.`);
+  lines.push(`- [Homepage](${SITE.url}/): Overview of ${SITE.name}'s services and process.`);
   lines.push(`- [Company](${SITE.url}/company): Who ${SITE.name} is, founder background, and how the studio works.`);
   lines.push(`- [Insights](${SITE.url}/insights): Engineering-focused articles on software, AI, web development and technical SEO.`);
   lines.push(`- [Contact](${SITE.url}/#contact): Start a project or request a free website audit.`);
@@ -48,7 +48,6 @@ export function GET() {
   lines.push("");
   lines.push(`- ${SITE.name} is ${SITE.location.toLowerCase()} and works with clients ${SITE.availability.toLowerCase()}.`);
   lines.push("- Pricing depends on project scope and is not published as fixed rates; estimates are provided after understanding requirements.");
-  lines.push("- The Work section on the homepage describes representative engagement types. Specific client names and metrics are published only once verified.");
   lines.push(`- Full machine-readable detail: ${SITE.url}/llms-full.txt`);
   lines.push("");
 
