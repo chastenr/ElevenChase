@@ -35,7 +35,8 @@ export function Hero() {
         <KineticHeadline
           delay={HERO_STAGGER_DELAYS.headline}
           lines={["We build the software", "ambitious companies", "run on."]}
-          className="mt-8 max-w-[1280px] text-[clamp(3.25rem,8.25vw,7.5rem)] leading-[0.89] font-medium tracking-[-0.065em] text-balance"
+          mobileLines={["We build the", "software", "ambitious", "companies", "run on."]}
+          className="mt-8 w-full min-w-0 max-w-[1280px] text-[clamp(2.85rem,13vw,3.4rem)] leading-[0.89] font-medium tracking-[-0.06em] text-balance sm:text-[clamp(3.25rem,8.25vw,7.5rem)] sm:tracking-[-0.065em]"
         />
 
         <motion.p

@@ -23,7 +23,10 @@ export function OpeningSequence({ children }: { children: React.ReactNode }) {
 
   return (
     <div ref={sequenceRef} className="relative isolate">
-      <div className="pointer-events-none absolute inset-0 z-20" aria-hidden="true">
+      <div
+        className="pointer-events-none absolute inset-0 z-20 overflow-x-clip"
+        aria-hidden="true"
+      >
         <motion.div
           data-testid="opening-orbit-motion"
           className="sticky top-0 h-[100svh] overflow-hidden text-white mix-blend-difference"
