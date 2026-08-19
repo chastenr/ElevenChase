@@ -2,7 +2,7 @@ const TICKS = Array.from({ length: 48 }, (_, index) => index * 7.5);
 
 export function EngineeringOrbit() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute -top-[18vw] -right-[32vw] z-0 size-[105vw] max-h-[1300px] max-w-[1300px] min-h-[620px] min-w-[620px] text-current opacity-[0.13] md:-top-[28rem] md:-right-[22rem] md:size-[82rem]">
+    <div aria-hidden="true" className="pointer-events-none absolute -top-[18vw] -right-[32vw] z-0 size-[105vw] max-h-[1300px] max-w-[1300px] min-h-[620px] min-w-[620px] text-current opacity-[0.09] md:-top-[28rem] md:-right-[22rem] md:size-[82rem]">
       <svg viewBox="0 0 400 400" fill="none" className="size-full overflow-visible">
         <g className="engineering-orbit-slow origin-center">
           <circle cx="200" cy="200" r="174" stroke="currentColor" strokeWidth="0.65" />

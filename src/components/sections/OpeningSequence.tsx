@@ -18,7 +18,7 @@ export function OpeningSequence({ children }: { children: React.ReactNode }) {
   const orbitOpacity = useTransform(
     scrollYProgress,
     [0, 0.72, 0.9, 1],
-    [1, 0.95, 0.55, 0],
+    [1, 0.92, 0.48, 0],
   );
 
   return (
