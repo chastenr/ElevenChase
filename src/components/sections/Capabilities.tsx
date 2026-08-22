@@ -52,7 +52,14 @@ export function Capabilities() {
                       <li key={example}>{example}</li>
                     ))}
                   </ul>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm">Explore {capability.title.replace(" Development", "").replace(" Engineering", "")} <AnimatedArrow /></span>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm">
+                    <span
+                      data-i18n-key={`Explore ${capability.title.replace(" Development", "").replace(" Engineering", "")}`}
+                    >
+                      Explore {capability.title.replace(" Development", "").replace(" Engineering", "")}
+                    </span>
+                    <AnimatedArrow />
+                  </span>
                 </div>
               </Link>
             </Reveal>

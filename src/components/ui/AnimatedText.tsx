@@ -38,7 +38,7 @@ export function AnimatedText({
 
   if (prefersReducedMotion) {
     return (
-      <Tag id={id} className={className} aria-label={lines.join(" ")}>
+      <Tag id={id} className={className} aria-label={lines.join(" ")} data-i18n-heading>
         {lines.map((line, i) => (
           <span key={line + i} className={cn("block", lineClassName)}>
             {line}
@@ -63,7 +63,12 @@ export function AnimatedText({
     // reveal mask's overflow-hidden clips them. pb-[0.2em] on each mask
     // gives descenders room; -mb-[0.2em] here cancels the trailing line's
     // padding so spacing after the heading is unaffected.
-    <Tag id={id} className={cn(className, "-mb-[0.2em]")} aria-label={lines.join(" ")}>
+    <Tag
+      id={id}
+      className={cn(className, "-mb-[0.2em]")}
+      aria-label={lines.join(" ")}
+      data-i18n-heading
+    >
       {lines.map((line, i) => (
         <motion.span
           key={line + i}

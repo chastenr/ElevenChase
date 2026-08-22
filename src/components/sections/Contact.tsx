@@ -184,7 +184,7 @@ export function Contact({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" })
               <div className="grid gap-8 lg:grid-cols-2">
                 <label className="flex flex-col gap-2">
                   <span className="font-mono text-xs tracking-[0.1em] text-muted uppercase">
-                    Company{" "}
+                    Company name{" "}
                     <span className="normal-case text-muted/60">
                       (optional)
                     </span>

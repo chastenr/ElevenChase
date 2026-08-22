@@ -224,6 +224,46 @@ html[data-locale="ja"]:not([data-i18n-ready="true"]) body {
 
 html[data-locale="ja"] body {
   font-family: var(--font-sans-primary), "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
-  font-feature-settings: "palt";
-  word-break: auto-phrase;
+  font-feature-settings: "palt" 1;
+  font-kerning: normal;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+html[data-locale="ja"] h1,
+html[data-locale="ja"] h2,
+html[data-locale="ja"] h3 {
+  line-height: 1.18 !important;
+  letter-spacing: -0.035em !important;
+  text-wrap: balance;
+}
+
+html[data-locale="ja"] [data-i18n-hero] {
+  max-width: 11em;
+  font-size: clamp(2.65rem, 6vw, 5.8rem) !important;
+  line-height: 1.14 !important;
+  letter-spacing: -0.045em !important;
+  white-space: pre-line;
+}
+
+html[data-locale="ja"] [data-i18n-heading] {
+  line-height: 1.2 !important;
+  letter-spacing: -0.035em !important;
+}
+
+html[data-locale="ja"] p {
+  line-height: 1.85;
+}
+
+html[data-locale="ja"] .font-mono {
+  letter-spacing: 0.08em !important;
+}
+
+@media (max-width: 639px) {
+  html[data-locale="ja"] [data-i18n-hero] {
+    max-width: 9em;
+    font-size: clamp(2.35rem, 11vw, 3rem) !important;
+    line-height: 1.2 !important;
+  }
 }

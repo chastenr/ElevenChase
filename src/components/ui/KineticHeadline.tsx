@@ -61,7 +61,11 @@ export function KineticHeadline({
   }
 
   return (
-    <h1 aria-label={lines.join(" ")} className={cn(className, "-mb-[0.16em]")}>
+    <h1
+      aria-label={lines.join(" ")}
+      data-i18n-hero
+      className={cn(className, "-mb-[0.16em]")}
+    >
       <span aria-hidden="true" className={mobileLines ? "sm:hidden" : undefined}>
         {renderLines(mobileLines ?? lines, "mobile")}
       </span>

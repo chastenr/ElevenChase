@@ -20,11 +20,11 @@ export function WordReveal({
   const words = text.split(" ");
 
   if (prefersReducedMotion) {
-    return <Tag className={className}>{text}</Tag>;
+    return <Tag className={className} data-i18n-heading>{text}</Tag>;
   }
 
   return (
-    <Tag className={cn(className)} aria-label={text}>
+    <Tag className={cn(className)} aria-label={text} data-i18n-heading>
       <motion.span
         aria-hidden="true"
         initial="hidden"
