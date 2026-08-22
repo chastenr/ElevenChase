@@ -14,7 +14,12 @@ export function Problems() {
     <section className="py-24 md:py-36">
       <Container>
         <SectionLabel>{"// When companies come to us"}</SectionLabel>
-        <h2 className="mt-6 max-w-4xl text-[clamp(2.75rem,6vw,5.75rem)] leading-[0.98] font-medium tracking-[-0.05em]">Usually, something<br />isn&apos;t working.</h2>
+        <h2
+          data-i18n-key="Usually, something isn't working."
+          className="mt-6 max-w-4xl text-[clamp(2.75rem,6vw,5.75rem)] leading-[0.98] font-medium tracking-[-0.05em]"
+        >
+          Usually, something<br />isn&apos;t working.
+        </h2>
         <div className="mt-14 border-t border-line md:mt-20">
           {PROBLEMS.map(([problem, response], index) => (
             <Reveal key={problem} delay={index * 0.03}>

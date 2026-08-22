@@ -223,7 +223,7 @@ html[data-locale="ja"]:not([data-i18n-ready="true"]) body {
 }
 
 html[data-locale="ja"] body {
-  font-family: var(--font-sans-primary), "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-family: var(--font-sans-japanese), "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
   font-feature-settings: "palt" 1;
   font-kerning: normal;
   line-break: strict;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Geist_Mono } from "next/font/google";
+import { Manrope, Geist_Mono, Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/data/site";
@@ -22,6 +22,14 @@ const sans = Manrope({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const japaneseSans = Noto_Sans_JP({
+  variable: "--font-sans-japanese",
+  weight: "variable",
+  display: "swap",
+  preload: false,
+  fallback: ["Hiragino Sans", "Yu Gothic", "Meiryo", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -78,7 +86,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${sans.variable} ${geistMono.variable} ${japaneseSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ivory text-ink">
         <noscript>

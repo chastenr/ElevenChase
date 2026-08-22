@@ -41,7 +41,9 @@ export function Navbar() {
         <div className="hidden items-center gap-7 lg:flex">
           <nav className="flex items-center gap-7" aria-label="Primary">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm text-muted transition-colors hover:text-ink">{link.label}</Link>
+              <Link key={link.href} href={link.href} className="text-sm text-muted transition-colors hover:text-ink">
+                <span data-i18n-key={`Navigation: ${link.label}`}>{link.label}</span>
+              </Link>
             ))}
           </nav>
           <LanguageSwitcher />
@@ -68,7 +70,8 @@ export function Navbar() {
                 {NAV_LINKS.map((link, index) => (
                   <motion.div key={link.href} initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: EASE_PREMIUM, delay: index * 0.04 }}>
                     <Link href={link.href} onClick={() => setOpen(false)} className="flex min-h-16 items-center justify-between border-b border-line text-[clamp(1.75rem,8vw,2.5rem)] tracking-tight">
-                      {link.label}<span className="font-mono text-xs text-muted">0{index + 1}</span>
+                      <span data-i18n-key={`Navigation: ${link.label}`}>{link.label}</span>
+                      <span className="font-mono text-xs text-muted">0{index + 1}</span>
                     </Link>
                   </motion.div>
                 ))}
