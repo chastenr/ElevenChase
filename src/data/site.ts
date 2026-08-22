@@ -11,7 +11,7 @@ export const SITE = {
   availability: "Worldwide",
   ceoName: "Chasten Ramirez",
   ceoTitle: "Founder & CEO",
-  email: "chase@elevenchase.com",
+  email: "start@elevenchase.com",
   contactEmail: "start@elevenchase.com",
   // Company and founder social profiles for schema.org `sameAs`. Left empty
   // until real, live profiles exist — populate as they're created rather

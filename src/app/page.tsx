@@ -6,14 +6,13 @@ import { ClientProof } from "@/components/sections/ClientProof";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { Problems } from "@/components/sections/Problems";
 import { Process } from "@/components/sections/Process";
-import { About } from "@/components/sections/About";
 import { Signals } from "@/components/sections/Signals";
 import { AuditCta } from "@/components/sections/AuditCta";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Contact } from "@/components/sections/Contact";
 
-// The homepage leads with capabilities, process, client trust and direct
-// founder accountability without publishing confidential project details.
+// The homepage stays focused on capabilities, outcomes, process and client
+// trust. The company page carries the studio and founder story.
 export default function Home() {
   return (
     <>
@@ -27,7 +26,6 @@ export default function Home() {
       <Capabilities />
       <Signals />
       <Process />
-      <About />
       <AuditCta />
       <FinalCta />
       <Contact />

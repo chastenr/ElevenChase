@@ -1,5 +1,5 @@
 # Per RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116).
-Contact: mailto:chase@elevenchase.com
+Contact: mailto:start@elevenchase.com
 Expires: 2027-08-11T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://www.elevenchase.com/.well-known/security.txt
