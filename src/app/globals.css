@@ -218,3 +218,12 @@ section[id] {
     animation: none;
   }
 }
+html[data-locale="ja"]:not([data-i18n-ready="true"]) body {
+  visibility: hidden;
+}
+
+html[data-locale="ja"] body {
+  font-family: var(--font-sans-primary), "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-feature-settings: "palt";
+  word-break: auto-phrase;
+}

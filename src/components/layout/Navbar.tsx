@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/data/site";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 import { EASE_PREMIUM } from "@/lib/motion";
@@ -43,6 +44,7 @@ export function Navbar() {
               <Link key={link.href} href={link.href} className="text-sm text-muted transition-colors hover:text-ink">{link.label}</Link>
             ))}
           </nav>
+          <LanguageSwitcher />
           <ThemeToggle className="min-h-11 min-w-11" />
           <Link href="/#contact" className="group inline-flex min-h-11 items-center gap-2 border border-ink bg-ink px-5 text-sm text-ivory transition-colors hover:bg-transparent hover:text-ink">
             Start a project <AnimatedArrow />
@@ -50,7 +52,8 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-1 lg:hidden">
-          <ThemeToggle className="min-h-11 min-w-11" />
+          <LanguageSwitcher compact />
+          <ThemeToggle className="hidden min-h-11 min-w-11 sm:inline-flex" />
           <button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex min-h-11 min-w-11 items-center justify-center" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-menu">
             {open ? <X size={21} aria-hidden /> : <Menu size={21} aria-hidden />}
           </button>
