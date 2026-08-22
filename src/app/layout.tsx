@@ -89,6 +89,7 @@ const LANGUAGE_INIT_SCRIPT = `(function(){try{var p=window.location.pathname;var
 
 const GOOGLE_ANALYTICS_ID = "G-DRKHQW2GN8";
 const GOOGLE_TAG_MANAGER_ID = "GTM-PRPX2278";
+const isProduction = process.env.NODE_ENV === "production";
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const localeHeader = (await headers()).get("x-elevenchase-locale");
@@ -102,15 +103,17 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sans.variable} ${geistMono.variable} ${japaneseSans.variable} ${traditionalChineseSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ivory text-ink">
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
-            height="0"
-            width="0"
-            className="hidden invisible"
-            title="Google Tag Manager"
-          />
-        </noscript>
+        {isProduction ? (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}`}
+              height="0"
+              width="0"
+              className="hidden invisible"
+              title="Google Tag Manager"
+            />
+          </noscript>
+        ) : null}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: LANGUAGE_INIT_SCRIPT }} />
         <script
@@ -130,28 +133,32 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <main className="flex-1">{children}</main>
           <Footer />
         </LanguageProvider>
-        <Analytics />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GOOGLE_ANALYTICS_ID}');
-          `}
-        </Script>
-        <Script id="google-tag-manager" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');
-          `}
-        </Script>
+        {isProduction ? (
+          <>
+            <Analytics />
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GOOGLE_ANALYTICS_ID}');
+              `}
+            </Script>
+            <Script id="google-tag-manager" strategy="afterInteractive">
+              {`
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${GOOGLE_TAG_MANAGER_ID}');
+              `}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );

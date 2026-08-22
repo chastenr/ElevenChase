@@ -2,6 +2,18 @@ import path from "node:path";
 import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV === "development";
+const analyticsScriptSources = isDev
+  ? ""
+  : " https://va.vercel-scripts.com https://www.googletagmanager.com";
+const analyticsConnectSources = isDev
+  ? ""
+  : " https://vitals.vercel-insights.com https://www.google-analytics.com https://region1.google-analytics.com";
+const analyticsImageSources = isDev
+  ? ""
+  : " https://www.google-analytics.com https://www.googletagmanager.com";
+const analyticsFrameSources = isDev
+  ? "'none'"
+  : "https://www.googletagmanager.com";
 
 /**
  * script-src/style-src intentionally allow 'unsafe-inline' rather than a
@@ -27,15 +39,15 @@ const isDev = process.env.NODE_ENV === "development";
  */
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}${analyticsScriptSources}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  `img-src 'self' data:${analyticsImageSources}`,
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${analyticsConnectSources}`,
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-  "frame-src 'none'",
+  `frame-src ${analyticsFrameSources}`,
   "frame-ancestors 'none'",
   "upgrade-insecure-requests",
 ].join("; ");

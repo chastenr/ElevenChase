@@ -26,8 +26,6 @@ import {
   htmlLanguages,
   isLocalizedLocale,
   isLocalizedRoutePath,
-  localizedLocales,
-  localizedRoutePaths,
   type LocalizedRoutePath,
 } from "@/i18n/routing";
 import { localizedMetadata, localizedSeo } from "@/i18n/seo";
@@ -37,16 +35,11 @@ type LocalizedPageParams = Promise<{
   slug?: string[];
 }>;
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return localizedLocales.flatMap((locale) =>
-    localizedRoutePaths.map((pathname) => {
-      const slug = pathname === "/" ? undefined : pathname.slice(1).split("/");
-      return slug ? { locale, slug } : { locale };
-    }),
-  );
-}
+// The root layout reads the locale header set by proxy.ts so the document's
+// lang attribute is correct on the first response. Keep localized routes
+// dynamic as well; otherwise Next can classify this optional catch-all as SSG
+// and then fail with DYNAMIC_SERVER_USAGE when serving a production request.
+export const dynamic = "force-dynamic";
 
 function resolveRoute(localeValue: string, slug?: string[]) {
   const pathname = slug?.length ? `/${slug.join("/")}` : "/";
