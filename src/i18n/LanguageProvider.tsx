@@ -2,14 +2,12 @@
 
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
 import japanese from "@/i18n/ja.json";
 import traditionalChinese from "@/i18n/zh-Hant.json";
 import { traditionalChineseOverrides } from "@/i18n/zh-Hant-overrides";
@@ -25,7 +23,6 @@ export type { Locale } from "@/i18n/routing";
 
 type LanguageContextValue = {
   locale: Locale;
-  setLocale: (locale: Locale) => void;
   t: (source: string) => string;
 };
 
@@ -506,15 +503,6 @@ export function LanguageProvider({
   initialLocale?: Locale;
 }) {
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
-  const router = useRouter();
-
-  const setLocale = useCallback((nextLocale: Locale) => {
-    localStorage.setItem(STORAGE_KEY, nextLocale);
-    document.documentElement.lang = htmlLanguages[nextLocale];
-    document.documentElement.dataset.locale = nextLocale;
-    const nextPath = localizePathname(window.location.pathname, nextLocale);
-    router.push(`${nextPath}${window.location.search}${window.location.hash}`);
-  }, [router]);
 
   useEffect(() => {
     const pathLocale = localeFromPathname(window.location.pathname);
@@ -570,10 +558,9 @@ export function LanguageProvider({
   const value = useMemo<LanguageContextValue>(
     () => ({
       locale,
-      setLocale,
       t: locale === "en" ? (source) => source : (source) => translate(source, locale),
     }),
-    [locale, setLocale],
+    [locale],
   );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

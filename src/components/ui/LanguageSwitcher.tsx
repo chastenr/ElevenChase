@@ -1,8 +1,13 @@
 "use client";
 
+import type { MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 import { Languages } from "lucide-react";
 import { useLanguage, type Locale } from "@/i18n/LanguageProvider";
+import { localizePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+
+const STORAGE_KEY = "elevenchase-locale";
 
 export function LanguageSwitcher({
   className,
@@ -11,11 +16,27 @@ export function LanguageSwitcher({
   className?: string;
   compact?: boolean;
 }) {
-  const { locale, setLocale } = useLanguage();
+  const { locale } = useLanguage();
+  const pathname = usePathname();
 
-  function changeLanguage(nextLocale: Locale) {
-    if (nextLocale !== locale) setLocale(nextLocale);
+  function rememberLanguage(
+    event: MouseEvent<HTMLAnchorElement>,
+    nextLocale: Locale,
+  ) {
+    localStorage.setItem(STORAGE_KEY, nextLocale);
+
+    // Use native document navigation so the root document language, metadata
+    // and translated content all initialize from the same locale. Next.js
+    // client navigation intentionally preserves the root layout.
+    event.currentTarget.href = `${localizePathname(pathname, nextLocale)}${window.location.search}${window.location.hash}`;
   }
+
+  const optionClassName = (optionLocale: Locale) => cn(
+    "inline-flex min-h-8 items-center px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
+    locale === optionLocale
+      ? "bg-ink text-ivory"
+      : "text-muted hover:text-ink",
+  );
 
   return (
     <div
@@ -31,39 +52,36 @@ export function LanguageSwitcher({
       data-no-translate
     >
       {!compact && <Languages size={15} className="ml-1 text-muted" aria-hidden="true" />}
-      <button
-        type="button"
-        onClick={() => changeLanguage("en")}
-        className={cn(
-          "min-h-8 px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
-          locale === "en" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
-        )}
-        aria-pressed={locale === "en"}
+      <a
+        href={localizePathname(pathname, "en")}
+        onClick={(event) => rememberLanguage(event, "en")}
+        className={optionClassName("en")}
+        hrefLang="en"
+        lang="en"
+        aria-current={locale === "en" ? "page" : undefined}
       >
         EN
-      </button>
-      <button
-        type="button"
-        onClick={() => changeLanguage("ja")}
-        className={cn(
-          "min-h-8 px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
-          locale === "ja" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
-        )}
-        aria-pressed={locale === "ja"}
+      </a>
+      <a
+        href={localizePathname(pathname, "ja")}
+        onClick={(event) => rememberLanguage(event, "ja")}
+        className={optionClassName("ja")}
+        hrefLang="ja"
+        lang="ja"
+        aria-current={locale === "ja" ? "page" : undefined}
       >
         日本語
-      </button>
-      <button
-        type="button"
-        onClick={() => changeLanguage("zh-tw")}
-        className={cn(
-          "min-h-8 px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
-          locale === "zh-tw" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
-        )}
-        aria-pressed={locale === "zh-tw"}
+      </a>
+      <a
+        href={localizePathname(pathname, "zh-tw")}
+        onClick={(event) => rememberLanguage(event, "zh-tw")}
+        className={optionClassName("zh-tw")}
+        hrefLang="zh-Hant-TW"
+        lang="zh-Hant-TW"
+        aria-current={locale === "zh-tw" ? "page" : undefined}
       >
         {compact ? "繁中" : "繁體中文"}
-      </button>
+      </a>
     </div>
   );
 }
