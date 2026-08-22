@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Geist_Mono, Noto_Sans_JP } from "next/font/google";
+import { Manrope, Geist_Mono, Noto_Sans_JP, Noto_Sans_TC } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/data/site";
@@ -30,6 +30,14 @@ const japaneseSans = Noto_Sans_JP({
   display: "swap",
   preload: false,
   fallback: ["Hiragino Sans", "Yu Gothic", "Meiryo", "sans-serif"],
+});
+
+const traditionalChineseSans = Noto_Sans_TC({
+  variable: "--font-sans-traditional-chinese",
+  weight: "variable",
+  display: "swap",
+  preload: false,
+  fallback: ["PingFang TC", "Microsoft JhengHei", "Heiti TC", "sans-serif"],
 });
 
 export const metadata: Metadata = {
@@ -76,7 +84,7 @@ export const metadata: Metadata = {
 };
 
 const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var t=s==='light'||s==='dark'?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-const LANGUAGE_INIT_SCRIPT = `(function(){try{var l=localStorage.getItem('elevenchase-locale')==='ja'?'ja':'en';document.documentElement.lang=l;document.documentElement.setAttribute('data-locale',l);}catch(e){}})();`;
+const LANGUAGE_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('elevenchase-locale');var l=s==='ja'||s==='zh-Hant'?s:'en';document.documentElement.lang=l;document.documentElement.setAttribute('data-locale',l);}catch(e){}})();`;
 
 const GOOGLE_ANALYTICS_ID = "G-DRKHQW2GN8";
 const GOOGLE_TAG_MANAGER_ID = "GTM-PRPX2278";
@@ -86,7 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${sans.variable} ${geistMono.variable} ${japaneseSans.variable} h-full antialiased`}
+      className={`${sans.variable} ${geistMono.variable} ${japaneseSans.variable} ${traditionalChineseSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ivory text-ink">
         <noscript>

@@ -109,7 +109,9 @@ export default function TermsPage() {
                 Contact
               </h2>
               <p className="mt-3">
-                Questions about these terms? Reach out through our{" "}
+                <span data-i18n-key="Terms: Contact prompt">
+                  Questions about these terms? Reach out through our{" "}
+                </span>
                 <Link
                   href="/#contact"
                   className="text-ink underline underline-offset-4 hover:text-accent"

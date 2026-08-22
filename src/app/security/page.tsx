@@ -106,14 +106,16 @@ export default function SecurityPage() {
                 Related pages
               </h2>
               <p className="mt-3">
-                See our{" "}
+                <span data-i18n-key="Security: Related intro">See our </span>
                 <Link
                   href="/privacy"
                   className="text-ink underline underline-offset-4 hover:text-accent"
                 >
                   Privacy Policy
-                </Link>{" "}
-                for how information submitted through this site is handled.
+                </Link>
+                <span data-i18n-key="Security: Related details">
+                  {" "}for how information submitted through this site is handled.
+                </span>
               </p>
             </div>
           </div>

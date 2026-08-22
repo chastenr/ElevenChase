@@ -69,7 +69,7 @@ export default function PrivacyPage() {
                 Service providers
               </h2>
               <p className="mt-3">
-                We use{" "}
+                <span data-i18n-key="Privacy: Resend intro">We use </span>
                 <a
                   href="https://resend.com"
                   target="_blank"
@@ -77,11 +77,13 @@ export default function PrivacyPage() {
                   className="text-ink underline underline-offset-4 hover:text-accent"
                 >
                   Resend
-                </a>{" "}
-                to deliver form submissions to our inbox by email and, when
-                you opt in, to maintain our marketing contact list and deliver
-                future marketing emails. Resend is the only third party
-                involved in handling form data.
+                </a>
+                <span data-i18n-key="Privacy: Resend details">
+                  {" "}to deliver form submissions to our inbox by email and,
+                  when you opt in, to maintain our marketing contact list and
+                  deliver future marketing emails. Resend is the only third
+                  party involved in handling form data.
+                </span>
               </p>
             </div>
 
@@ -149,8 +151,10 @@ export default function PrivacyPage() {
                 Contact
               </h2>
               <p className="mt-3">
-                Questions about this policy or your information? Reach out
-                through our{" "}
+                <span data-i18n-key="Privacy: Contact prompt">
+                  Questions about this policy or your information? Reach out
+                  through our{" "}
+                </span>
                 <Link
                   href="/#contact"
                   className="text-ink underline underline-offset-4 hover:text-accent"

@@ -218,7 +218,7 @@ section[id] {
     animation: none;
   }
 }
-html[data-locale="ja"]:not([data-i18n-ready="true"]) body {
+html:is([data-locale="ja"], [data-locale="zh-Hant"]):not([data-i18n-ready="true"]) body {
   visibility: hidden;
 }
 
@@ -260,8 +260,52 @@ html[data-locale="ja"] .font-mono {
   letter-spacing: 0.08em !important;
 }
 
+html[data-locale="zh-Hant"] body {
+  font-family: var(--font-sans-traditional-chinese), "PingFang TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+  font-feature-settings: "palt" 1;
+  font-kerning: normal;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+html[data-locale="zh-Hant"] h1,
+html[data-locale="zh-Hant"] h2,
+html[data-locale="zh-Hant"] h3 {
+  line-height: 1.18 !important;
+  letter-spacing: -0.035em !important;
+  text-wrap: balance;
+}
+
+html[data-locale="zh-Hant"] [data-i18n-hero] {
+  max-width: 11em;
+  font-size: clamp(2.65rem, 6vw, 5.8rem) !important;
+  line-height: 1.14 !important;
+  letter-spacing: -0.045em !important;
+  white-space: pre-line;
+}
+
+html[data-locale="zh-Hant"] [data-i18n-heading] {
+  line-height: 1.2 !important;
+  letter-spacing: -0.035em !important;
+}
+
+html[data-locale="zh-Hant"] p {
+  line-height: 1.8;
+}
+
+html[data-locale="zh-Hant"] .font-mono {
+  letter-spacing: 0.08em !important;
+}
+
 @media (max-width: 639px) {
   html[data-locale="ja"] [data-i18n-hero] {
+    max-width: 9em;
+    font-size: clamp(2.35rem, 11vw, 3rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  html[data-locale="zh-Hant"] [data-i18n-hero] {
     max-width: 9em;
     font-size: clamp(2.35rem, 11vw, 3rem) !important;
     line-height: 1.2 !important;

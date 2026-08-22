@@ -10,8 +10,10 @@ import {
   type ReactNode,
 } from "react";
 import japanese from "@/i18n/ja.json";
+import traditionalChinese from "@/i18n/zh-Hant.json";
+import { traditionalChineseOverrides } from "@/i18n/zh-Hant-overrides";
 
-export type Locale = "en" | "ja";
+export type Locale = "en" | "ja" | "zh-Hant";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -21,7 +23,7 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 const STORAGE_KEY = "elevenchase-locale";
-const translations: Record<string, string> = {
+const japaneseTranslations: Record<string, string> = {
   ...(japanese as Record<string, string>),
   "ElevenChase // Software + AI Engineering": "ElevenChase // Software + AI Engineering",
   "We build the software ambitious companies run on.": "事業を動かす\nソフトウェア。",
@@ -286,6 +288,20 @@ const translations: Record<string, string> = {
   "Mobile": "モバイルナビゲーション",
   "Footer": "フッターナビゲーション",
   "Legal": "法的情報",
+  "Footer: Services": "サービス",
+  "Footer: Company": "会社概要",
+  "Footer: Insights": "インサイト",
+  "Footer: FAQ": "よくあるご質問",
+  "Footer: Contact": "お問い合わせ",
+  "Legal: Privacy": "プライバシー",
+  "Legal: Terms": "利用規約",
+  "Legal: Security": "セキュリティ",
+  "Privacy: Resend intro": "フォーム送信には",
+  "Privacy: Resend details": "を利用しています。お問い合わせ内容をメールで受信し、配信に同意された場合はマーケティング用の連絡先管理とメール配信にも使用します。フォーム情報を取り扱う第三者サービスはResendのみです。",
+  "Privacy: Contact prompt": "本ポリシーまたは個人情報に関するご質問は、",
+  "Security: Related intro": "このサイトから送信された情報の取り扱いについては、",
+  "Security: Related details": "をご確認ください。",
+  "Terms: Contact prompt": "本規約に関するご質問は、",
   "Open menu": "メニューを開く",
   "Close menu": "メニューを閉じる",
   "Input": "入力",
@@ -330,34 +346,55 @@ const translations: Record<string, string> = {
   "Thanks, your request was received. Email delivery isn't connected on this deployment yet, so please also reach out directly in the meantime.": "ご依頼を受け付けました。現在この環境ではメール送信が設定されていないため、お手数ですが直接メールでもご連絡ください。",
 };
 
-function translate(source: string) {
-  const exact = translations[source];
-  if (exact) return polishJapanese(exact);
+const translatedContent: Record<Exclude<Locale, "en">, Record<string, string>> = {
+  ja: japaneseTranslations,
+  "zh-Hant": {
+    ...(traditionalChinese as Record<string, string>),
+    ...traditionalChineseOverrides,
+  },
+};
+
+function translate(source: string, locale: Exclude<Locale, "en">) {
+  const exact = translatedContent[locale][source];
+  if (exact) return polishTranslation(exact, locale);
 
   const testimonial = source.match(/^Show testimonial (\d+)$/);
-  if (testimonial) return `お客様の声 ${testimonial[1]} を表示`;
+  if (testimonial) {
+    return locale === "ja"
+      ? `お客様の声 ${testimonial[1]} を表示`
+      : `顯示第 ${testimonial[1]} 則客戶評價`;
+  }
 
   if (source.startsWith("Something went wrong while sending your request.")) {
     const email = source.match(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/)?.[0];
-    return `送信中に問題が発生しました。もう一度お試しいただくか、${email ?? "ElevenChase"}までご連絡ください。`;
+    return locale === "ja"
+      ? `送信中に問題が発生しました。もう一度お試しいただくか、${email ?? "ElevenChase"}までご連絡ください。`
+      : `送出時發生問題。請再試一次，或聯絡 ${email ?? "ElevenChase"}。`;
   }
 
   return source;
 }
 
-function polishJapanese(value: string) {
+function polishTranslation(value: string, locale: Exclude<Locale, "en">) {
+  if (locale === "ja") {
+    return value
+      .replace(/イレブンチェイス|elevenChase/g, "ElevenChase")
+      .replace(/Web サイト/g, "Webサイト")
+      .replace(/AI エージェント/g, "AIエージェント");
+  }
+
   return value
-    .replace(/イレブンチェイス|elevenChase/g, "ElevenChase")
-    .replace(/Web サイト/g, "Webサイト")
-    .replace(/AI エージェント/g, "AIエージェント");
+    .replace(/十一大通|十一蔡斯|十一追逐|十一追|Eleven Chase/gi, "ElevenChase")
+    .replace(/人工智慧/g, "AI")
+    .replace(/網站/g, "網站");
 }
 
-function translateTextNode(node: Text) {
+function translateTextNode(node: Text, locale: Exclude<Locale, "en">) {
   const source = node.data;
   const trimmed = source.trim();
   if (!trimmed) return;
 
-  const translated = translate(trimmed);
+  const translated = translate(trimmed, locale);
   if (translated === trimmed) return;
 
   const leading = source.match(/^\s*/)?.[0] ?? "";
@@ -365,14 +402,14 @@ function translateTextNode(node: Text) {
   node.data = `${leading}${translated}${trailing}`;
 }
 
-function translateElement(root: ParentNode) {
+function translateElement(root: ParentNode, locale: Exclude<Locale, "en">) {
   const keyedElements = root instanceof Element
     ? [root, ...root.querySelectorAll<HTMLElement>("[data-i18n-key]")]
     : [...root.querySelectorAll<HTMLElement>("[data-i18n-key]")];
 
   for (const element of keyedElements) {
     const key = element.getAttribute("data-i18n-key");
-    if (key) element.textContent = translate(key);
+    if (key) element.textContent = translate(key, locale);
   }
 
   const blocks = root instanceof Element
@@ -383,7 +420,7 @@ function translateElement(root: ParentNode) {
     if (!block.matches("p, figcaption, dt, dd") || block.children.length > 0) continue;
     const source = block.textContent?.replace(/\s+/g, " ").trim();
     if (!source) continue;
-    const translated = translate(source);
+    const translated = translate(source, locale);
     if (translated !== source) block.textContent = translated;
   }
 
@@ -397,7 +434,7 @@ function translateElement(root: ParentNode) {
     const source = heading.getAttribute("aria-label")
       ?? heading.textContent?.replace(/\s+/g, " ").trim();
     if (!source) continue;
-    const translated = translate(source);
+    const translated = translate(source, locale);
     if (translated !== source) {
       heading.textContent = translated;
       if (heading.hasAttribute("aria-label")) heading.setAttribute("aria-label", translated);
@@ -410,7 +447,7 @@ function translateElement(root: ParentNode) {
   while (current) {
     const parent = current.parentElement;
     if (parent && !parent.closest("script, style, noscript, [data-no-translate]")) {
-      translateTextNode(current as Text);
+      translateTextNode(current as Text, locale);
     }
     current = walker.nextNode();
   }
@@ -422,13 +459,13 @@ function translateElement(root: ParentNode) {
   for (const element of elements) {
     for (const attribute of ["aria-label", "title", "placeholder"] as const) {
       const source = element.getAttribute(attribute);
-      if (source) element.setAttribute(attribute, translate(source));
+      if (source) element.setAttribute(attribute, translate(source, locale));
     }
   }
 
-  document.title = translate(document.title);
+  document.title = translate(document.title, locale);
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-  if (description) description.content = translate(description.content);
+  if (description) description.content = translate(description.content, locale);
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -442,28 +479,31 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem(STORAGE_KEY) === "ja" ? "ja" : "en";
+    const storedLocale = localStorage.getItem(STORAGE_KEY);
+    const savedLocale: Locale = storedLocale === "ja" || storedLocale === "zh-Hant"
+      ? storedLocale
+      : "en";
     const stateFrame = window.requestAnimationFrame(() => setLocaleState(savedLocale));
     document.documentElement.lang = savedLocale;
     document.documentElement.dataset.locale = savedLocale;
 
-    if (savedLocale !== "ja") {
+    if (savedLocale === "en") {
       document.documentElement.dataset.i18nReady = "true";
       return () => window.cancelAnimationFrame(stateFrame);
     }
 
-    translateElement(document.body);
+    translateElement(document.body, savedLocale);
 
     const observer = new MutationObserver((mutations) => {
       observer.disconnect();
       for (const mutation of mutations) {
         if (mutation.type === "characterData") {
-          translateTextNode(mutation.target as Text);
+          translateTextNode(mutation.target as Text, savedLocale);
           continue;
         }
         for (const node of mutation.addedNodes) {
-          if (node.nodeType === Node.TEXT_NODE) translateTextNode(node as Text);
-          if (node instanceof Element) translateElement(node);
+          if (node.nodeType === Node.TEXT_NODE) translateTextNode(node as Text, savedLocale);
+          if (node instanceof Element) translateElement(node, savedLocale);
         }
       }
       observer.observe(document.body, {
@@ -487,7 +527,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo<LanguageContextValue>(
-    () => ({ locale, setLocale, t: locale === "ja" ? translate : (source) => source }),
+    () => ({
+      locale,
+      setLocale,
+      t: locale === "en" ? (source) => source : (source) => translate(source, locale),
+    }),
     [locale, setLocale],
   );
 

@@ -21,7 +21,13 @@ export function LanguageSwitcher({
     <div
       className={cn("flex min-h-11 items-center gap-1 border border-line px-1", className)}
       role="group"
-      aria-label={locale === "ja" ? "言語を選択" : "Choose language"}
+      aria-label={
+        locale === "ja"
+          ? "言語を選択"
+          : locale === "zh-Hant"
+            ? "選擇語言"
+            : "Choose language"
+      }
       data-no-translate
     >
       {!compact && <Languages size={15} className="ml-1 text-muted" aria-hidden="true" />}
@@ -46,6 +52,17 @@ export function LanguageSwitcher({
         aria-pressed={locale === "ja"}
       >
         日本語
+      </button>
+      <button
+        type="button"
+        onClick={() => changeLanguage("zh-Hant")}
+        className={cn(
+          "min-h-8 px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
+          locale === "zh-Hant" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
+        )}
+        aria-pressed={locale === "zh-Hant"}
+      >
+        繁中
       </button>
     </div>
   );

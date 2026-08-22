@@ -20,7 +20,11 @@ export function Footer() {
             <p className="mt-4 text-sm text-muted">Software + AI Engineering</p>
           </div>
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-8 gap-y-3 md:col-span-3">
-            {LINKS.map(([label, href]) => <Link key={href} href={href} className="text-sm text-muted hover:text-ink">{label}</Link>)}
+            {LINKS.map(([label, href]) => (
+              <Link key={href} href={href} className="text-sm text-muted hover:text-ink">
+                <span data-i18n-key={`Footer: ${label}`}>{label}</span>
+              </Link>
+            ))}
           </nav>
           <div className="md:col-span-4 md:text-right">
             <a href={`mailto:${SITE.email}`} className="text-sm underline underline-offset-4">{SITE.email}</a>
@@ -29,7 +33,11 @@ export function Footer() {
         </div>
         <div className="mt-16 flex flex-col gap-5 border-t border-line pt-7 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 ElevenChase. All rights reserved.</p>
-          <nav aria-label="Legal" className="flex gap-5"><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link><Link href="/security">Security</Link></nav>
+          <nav aria-label="Legal" className="flex gap-5">
+            <Link href="/privacy"><span data-i18n-key="Legal: Privacy">Privacy</span></Link>
+            <Link href="/terms"><span data-i18n-key="Legal: Terms">Terms</span></Link>
+            <Link href="/security"><span data-i18n-key="Legal: Security">Security</span></Link>
+          </nav>
         </div>
       </Container>
     </footer>
