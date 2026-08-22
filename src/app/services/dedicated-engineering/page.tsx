@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -16,16 +15,11 @@ const PAGE_TITLE = "Dedicated Engineering";
 const PAGE_DESCRIPTION =
   "An embedded engineer or small team that works inside your existing workflow, tools and roadmap, instead of operating as a separate outside vendor you have to manage.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/services/dedicated-engineering",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/services/dedicated-engineering"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/services/dedicated-engineering`,
-  },
-};
+});
 
 const INCLUDES_ITEMS = [
   {

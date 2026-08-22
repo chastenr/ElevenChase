@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -18,16 +17,11 @@ const PAGE_TITLE = "AI + Automation Services";
 const PAGE_DESCRIPTION =
   "AI agents and workflow automation built into real business operations: support, sales, document processing and internal systems.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/services/ai-automation",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/services/ai-automation"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/services/ai-automation`,
-  },
-};
+});
 
 const AI_ITEMS = [
   { title: "AI agents" },

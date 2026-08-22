@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -15,16 +14,11 @@ const PAGE_TITLE = "Web Development Services";
 const PAGE_DESCRIPTION =
   "High-performance websites engineered around strategy, UX, technical SEO and conversion, built as business infrastructure rather than a digital brochure.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/services/web-development",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/services/web-development"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/services/web-development`,
-  },
-};
+});
 
 const WEB_ITEMS = [
   { title: "Strategy", description: "Business goals, audience and competitive positioning." },

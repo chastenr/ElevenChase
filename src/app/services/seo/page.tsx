@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -21,16 +20,11 @@ const PAGE_TITLE = "Technical SEO Services";
 const PAGE_DESCRIPTION =
   "Technical SEO engineered into your website: crawlability, structured data and Core Web Vitals, implemented directly by the team that builds your site.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/services/seo",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/services/seo"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/services/seo`,
-  },
-};
+});
 
 const IMPROVE_ITEMS = [
   { title: "Crawlability" },

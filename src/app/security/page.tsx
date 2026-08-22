@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Container } from "@/components/ui/Container";
 
@@ -9,12 +8,11 @@ const PAGE_TITLE = "Security";
 const PAGE_DESCRIPTION = `How to report a security vulnerability affecting ${SITE.domain}, and what to expect from ${SITE.name} after you do.`;
 const LAST_UPDATED = "August 11, 2026";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/security",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/security"),
-  robots: { index: true, follow: true },
-};
+});
 
 export default function SecurityPage() {
   return (

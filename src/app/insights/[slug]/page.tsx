@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
 import { ARTICLES } from "@/data/insights";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
+import type { LocalizedRoutePath } from "@/i18n/routing";
 import { articleJsonLd, breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/structured-data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -30,18 +31,13 @@ export async function generateMetadata({
     return { title: "Article not found" };
   }
 
-  return {
+  return englishMetadata({
+    pathname: `/insights/${article.slug}` as LocalizedRoutePath,
     title: article.title,
     description: article.excerpt,
-    alternates: englishAlternates(`/insights/${article.slug}` as Parameters<typeof englishAlternates>[0]),
-    openGraph: {
-      title: `${article.title} | ${SITE.name}`,
-      description: article.excerpt,
-      url: `${SITE.url}/insights/${article.slug}`,
-      type: "article",
-      publishedTime: article.date,
-    },
-  };
+    type: "article",
+    publishedTime: article.date,
+  });
 }
 
 export default async function ArticlePage({

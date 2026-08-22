@@ -4,7 +4,10 @@ import { ARTICLES } from "@/data/insights";
 import { absoluteLocalizedUrl, type Locale } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  // Keep modification dates stable until content actually changes. Returning
+  // the current time on every request sends search engines a false freshness
+  // signal and can waste crawl budget.
+  const lastModified = new Date("2026-08-22T00:00:00.000Z");
 
   const routes = [
     { path: "/", priority: 1, changeFrequency: "monthly" as const },

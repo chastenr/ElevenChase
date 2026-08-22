@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
-import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { ARTICLES } from "@/data/insights";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -17,16 +15,11 @@ const PAGE_TITLE = "Insights";
 const PAGE_DESCRIPTION =
   "Practical guides for planning software projects, evaluating engineering partners and making clearer decisions before development begins.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/insights",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/insights"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/insights`,
-  },
-};
+});
 
 export default function InsightsPage() {
   return (

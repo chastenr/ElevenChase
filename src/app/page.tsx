@@ -3,6 +3,7 @@ import { OpeningSequence } from "@/components/sections/OpeningSequence";
 import { Premise } from "@/components/sections/Premise";
 import { TechnicalDiagram } from "@/components/sections/TechnicalDiagram";
 import { ClientProof } from "@/components/sections/ClientProof";
+import { ClientReachMap } from "@/components/sections/ClientReachMap";
 import { Capabilities } from "@/components/sections/Capabilities";
 import { Problems } from "@/components/sections/Problems";
 import { Process } from "@/components/sections/Process";
@@ -22,6 +23,7 @@ export default function Home() {
         <TechnicalDiagram />
       </OpeningSequence>
       <ClientProof />
+      <ClientReachMap />
       <Problems />
       <Capabilities />
       <Signals />

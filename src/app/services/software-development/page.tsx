@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -16,16 +15,11 @@ const PAGE_TITLE = "Software Development Services";
 const PAGE_DESCRIPTION =
   "Production-ready SaaS, platforms, internal tools and MVPs, designed, architected and engineered by ElevenChase for real business workflows.";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/services/software-development",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/services/software-development"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/services/software-development`,
-  },
-};
+});
 
 const BUILD_ITEMS = [
   { title: "SaaS", description: "Multi-tenant products built to scale with your customer base." },

@@ -82,6 +82,57 @@ export function englishAlternates(pathname: LocalizedRoutePath) {
   };
 }
 
+export function englishMetadata({
+  pathname,
+  title,
+  description,
+  type = "website",
+  publishedTime,
+  robots = { index: true, follow: true },
+}: {
+  pathname: LocalizedRoutePath;
+  title: string;
+  description: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  robots?: Metadata["robots"];
+}): Metadata {
+  const canonicalPath = canonicalRoutePath(pathname);
+  const url = absoluteLocalizedUrl(SITE.url, canonicalPath, "en");
+  const socialTitle = `${title} | ${SITE.name}`;
+
+  return {
+    title,
+    description,
+    alternates: englishAlternates(pathname),
+    robots,
+    openGraph: {
+      type,
+      url,
+      siteName: SITE.name,
+      title: socialTitle,
+      description,
+      locale: "en_US",
+      alternateLocale: ["ja_JP", "zh_TW"],
+      images: [
+        {
+          url: `${SITE.url}/opengraph-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${SITE.name} — Software, AI and web engineering`,
+        },
+      ],
+      ...(type === "article" && publishedTime ? { publishedTime } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description,
+      images: [`${SITE.url}/twitter-image.jpg`],
+    },
+  };
+}
+
 export function localizedMetadata(
   locale: LocalizedLocale,
   pathname: LocalizedRoutePath,
@@ -89,6 +140,8 @@ export function localizedMetadata(
   const copy = localizedSeo[locale][pathname];
   const url = absoluteLocalizedUrl(SITE.url, canonicalRoutePath(pathname), locale);
   const language = locale === "ja" ? "ja_JP" : "zh_TW";
+  const socialTitle = `${copy.title} | ${SITE.name}`;
+  const isArticle = pathname.startsWith("/insights/");
 
   return {
     title: copy.title,
@@ -98,13 +151,28 @@ export function localizedMetadata(
       languages: localizedAlternates(pathname),
     },
     openGraph: {
-      type: "website",
+      type: isArticle ? "article" : "website",
       url,
       siteName: SITE.name,
-      title: `${copy.title} | ${SITE.name}`,
+      title: socialTitle,
       description: copy.description,
       locale: language,
       alternateLocale: locale === "ja" ? ["en_US", "zh_TW"] : ["en_US", "ja_JP"],
+      images: [
+        {
+          url: `${SITE.url}/opengraph-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: `${SITE.name} — Software, AI and web engineering`,
+        },
+      ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: socialTitle,
+      description: copy.description,
+      images: [`${SITE.url}/twitter-image.jpg`],
+    },
+    robots: { index: true, follow: true },
   };
 }

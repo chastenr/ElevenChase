@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Container } from "@/components/ui/Container";
 
@@ -9,12 +8,11 @@ const PAGE_TITLE = "Privacy Policy";
 const PAGE_DESCRIPTION = `How ${SITE.name} collects, uses and protects information submitted through this website.`;
 const LAST_UPDATED = "August 12, 2026";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/privacy",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/privacy"),
-  robots: { index: true, follow: true },
-};
+});
 
 export default function PrivacyPage() {
   return (

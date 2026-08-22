@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Container } from "@/components/ui/Container";
 
@@ -9,12 +8,11 @@ const PAGE_TITLE = "Terms of Service";
 const PAGE_DESCRIPTION = `Terms governing use of the ${SITE.name} website.`;
 const LAST_UPDATED = "August 9, 2026";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/terms",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/terms"),
-  robots: { index: true, follow: true },
-};
+});
 
 export default function TermsPage() {
   return (

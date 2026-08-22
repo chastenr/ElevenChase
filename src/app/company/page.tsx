@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE, SERVICES_NAV } from "@/data/site";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { PRINCIPLES } from "@/data/principles";
 import { PROCESS_STEPS } from "@/data/process";
 import { breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/structured-data";
@@ -15,16 +14,11 @@ import { ServiceCta } from "@/components/service/ServiceCta";
 const PAGE_TITLE = "Company";
 const PAGE_DESCRIPTION = `${SITE.name} is an independent software, AI and web engineering studio founded by ${SITE.ceoName}. Learn who builds your software and how we work.`;
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/company",
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: englishAlternates("/company"),
-  openGraph: {
-    title: `${PAGE_TITLE} | ${SITE.name}`,
-    description: PAGE_DESCRIPTION,
-    url: `${SITE.url}/company`,
-  },
-};
+});
 
 export default function CompanyPage() {
   const breadcrumb = breadcrumbJsonLd([
@@ -53,6 +47,59 @@ export default function CompanyPage() {
               software, from strategy through production.
             </p>
           </Reveal>
+        </Container>
+      </section>
+
+      <section className="border-t border-line py-16 md:py-24">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[minmax(16rem,0.7fr)_minmax(0,1.3fr)] lg:gap-16">
+            <div>
+              <SectionLabel>{"// Mission & Vision"}</SectionLabel>
+              <Reveal>
+                <h2 className="mt-5 max-w-md text-[clamp(2rem,4vw,3.75rem)] leading-[1.03] font-medium tracking-tight text-balance">
+                  What guides ElevenChase.
+                </h2>
+              </Reveal>
+            </div>
+
+            <div className="grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
+              <Reveal>
+                <article className="h-full bg-ivory p-7 md:p-9">
+                  <div className="flex items-center justify-between font-mono text-[10px] tracking-[0.14em] text-muted uppercase">
+                    <span>01</span>
+                    <span>Mission</span>
+                  </div>
+                  <h3 className="mt-10 text-2xl leading-tight font-medium tracking-tight text-balance">
+                    Turn complex business problems into software that creates
+                    clear, lasting value.
+                  </h3>
+                  <p className="mt-5 leading-relaxed text-muted">
+                    We combine product thinking, software engineering and
+                    practical AI to build reliable systems that remove
+                    operational friction and help companies grow.
+                  </p>
+                </article>
+              </Reveal>
+
+              <Reveal delay={0.08}>
+                <article className="h-full bg-ivory p-7 md:p-9">
+                  <div className="flex items-center justify-between font-mono text-[10px] tracking-[0.14em] text-muted uppercase">
+                    <span>02</span>
+                    <span>Vision</span>
+                  </div>
+                  <h3 className="mt-10 text-2xl leading-tight font-medium tracking-tight text-balance">
+                    A future where excellent engineering is direct, practical
+                    and available across borders.
+                  </h3>
+                  <p className="mt-5 leading-relaxed text-muted">
+                    We want ambitious teams everywhere to work directly with
+                    capable engineers and build digital infrastructure that
+                    remains useful long after launch.
+                  </p>
+                </article>
+              </Reveal>
+            </div>
+          </div>
         </Container>
       </section>
 

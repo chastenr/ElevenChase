@@ -69,11 +69,20 @@ export const metadata: Metadata = {
     title: SITE.title,
     description: SITE.description,
     locale: "en_US",
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ElevenChase — Software, AI and web engineering",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
+    images: ["/twitter-image.jpg"],
   },
   robots: {
     index: true,

@@ -1,14 +1,13 @@
-import type { Metadata } from "next";
-import { englishAlternates } from "@/i18n/seo";
+import { englishMetadata } from "@/i18n/seo";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
 
-export const metadata: Metadata = {
+export const metadata = englishMetadata({
+  pathname: "/faq",
   title: "Frequently Asked Questions",
   description:
     "Answers about ElevenChase project costs, timelines, existing codebases, AI agents, ownership and ongoing engineering support.",
-  alternates: englishAlternates("/faq"),
-};
+});
 
 export default function FaqPage() {
   return (

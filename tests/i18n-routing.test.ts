@@ -7,7 +7,11 @@ import {
   localizePathname,
   localizedRoutePaths,
 } from "../src/i18n/routing.ts";
-import { localizedMetadata, localizedSeo } from "../src/i18n/seo.ts";
+import {
+  englishMetadata,
+  localizedMetadata,
+  localizedSeo,
+} from "../src/i18n/seo.ts";
 
 test("locale routes are detected from the URL", () => {
   assert.equal(localeFromPathname("/"), "en");
@@ -49,4 +53,35 @@ test("localized metadata includes canonical and all hreflang equivalents", () =>
   });
   assert.equal(htmlLanguages.ja, "ja-JP");
   assert.equal(htmlLanguages["zh-tw"], "zh-Hant-TW");
+});
+
+test("page metadata includes indexability and complete social previews", () => {
+  const metadata = englishMetadata({
+    pathname: "/services/ai-automation",
+    title: "AI + Automation Services",
+    description: "Production-ready AI and workflow automation.",
+  });
+  const openGraph = metadata.openGraph as { type?: string; url?: string };
+  const twitter = metadata.twitter as { card?: string; images?: string[] };
+
+  assert.deepEqual(metadata.robots, { index: true, follow: true });
+  assert.equal(openGraph.url, "https://www.elevenchase.com/services/ai-automation");
+  assert.equal(openGraph.type, "website");
+  assert.equal(twitter.card, "summary_large_image");
+  assert.deepEqual(twitter.images, [
+    "https://www.elevenchase.com/twitter-image.jpg",
+  ]);
+});
+
+test("localized article metadata uses article social markup", () => {
+  const metadata = localizedMetadata(
+    "zh-tw",
+    "/insights/how-to-choose-a-software-development-company",
+  );
+  const openGraph = metadata.openGraph as { type?: string };
+  const twitter = metadata.twitter as { card?: string };
+
+  assert.equal(openGraph.type, "article");
+  assert.equal(twitter.card, "summary_large_image");
+  assert.deepEqual(metadata.robots, { index: true, follow: true });
 });
