@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/data/site";
 import { ARTICLES } from "@/data/insights";
+import { absoluteLocalizedUrl, type Locale } from "@/i18n/routing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -43,21 +44,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/security", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
-  const staticEntries = routes.map((route) => ({
-    url: `${SITE.url}${route.path}`,
-    lastModified,
-    changeFrequency: route.changeFrequency,
-    priority: route.priority,
-  }));
-
-  // Every published article is automatically included — no manual sitemap
-  // edits needed when adding a new post to src/data/insights.ts.
-  const articleEntries = ARTICLES.map((article) => ({
-    url: `${SITE.url}/insights/${article.slug}`,
+  const articleRoutes = ARTICLES.map((article) => ({
+    path: `/insights/${article.slug}`,
     lastModified: new Date(article.date),
     changeFrequency: "monthly" as const,
     priority: 0.5,
   }));
 
-  return [...staticEntries, ...articleEntries];
+  const allRoutes = [
+    ...routes.map((route) => ({ ...route, lastModified })),
+    ...articleRoutes,
+  ];
+  const locales: Locale[] = ["en", "ja", "zh-tw"];
+
+  return allRoutes.flatMap((route) => {
+    const languages = {
+      en: absoluteLocalizedUrl(SITE.url, route.path, "en"),
+      "ja-JP": absoluteLocalizedUrl(SITE.url, route.path, "ja"),
+      "zh-Hant-TW": absoluteLocalizedUrl(SITE.url, route.path, "zh-tw"),
+      "x-default": absoluteLocalizedUrl(SITE.url, route.path, "en"),
+    };
+
+    return locales.map((locale) => ({
+      url: absoluteLocalizedUrl(SITE.url, route.path, locale),
+      lastModified: route.lastModified,
+      changeFrequency: route.changeFrequency,
+      priority: locale === "en" ? route.priority : Math.max(route.priority - 0.05, 0.1),
+      alternates: { languages },
+    }));
+  });
 }

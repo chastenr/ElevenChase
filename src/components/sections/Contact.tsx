@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { submitContactForm } from "@/lib/actions";
 import type { ContactFormState } from "@/lib/contact-types";
 import { PROJECT_TYPES, BUDGET_RANGES, TIMELINES } from "@/data/contact";

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE, SERVICES_NAV } from "@/data/site";
+import { englishAlternates } from "@/i18n/seo";
 import { Container } from "@/components/ui/Container";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { ServiceCta } from "@/components/service/ServiceCta";
 
-export const metadata: Metadata = { title: "Engineering Services", description: "Software, AI, automation, web and technical SEO engineering from ElevenChase.", alternates: { canonical: "/services" } };
+export const metadata: Metadata = { title: "Engineering Services", description: "Software, AI, automation, web and technical SEO engineering from ElevenChase.", alternates: englishAlternates("/services") };
 
 export default function ServicesPage() {
   return <>

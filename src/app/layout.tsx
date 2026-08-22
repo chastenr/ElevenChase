@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Manrope, Geist_Mono, Noto_Sans_JP, Noto_Sans_TC } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
@@ -12,6 +13,8 @@ import {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
+import { htmlLanguages, isLocale } from "@/i18n/routing";
+import { englishAlternates } from "@/i18n/seo";
 import "./globals.css";
 
 const sans = Manrope({
@@ -58,9 +61,7 @@ export const metadata: Metadata = {
     "product development",
   ],
   authors: [{ name: SITE.name }],
-  alternates: {
-    canonical: "/",
-  },
+  alternates: englishAlternates("/"),
   openGraph: {
     type: "website",
     url: SITE.url,
@@ -84,15 +85,19 @@ export const metadata: Metadata = {
 };
 
 const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var t=s==='light'||s==='dark'?s:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-const LANGUAGE_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('elevenchase-locale');var l=s==='ja'||s==='zh-Hant'?s:'en';document.documentElement.lang=l;document.documentElement.setAttribute('data-locale',l);}catch(e){}})();`;
+const LANGUAGE_INIT_SCRIPT = `(function(){try{var p=window.location.pathname;var l=p==='/ja'||p.indexOf('/ja/')===0?'ja':p==='/zh-tw'||p.indexOf('/zh-tw/')===0?'zh-tw':'en';var h=l==='ja'?'ja-JP':l==='zh-tw'?'zh-Hant-TW':'en';document.documentElement.lang=h;document.documentElement.setAttribute('data-locale',l);}catch(e){}})();`;
 
 const GOOGLE_ANALYTICS_ID = "G-DRKHQW2GN8";
 const GOOGLE_TAG_MANAGER_ID = "GTM-PRPX2278";
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const localeHeader = (await headers()).get("x-elevenchase-locale");
+  const locale = isLocale(localeHeader) ? localeHeader : "en";
+
   return (
     <html
-      lang="en"
+      lang={htmlLanguages[locale]}
+      data-locale={locale}
       suppressHydrationWarning
       className={`${sans.variable} ${geistMono.variable} ${japaneseSans.variable} ${traditionalChineseSans.variable} h-full antialiased`}
     >
@@ -120,11 +125,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           {...jsonLdScriptProps(websiteJsonLd())}
         />
-        <LanguageProvider>
+        <LanguageProvider initialLocale={locale}>
           <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
         </LanguageProvider>
-        <main className="flex-1">{children}</main>
-        <Footer />
         <Analytics />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}

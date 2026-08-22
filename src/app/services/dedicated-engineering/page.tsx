@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/data/site";
+import { englishAlternates } from "@/i18n/seo";
 import {
   serviceJsonLd,
   breadcrumbJsonLd,
@@ -18,7 +19,7 @@ const PAGE_DESCRIPTION =
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/services/dedicated-engineering" },
+  alternates: englishAlternates("/services/dedicated-engineering"),
   openGraph: {
     title: `${PAGE_TITLE} | ${SITE.name}`,
     description: PAGE_DESCRIPTION,

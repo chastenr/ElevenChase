@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
 import { Container } from "@/components/ui/Container";
 

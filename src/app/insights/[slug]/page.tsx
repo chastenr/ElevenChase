@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
 import { ARTICLES } from "@/data/insights";
+import { englishAlternates } from "@/i18n/seo";
 import { articleJsonLd, breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/structured-data";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -32,7 +33,7 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.excerpt,
-    alternates: { canonical: `/insights/${article.slug}` },
+    alternates: englishAlternates(`/insights/${article.slug}` as Parameters<typeof englishAlternates>[0]),
     openGraph: {
       title: `${article.title} | ${SITE.name}`,
       description: article.excerpt,

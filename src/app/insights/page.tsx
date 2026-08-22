@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
+import { englishAlternates } from "@/i18n/seo";
 import { ARTICLE_CATEGORIES, ARTICLES } from "@/data/insights";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { AnimatedText } from "@/components/ui/AnimatedText";
@@ -19,7 +20,7 @@ const PAGE_DESCRIPTION =
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/insights" },
+  alternates: englishAlternates("/insights"),
   openGraph: {
     title: `${PAGE_TITLE} | ${SITE.name}`,
     description: PAGE_DESCRIPTION,

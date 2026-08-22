@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/data/site";
@@ -12,8 +12,11 @@ import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 import { EASE_PREMIUM } from "@/lib/motion";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { localizePathname } from "@/i18n/routing";
 
 export function Navbar() {
+  const { locale } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -33,7 +36,7 @@ export function Navbar() {
   return (
     <header className={cn("fixed inset-x-0 top-0 z-50 border-b transition-all duration-500", scrolled || open ? "border-line bg-ivory/90 py-4 backdrop-blur-xl" : "border-transparent bg-transparent py-6")}>
       <Container className="flex items-center justify-between">
-        <Link href="/#top" className="flex min-h-11 items-center gap-2.5 font-mono text-xs tracking-[0.12em]">
+        <Link href={localizePathname("/#top", locale)} className="flex min-h-11 items-center gap-2.5 font-mono text-xs tracking-[0.12em]">
           <Image src="/logo-mark-white.png" alt="" width={24} height={24} priority className="h-6 w-6 invert dark:invert-0" aria-hidden="true" />
           ELEVENCHASE
         </Link>
@@ -41,14 +44,14 @@ export function Navbar() {
         <div className="hidden items-center gap-7 lg:flex">
           <nav className="flex items-center gap-7" aria-label="Primary">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="text-sm text-muted transition-colors hover:text-ink">
+              <Link key={link.href} href={localizePathname(link.href, locale)} className="text-sm text-muted transition-colors hover:text-ink">
                 <span data-i18n-key={`Navigation: ${link.label}`}>{link.label}</span>
               </Link>
             ))}
           </nav>
           <LanguageSwitcher />
           <ThemeToggle className="min-h-11 min-w-11" />
-          <Link href="/#contact" className="group inline-flex min-h-11 items-center gap-2 border border-ink bg-ink px-5 text-sm text-ivory transition-colors hover:bg-transparent hover:text-ink">
+          <Link href={localizePathname("/#contact", locale)} className="group inline-flex min-h-11 items-center gap-2 border border-ink bg-ink px-5 text-sm text-ivory transition-colors hover:bg-transparent hover:text-ink">
             Start a project <AnimatedArrow />
           </Link>
         </div>
@@ -69,7 +72,7 @@ export function Navbar() {
               <nav className="flex flex-col" aria-label="Mobile">
                 {NAV_LINKS.map((link, index) => (
                   <motion.div key={link.href} initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: EASE_PREMIUM, delay: index * 0.04 }}>
-                    <Link href={link.href} onClick={() => setOpen(false)} className="flex min-h-16 items-center justify-between border-b border-line text-[clamp(1.75rem,8vw,2.5rem)] tracking-tight">
+                    <Link href={localizePathname(link.href, locale)} onClick={() => setOpen(false)} className="flex min-h-16 items-center justify-between border-b border-line text-[clamp(1.75rem,8vw,2.5rem)] tracking-tight">
                       <span data-i18n-key={`Navigation: ${link.label}`}>{link.label}</span>
                       <span className="font-mono text-xs text-muted">0{index + 1}</span>
                     </Link>
@@ -78,7 +81,7 @@ export function Navbar() {
               </nav>
               <div className="border-t border-line pt-6">
                 <p className="font-mono text-[10px] tracking-[0.16em] text-muted uppercase">Have something worth building?</p>
-                <Link href="/#contact" onClick={() => setOpen(false)} className="mt-4 inline-flex min-h-11 items-center gap-2 text-lg">Start a project <AnimatedArrow /></Link>
+                <Link href={localizePathname("/#contact", locale)} onClick={() => setOpen(false)} className="mt-4 inline-flex min-h-11 items-center gap-2 text-lg">Start a project <AnimatedArrow /></Link>
               </div>
             </Container>
           </motion.div>

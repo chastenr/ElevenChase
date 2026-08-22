@@ -9,11 +9,19 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useRouter } from "next/navigation";
 import japanese from "@/i18n/ja.json";
 import traditionalChinese from "@/i18n/zh-Hant.json";
 import { traditionalChineseOverrides } from "@/i18n/zh-Hant-overrides";
+import {
+  htmlLanguages,
+  isLocale,
+  localeFromPathname,
+  localizePathname,
+  type Locale,
+} from "@/i18n/routing";
 
-export type Locale = "en" | "ja" | "zh-Hant";
+export type { Locale } from "@/i18n/routing";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -26,9 +34,9 @@ const STORAGE_KEY = "elevenchase-locale";
 const japaneseTranslations: Record<string, string> = {
   ...(japanese as Record<string, string>),
   "ElevenChase // Software + AI Engineering": "ElevenChase // Software + AI Engineering",
-  "We build the software ambitious companies run on.": "事業を動かす\nソフトウェア。",
-  "Design, engineering and AI systems for companies building serious products, automating operations and scaling what already works.": "プロダクト開発と業務変革に取り組む企業へ。設計・開発・AIで、事業の成長を支援します。",
-  "Start a project": "まずは相談する",
+  "We build the software ambitious companies run on.": "成長を目指す企業を支える、\nソフトウェアをつくる。",
+  "Design, engineering and AI systems for companies building serious products, automating operations and scaling what already works.": "プロダクト開発、業務の自動化、そして事業の成長を支える設計・ソフトウェア開発・AIシステムを提供します。",
+  "Start a project": "プロジェクトを相談する",
   "Navigation: Services": "サービス",
   "Navigation: Process": "開発プロセス",
   "Navigation: Company": "私たちについて",
@@ -41,13 +49,13 @@ const japaneseTranslations: Record<string, string> = {
   "Remote-first": "リモート対応",
   "Worldwide": "世界各地",
   "// The premise": "// 私たちの考え方",
-  "Good software is not about adding more technology.": "優れたソフトウェアは、技術を増やすことが目的ではありません。",
-  "It is about removing friction from the way a business operates.": "事業の流れから、無駄や摩擦をなくすためのものです。",
+  "Good software is not about adding more technology.": "良いソフトウェアとは、技術を増やすことではありません。",
+  "It is about removing friction from the way a business operates.": "業務のムダや滞りをなくし、事業をよりスムーズに動かすことです。",
   "ElevenChase works from the business problem outward — designing the system, automation or digital product that creates the clearest operational advantage.": "ElevenChaseは、まず事業課題を理解し、成果につながるシステム・自動化・デジタルプロダクトを設計します。",
   "// How ElevenChase thinks": "// ElevenChaseのアプローチ",
   "Scroll sequence / 03": "プロセス / 03",
   "Fig. 01 — Turning operational problems into production software.": "図01 — 業務課題を、本番環境で使えるソフトウェアへ。",
-  "From friction to production software.": "業務上の課題から、本番環境で使えるソフトウェアへ。",
+  "From friction to production software.": "業務の課題を、本番で使えるソフトウェアへ。",
   "The problem enters the system.": "まず、課題を正しく捉える。",
   "We start with the operation as it exists today — the people, constraints and systems that shape the real problem.": "現場の業務、人、制約、既存システムを理解し、本質的な課題を明らかにします。",
   "Business problem": "事業課題",
@@ -67,7 +75,7 @@ const japaneseTranslations: Record<string, string> = {
   "// Satisfied clients": "// 導入企業",
   "Trusted with work that matters.": "重要なプロジェクトをお任せいただいています。",
   "// When companies come to us": "// ご相談いただくタイミング",
-  "Usually, something isn't working.": "成長を妨げる課題を、解決します。",
+  "Usually, something isn't working.": "多くの場合、何かがうまく回っていません。",
   "When manual work is becoming the bottleneck": "手作業が、事業成長のボトルネックになっている",
   "Automation + internal systems": "自動化・社内システム",
   "When the product needs to become real": "アイデアを、実際に使えるプロダクトにしたい",
@@ -123,18 +131,21 @@ const japaneseTranslations: Record<string, string> = {
   "Work in focused development cycles with visible progress.": "短い開発サイクルで、動く成果を継続的に共有します。",
   "Deploy production-ready software, measure performance and keep improving.": "本番リリース後も効果を測定し、改善を続けます。",
   "// ElevenChase": "// ElevenChaseについて",
-  "Small team. Serious engineering.": "少数精鋭の、本格的なエンジニアリング。",
+  "Small team. Serious engineering.": "小さなチーム。\n妥協のないエンジニアリング。",
   "ElevenChase is an independent software engineering studio helping companies turn ideas, workflows and complex operational problems into software people actually want to use.": "ElevenChaseは、アイデアや複雑な業務課題を、現場で本当に使われるソフトウェアへ変える独立系エンジニアリングスタジオです。",
   "You work directly with the people designing and writing your software, from early strategy through production, instead of a rotating account team. Clear scope, clear communication, and engineers who stay hands-on the entire way.": "営業担当を介さず、戦略から本番運用まで担当エンジニアと直接進めます。明確な範囲、率直なコミュニケーション、一貫した責任体制を大切にしています。",
   "More about ElevenChase →": "ElevenChaseについて詳しく見る →",
   "// Not ready for a project?": "// まずは現状を知りたい方へ",
   "Start with an audit.": "まずはサイト診断から。",
   "We'll review your site's technical foundation, performance, search structure and conversion path and tell you what is actually worth fixing.": "技術基盤、表示速度、検索構造、コンバージョン導線を確認し、優先して改善すべき点をお伝えします。",
-  "Request an audit": "無料サイト診断を申し込む",
+  "Request an audit": "サイト診断を受ける",
   "Ready when you are": "いつでもご相談ください",
-  "Have something worth building?": "実現したい構想はありませんか？",
+  "Have something worth building?": "実現したいアイデアがありますか？",
   "Tell us what you're building. We'll reply with a clear next step: what it would take to build, and how we'd approach it.": "構想や課題をお聞かせください。必要な進め方と次のステップを明確にご案内します。",
-  "Book a discovery call": "初回相談を予約する",
+  "Book a discovery call": "相談ミーティングを予約する",
+  "01 / Input": "01 / INPUT",
+  "02 / Engineering": "02 / ENGINEERING",
+  "03 / Output": "03 / OUTPUT",
   "No sales deck. No unnecessary calls. Just a clear next step.": "押し売りや不要な打ち合わせはありません。必要な次の一歩だけをお伝えします。",
   "Questions first? Read the FAQ →": "よくあるご質問を見る →",
   "// Contact": "// お問い合わせ",
@@ -145,18 +156,18 @@ const japaneseTranslations: Record<string, string> = {
   "(optional)": "（任意）",
   "Company": "会社概要",
   "Company name": "会社名",
-  "Website": "Webサイト",
+  "Website": "ウェブサイト",
   "What do you need?": "ご相談内容",
   "Budget": "ご予算",
   "Timeline": "ご希望時期",
-  "Project details": "プロジェクトの詳細",
+  "Project details": "プロジェクトについて教えてください",
   "Select one": "選択してください",
   "Not sure yet": "まだ決まっていない",
   "Software Product": "ソフトウェア開発",
   "Existing Software": "既存システムの改善",
   "Dedicated Engineering": "専任エンジニアリング支援",
   "Technical Partnership": "技術パートナーシップ",
-  "Start the conversation": "相談内容を送信する",
+  "Start the conversation": "送信する",
   "Sending…": "送信中…",
   "Home": "ホーム",
   "// Services": "// サービス",
@@ -348,7 +359,7 @@ const japaneseTranslations: Record<string, string> = {
 
 const translatedContent: Record<Exclude<Locale, "en">, Record<string, string>> = {
   ja: japaneseTranslations,
-  "zh-Hant": {
+  "zh-tw": {
     ...(traditionalChinese as Record<string, string>),
     ...traditionalChineseOverrides,
   },
@@ -386,7 +397,14 @@ function polishTranslation(value: string, locale: Exclude<Locale, "en">) {
   return value
     .replace(/十一大通|十一蔡斯|十一追逐|十一追|Eleven Chase/gi, "ElevenChase")
     .replace(/人工智慧/g, "AI")
-    .replace(/網站/g, "網站");
+    .replace(/項目/g, "專案")
+    .replace(/數據/g, "資料")
+    .replace(/信息/g, "資訊")
+    .replace(/支持/g, "支援")
+    .replace(/招聘/g, "招募")
+    .replace(/用戶/g, "使用者")
+    .replace(/代碼/g, "程式碼")
+    .replace(/文檔/g, "文件");
 }
 
 function translateTextNode(node: Text, locale: Exclude<Locale, "en">) {
@@ -463,28 +481,51 @@ function translateElement(root: ParentNode, locale: Exclude<Locale, "en">) {
     }
   }
 
+  const anchors = root instanceof Element
+    ? [root, ...root.querySelectorAll<HTMLAnchorElement>("a[href]")]
+    : [...root.querySelectorAll<HTMLAnchorElement>("a[href]")];
+
+  for (const anchor of anchors) {
+    if (!(anchor instanceof HTMLAnchorElement)) continue;
+    const href = anchor.getAttribute("href");
+    if (href?.startsWith("/")) {
+      anchor.setAttribute("href", localizePathname(href, locale));
+    }
+  }
+
   document.title = translate(document.title, locale);
   const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (description) description.content = translate(description.content, locale);
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+export function LanguageProvider({
+  children,
+  initialLocale = "en",
+}: {
+  children: ReactNode;
+  initialLocale?: Locale;
+}) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
+  const router = useRouter();
 
   const setLocale = useCallback((nextLocale: Locale) => {
     localStorage.setItem(STORAGE_KEY, nextLocale);
-    document.documentElement.lang = nextLocale;
+    document.documentElement.lang = htmlLanguages[nextLocale];
     document.documentElement.dataset.locale = nextLocale;
-    window.location.reload();
-  }, []);
+    const nextPath = localizePathname(window.location.pathname, nextLocale);
+    router.push(`${nextPath}${window.location.search}${window.location.hash}`);
+  }, [router]);
 
   useEffect(() => {
+    const pathLocale = localeFromPathname(window.location.pathname);
     const storedLocale = localStorage.getItem(STORAGE_KEY);
-    const savedLocale: Locale = storedLocale === "ja" || storedLocale === "zh-Hant"
-      ? storedLocale
-      : "en";
+    const savedLocale: Locale = isLocale(pathLocale)
+      ? pathLocale
+      : isLocale(storedLocale)
+        ? storedLocale
+        : initialLocale;
     const stateFrame = window.requestAnimationFrame(() => setLocaleState(savedLocale));
-    document.documentElement.lang = savedLocale;
+    document.documentElement.lang = htmlLanguages[savedLocale];
     document.documentElement.dataset.locale = savedLocale;
 
     if (savedLocale === "en") {
@@ -524,7 +565,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       window.cancelAnimationFrame(stateFrame);
       observer.disconnect();
     };
-  }, []);
+  }, [initialLocale]);
 
   const value = useMemo<LanguageContextValue>(
     () => ({

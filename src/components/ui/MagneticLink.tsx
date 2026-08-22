@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import { localizePathname } from "@/i18n/routing";
 
 type MagneticLinkProps = {
   href: string;
@@ -22,6 +24,7 @@ export function MagneticLink({
   onClick,
 }: MagneticLinkProps) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const { locale } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -44,7 +47,7 @@ export function MagneticLink({
   return (
     <motion.a
       ref={ref}
-      href={href}
+      href={!external && href.startsWith("/") ? localizePathname(href, locale) : href}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}

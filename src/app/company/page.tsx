@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE, SERVICES_NAV } from "@/data/site";
+import { englishAlternates } from "@/i18n/seo";
 import { PRINCIPLES } from "@/data/principles";
 import { PROCESS_STEPS } from "@/data/process";
 import { breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/structured-data";
@@ -17,7 +18,7 @@ const PAGE_DESCRIPTION = `${SITE.name} is an independent software, AI and web en
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/company" },
+  alternates: englishAlternates("/company"),
   openGraph: {
     title: `${PAGE_TITLE} | ${SITE.name}`,
     description: PAGE_DESCRIPTION,

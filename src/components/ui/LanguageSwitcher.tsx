@@ -24,7 +24,7 @@ export function LanguageSwitcher({
       aria-label={
         locale === "ja"
           ? "言語を選択"
-          : locale === "zh-Hant"
+          : locale === "zh-tw"
             ? "選擇語言"
             : "Choose language"
       }
@@ -55,14 +55,14 @@ export function LanguageSwitcher({
       </button>
       <button
         type="button"
-        onClick={() => changeLanguage("zh-Hant")}
+        onClick={() => changeLanguage("zh-tw")}
         className={cn(
           "min-h-8 px-2 font-mono text-[10px] tracking-[0.08em] transition-colors",
-          locale === "zh-Hant" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
+          locale === "zh-tw" ? "bg-ink text-ivory" : "text-muted hover:text-ink",
         )}
-        aria-pressed={locale === "zh-Hant"}
+        aria-pressed={locale === "zh-tw"}
       >
-        繁中
+        {compact ? "繁中" : "繁體中文"}
       </button>
     </div>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { SITE } from "@/data/site";
+import { englishAlternates } from "@/i18n/seo";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Container } from "@/components/ui/Container";
 
@@ -11,7 +12,7 @@ const LAST_UPDATED = "August 11, 2026";
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  alternates: { canonical: "/security" },
+  alternates: englishAlternates("/security"),
   robots: { index: true, follow: true },
 };
 

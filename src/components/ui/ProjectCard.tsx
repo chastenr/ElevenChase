@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import type { Project } from "@/data/work";
 import { AnimatedArrow } from "./AnimatedArrow";
 

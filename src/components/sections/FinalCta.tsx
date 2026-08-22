@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import Link from "next/link";
+import { LocalizedLink as Link } from "@/components/ui/LocalizedLink";
 import { AnimatedText } from "@/components/ui/AnimatedText";
 import { AnimatedArrow } from "@/components/ui/AnimatedArrow";
 import { MagneticLink } from "@/components/ui/MagneticLink";
